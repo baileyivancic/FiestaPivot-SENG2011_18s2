@@ -7,10 +7,17 @@
 	float: inherit;
 	width: 100%;
 	height: 50px;
+	background: white;
+	opacity: 20%;
 }
 
 .nav-link {
 	padding: 13px;
+}
+
+.search {
+	margin: auto;
+	height: 100px;
 }
 
 .nav-title {
@@ -23,6 +30,7 @@
 
 .form-Search-Bar {
 	width: 330px;
+	height: 70px;
 	padding: 15px;
 	background: rgb(57, 57, 57);
 	border-radius: 10px;
@@ -47,20 +55,11 @@
 	text-align: center;
 }
 
-.search {
-	margin: auto;
-	height: 50px;
-}
 /* --------------- */
 .cover-container {
-	background: url("./assets/CodeWorkshop.jpg") center no-repeat;
+	background: url("./assets/party-whip-chef.jpg") center no-repeat;
 	background-size: cover;
 	height: 100%;
-	margin: 0px;
-	padding: 0px;
-}
-
-.inner {
 	margin: 0px;
 	padding: 0px;
 }
@@ -95,8 +94,8 @@
 	animation: FadeIn 2s 1;
 }
 
-.cf:before,
-.cf:after {
+.cf::before,
+.cf::after {
 	content: "";
 	display: table;
 }
@@ -132,7 +131,7 @@
 	background: #c42f2f;
 }
 
-.form-wrapper-2 button:before {
+.form-wrapper-2 button::before {
 	content: '';
 	position: absolute;
 	border-width: 8px 8px 8px 0;
@@ -142,18 +141,18 @@
 	left: -6px;
 }
 
-.form-wrapper-2 button:hover:before {
+.form-wrapper-2 button:hover::before {
 	border-right-color: #FA8807;
 }
 
-.form-wrapper-2 button:focus:before {
+.form-wrapper-2 button:focus::before {
 	border-right-color: #c42f2f;
 }
 
 /*-------------------------------------*/
 
 /*Componet: Content*/
-.card:before, .card:after {
+.card::before, .card::after {
     content:"";
     position:absolute;
     z-index:-1;
@@ -164,7 +163,7 @@
     right:10px;
     border-radius:200px / 10px;
 }
-.card:after {
+.card::after {
     right:10px;
     left:auto;
 	transform:skew(8deg) rotate(3deg);
