@@ -1,64 +1,60 @@
 <!DOCTYPE html>
+
 <html>
-<head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>fiestaPivot</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-	<script src="main.js"></script>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>fiestaPivot</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="index.css" />
+		<script src="main.js"></script>
 
-	<!--Bootstrap CDN and JS-->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="main.css">
-</head>
-<body>
-	<!--Navbar things (TOP)-->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#">fiestaPivot</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		  <span class="navbar-toggler-icon"></span>
-		</button>
-	  
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		  <ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-			  <a class="nav-link" href="#">Dashboard (Home)<span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item dropdown">
-			  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				My Ads
-			  </a>
-			  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item" href="#">Manage ads</a>
-				<a class="dropdown-item" href="#">Something else with ads</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#">Post ad</a>
-			  </div>
-			</li>
-			<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					  My Jobs
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					  <a class="dropdown-item" href="#">Pending Jobs</a>
-					  <a class="dropdown-item" href="#">Completed jobs</a>
-					  <div class="dropdown-divider"></div>
-					  <a class="dropdown-item" href="#">Find Jobs</a>
+		<!--Bootstrap CDN and JS-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="main.css">
+	</head>
+	<body>
+		<!--Navbar things (TOP)-->
+		<div class="cover-container d-flex mx-auto flex-column">
+			<div class="topbar">
+				<ul class="nav mr-auto">
+					<span class="navbar-brand nav-title">
+						Party Whip
+					</span>
+
+					<li class="nav-item">
+						<a class="nav-link text-muted" href="#">Search</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-muted" href="#">About Us</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-muted" href="#">Classes</a>
+					</li>
+				</ul>
+			</div>
+
+			<div role="main" class="inner cover search">
+				<h1 class="cover-heading" id="Slogan">
+					Got a Party?<br/>We can help
+				</h1>
+				<div class="input-group mb-3 p-3">
+					<div class="button_box2" id="SearchBar">
+						<form class="form-wrapper-2 cf form-Search-Bar">
+							<input class="cover-input" type="text" placeholder="Search here..." required>
+							<button type="submit">Search</button>
+						</form>
 					</div>
-				  </li>
-		  </ul>
-		  <form class="form-inline my-2 my-lg-0">
-			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
-		  </form>
+				</div>
+			</div>
 		</div>
-	  </nav>
 
-	  <!--Content (MIDDLE)-->
-	  <div class="jumbotron">
+		  <!--Content (MIDDLE)-->
+		  <div class="jumbotron">
 			<h1 class="display-4">Placeholder...</h1>
 			<p class="lead">nekjnlene</p>
 			<hr class="my-4">
@@ -68,11 +64,13 @@
 			</p>
 		  </div>
 
-	  <!--Footer (BOTTOM)-->
-	  <hr class="bot-divider">
-	  <div style="padding-left: 20%; padding-right: 20%">
-		  <p>fiestaPivot is an innovative new take on the outsourcing business model - bringing all the benefits that provides to the realm of food preparation.
-				Find peple to cater for your party, black tie function, or even picnic. Use the skills you have as a chef or that your company/organisation has to serve new clients!</p>
-	  </div>
-</body>
+		  <!--Footer (BOTTOM)-->
+		  <hr class="bot-divider" />
+		  <div style="padding-left: 20%; padding-right: 20%">
+			  <p>
+				fiestaPivot is an innovative new take on the outsourcing business model - bringing all the benefits that provides to the realm of food preparation.
+				Find peple to cater for your party, black tie function, or even picnic. Use the skills you have as a chef or that your company/organisation has to serve new clients!
+			  </p>
+		  </div>
+	</body>
 </html>

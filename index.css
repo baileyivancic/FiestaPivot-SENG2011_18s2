@@ -1,0 +1,160 @@
+/* ---------------------------------- */
+/* everything */
+body, html {
+	margin: 0px;
+	padding: 0px;
+	background-color: rgb(236, 236, 236);
+	height: 100%;
+}
+
+* {margin: 0; padding: 0;}
+
+/* ---------------------------------- */
+/* Nav Bar */
+.topbar {
+	margin: 0px;
+	padding: 0px;
+	-webkit-box-shadow: 0 8px 6px -5px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 5px 6px -6px #999;
+	float: inherit;
+	width: 100%;
+	height: 50px;
+	background: #ededed;
+	opacity: 20%;
+}
+
+.nav-link {
+	padding: 13px;
+}
+
+.search {
+	margin: auto;
+	height: 100px;
+}
+
+.nav-title {
+	letter-spacing: 5px;
+	font-family: HelveticaNeue;
+	font-size: 15px;
+	padding: 15px 5px;
+	color: #212121;
+}
+
+#Slogan {
+	color: #ededed;
+	text-align: center;
+}
+
+/* ----------------------------------- */
+/* Cover */
+.cover-container {
+	background: url("./assets/party-whip-chef.jpg") center no-repeat;
+	background-size: cover;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+/*-------------------------------------*/
+/* Search Bar */
+
+@keyframes FadeIn {
+	from {
+		opacity: .10;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes SwipeIn {
+	from {
+		padding-left: 90px;
+	}
+	to {
+		padding-left: 0px;
+	}
+}
+
+#Slogan {
+	animation: FadeIn 2s 1, SwipeIn 2s 1;
+}
+
+#SearchBar {
+	animation: FadeIn 2s 1;
+}
+
+.cover-input {
+	width: 75%;
+	height: 40px;
+	padding: 10px 5px;
+	float: left;
+	font: bold 15px 'Raleway', sans-serif;
+	border: 0;
+	background: #ededed;
+	border-radius: 3px 0 0 3px;
+	color: rgb(57, 57, 57);
+	font-weight: normal;
+	font-style: italic;
+}
+
+.form-Search-Bar {
+	width: 330px;
+	height: 70px;
+	padding: 15px;
+	background: rgb(57, 57, 57);
+	border-radius: 10px;
+}
+
+.form-wrapper-2 input:focus {
+	outline: 0;
+	background: #fff;
+}
+
+/*-------------------------------------*/
+/* Search Bar */
+
+.form-wrapper-2 button {
+	overflow: visible;
+	position: relative;
+	float: right;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+	height: 40px;
+	width: 25%;
+	font: bold 15px/40px 'Raleway', sans-serif;
+	color: #fff;
+	text-transform: uppercase;
+	background: rgb(80, 176, 223);
+	border-radius: 0 3px 3px 0;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+}
+
+.form-wrapper-2 button:hover {
+	background: #FA8807;
+}
+
+.form-wrapper-2 button:active,
+.form-wrapper-2 button:focus {
+	background: #c42f2f;
+}
+
+.form-wrapper-2 button::before {
+	content: '';
+	position: absolute;
+	border-width: 8px 8px 8px 0;
+	border-style: solid solid solid none;
+	border-color: transparent rgb(80, 176, 223) transparent;
+	top: 12px;
+	left: -6px;
+}
+
+.form-wrapper-2 button:hover::before {
+	border-right-color: #FA8807;
+}
+
+.form-wrapper-2 button:focus::before {
+	border-right-color: #c42f2f;
+}
