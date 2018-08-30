@@ -49,7 +49,7 @@ body, html {
 /* ----------------------------------- */
 /* Cover */
 .cover-container {
-	background: url("./assets/party-whip-chef.jpg") center no-repeat;
+	background: url("./static/assets/party-whip-chef.jpg") center no-repeat;
 	background-size: cover;
 	height: 100%;
 	margin: 0px;
