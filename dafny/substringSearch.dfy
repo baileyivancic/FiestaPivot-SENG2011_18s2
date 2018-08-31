@@ -73,19 +73,19 @@ method testPrefix()
 
   assert s[..] == "ello";
   assert t[..] == "Hello World";
-  r:=isPrefix(s,t);
-  assert !r;
+  r:=isPrefix(s,t[1..]);
+  assert r;
 }
 
 method testSubstring() {
   //Yes casses
-  var s:string:="ello";
+  var s:string:="no";
   var t:string:="Hello World";
 
-  assert s[..] == "ello";
+  assert s[..] == "no";
   assert t[..] == "Hello World";
   var r:bool:=isSubstring(s,t);
   //assert r;
 
-  assert hasNoSubstring("no", "Hello world");
+  assert forall n :: ( 0 <= n < |t| ) ==> !hasPrefix(s,t[n..]);
 }
