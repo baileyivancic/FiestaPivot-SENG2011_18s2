@@ -78,7 +78,6 @@ method testPrefix()
 }
 
 method testSubstring() {
-  //Yes casses
   var s:string:="no";
   var t:string:="Hello World";
 
@@ -87,5 +86,5 @@ method testSubstring() {
   var r:bool:=isSubstring(s,t);
   //assert r;
 
-  assert forall n :: ( 0 <= n < |t| ) ==> !hasPrefix(s,t[n..]);
+  assert forall n :: ( 0 <= n < |t| ) ==> s != t[n..];
 }
