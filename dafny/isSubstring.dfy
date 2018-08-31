@@ -18,14 +18,14 @@ method isSubstring(token: string, str: string) returns (r: bool)
 	requires |str| > 0 && |token| > 0
 	requires |token| <= |str|
 	ensures r <==> hasSubstring(token,str)
-  //ensures !r ==> (forall k : nat | k <= (|str| - |token|) :: !hasSubstringWithOffset(token,str,k))
+	//ensures !r ==> (forall k : nat | k <= (|str| - |token|) :: !hasSubstringWithOffset(token,str,k))
 {
 	var i := 0;
 	r := (token <= str[i..]);
 	while(i <= (|str|-|token|) && !r)
 		invariant r <== loopInvariantOnEntry(token,str,i)
 		invariant r ==> (exists n : int :: (n >= 0) && (n + |token| <= |str|) && (token <= str[n..]))
-    //invariant !r ==> (forall k : nat | k <= i <= |str|-|token| :: !hasSubstringWithOffset(token,str,k))
+		//invariant !r ==> (forall k : nat | k <= i <= |str|-|token| :: !hasSubstringWithOffset(token,str,k))
 		invariant r ==> hasSubstringWithOffset(token,str,i)
 		decreases |str|-|token|-i
 	{
