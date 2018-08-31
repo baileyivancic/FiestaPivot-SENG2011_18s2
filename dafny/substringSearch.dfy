@@ -28,7 +28,7 @@ method isPrefix(token: string, str: string) returns (r:bool)
 method isSubstring(token: string, str: string) returns (r:bool)
   requires |token| <= |str| && |token|>0 && |str|>0
 	ensures r ==> hasSubstring(token, str)
-	ensures !r ==> hasNoSubstring(token, str)
+  ensures !r ==> hasNoSubstring(token, str)
 {
   var m;
   var i := 0;
@@ -50,10 +50,10 @@ method isSubstring(token: string, str: string) returns (r:bool)
 
 //Testing (Sanity checks)
 method Main() {
-  var s:string:="Hell";
+  var s:string:="ell";
   var t:string:="Hello World";
 
-  print(t[..|s|]);
+  print(t[1..1+|s|]);
 }
 
 method testPrefix()
@@ -78,13 +78,13 @@ method testPrefix()
 }
 
 method testSubstring() {
-  var s:string:="no";
-  var t:string:="Hello World";
+  var t:string:="no";
+  var s:string:="Hello World";
 
-  assert s[..] == "no";
-  assert t[..] == "Hello World";
-  var r:bool:=isSubstring(s,t);
+  assert t[..] == "no";
+  assert s[..] == "Hello World";
+  var r:bool:=isSubstring(t,s);
   //assert r;
 
-  assert forall n :: ( 0 <= n < |t| ) ==> s != t[n..];
+  assert forall n :: ( 0 <= n < |s|-|t|) ==> t != s[n..n+|t|];
 }
