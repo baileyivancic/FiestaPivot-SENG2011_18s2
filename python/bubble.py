@@ -1,9 +1,10 @@
 # Written by Bailey Ivancic - converted from Dafny verified code written by Harry Tang and Nabil Shaikh
 import sys
+import copy
 
 
 def bubble(args):
-    listCopy = list(args)
+    listCopy = copy.copy(args)
     i = (len(args) -1)
     upperbound = 0
     while (upperbound < len(args)):
@@ -17,6 +18,6 @@ def bubble(args):
         upperbound +=1
     return listCopy
 
-temp = list(bubble(sys.argv))
+temp = copy.copy(bubble(sys.argv))
 for p in temp:
     print(p)

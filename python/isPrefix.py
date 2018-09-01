@@ -1,9 +1,9 @@
-def isPrefix(string token, string str):
+def isPrefix(token, string):
     r = false
-    if token.len() == 0:
+    if len(token) == 0:
         r = true
-    if str.len() < token:
+    if len(string) < token:
         r = false
     else:
-        r = (token == str[..token.len()])
+        r = (token == str[..len(token)])
     return r
