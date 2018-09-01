@@ -1,0 +1,9 @@
+{
+    "python.pythonPath": "C:\\Program Files\\Python36\\python.exe",
+    "python.unitTest.pyTestArgs": [
+        "python"
+    ],
+    "python.unitTest.unittestEnabled": false,
+    "python.unitTest.nosetestsEnabled": false,
+    "python.unitTest.pyTestEnabled": true
+}
