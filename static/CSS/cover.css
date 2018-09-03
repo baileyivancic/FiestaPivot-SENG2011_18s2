@@ -11,6 +11,8 @@ body, html {
 
 /* ---------------------------------- */
 /* Nav Bar */
+
+/*
 .topbar {
 	margin: 0px;
 	padding: 0px;
@@ -34,7 +36,6 @@ body, html {
 }
 
 .nav-title {
-	letter-spacing: 5px;
 	font-family: HelveticaNeue;
 	font-size: 15px;
 	padding: 15px 5px;
@@ -45,9 +46,11 @@ body, html {
 	color: #ededed;
 	text-align: center;
 }
+*/
 
 /* ----------------------------------- */
 /* Cover */
+/*
 .cover-container {
 	background: url("./assets/party-whip-chef.jpg") center no-repeat;
 	background-size: cover;
@@ -55,10 +58,12 @@ body, html {
 	margin: 0px;
 	padding: 0px;
 }
+*/
 
 /*-------------------------------------*/
 /* Search Bar */
 
+/*
 @keyframes FadeIn {
 	from {
 		opacity: .10;
@@ -76,6 +81,7 @@ body, html {
 		padding-left: 0px;
 	}
 }
+*/
 
 #Slogan {
 	animation: FadeIn 2s 1, SwipeIn 2s 1;
