@@ -86,5 +86,5 @@ method testSubstring() {
   var r:bool:=isSubstring(t,s);
   //assert r;
 
-  assert forall n :: ( 0 <= n < |s|-|t|) ==> t != s[n..n+|t|];
+  assert forall n :: ( 0 <= n < |s|-|t| +1) ==> t != s[n..n+|t|];
 }
