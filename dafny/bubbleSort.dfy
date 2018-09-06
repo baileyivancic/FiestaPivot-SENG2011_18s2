@@ -15,7 +15,7 @@ method BubbleSort(a:array<int>)
   requires a.Length > 1;
   modifies a;
   ensures SortedUpTo(a,a.Length);
-{
+  {
   var i := a.Length -1;
   var upperBound := 0;
   while(upperBound < a.Length)

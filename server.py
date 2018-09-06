@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_login import LoginManager
 
-app = Flask(__name__)
+app = Flask("SENG2011 project")
 app.config['SECRET_KEY'] = '123123123'
 
 login_manager = LoginManager()
