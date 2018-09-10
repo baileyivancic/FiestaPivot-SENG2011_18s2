@@ -4,8 +4,8 @@ ensures left==old(left) && right==old(right)
 requires 0<=left<right<a.Length
 ensures multiset(a[..]) == multiset(old(a[..]))
 ensures left<=greater<=right
-ensures forall i :: left<=i<=greater ==> a[i]<=a[greater]
-ensures greater<right ==> ( forall i :: greater<i<=right ==> a[i]>a[greater] )
+ensures forall i :: left<=i<greater ==> a[i]<=a[greater]
+ensures forall i :: greater<i<=right ==> a[i]>a[greater]
 {
 	var j := left;
 	greater := left-1;
@@ -43,11 +43,15 @@ method quicksort(a :array<int>, left: int, right:int)
 decreases right-left
 decreases right
 modifies a 
-requires 0<=left<a.Length &&  0<=right<a.Length
+requires 0<=left && right<a.Length
+ensures left==old(left) && right==old(right)
+ensures forall i,j :: left<=i<j<=right ==> a[i]<=a[j]
 ensures multiset(a[..]) == multiset(old(a[..]))
 {
 	if ( left < right ) {
+		assert left<right;
 		var pivot := partition(a, left, right);
+		assert forall i :: left<=i<pivot ==> a[i]<=a[pivot];
 		quicksort(a, left, pivot-1);
 		quicksort(a, pivot+1, right);
 	}
