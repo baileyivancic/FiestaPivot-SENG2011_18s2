@@ -45,6 +45,7 @@ decreases right
 modifies a 
 requires 0<=left && right<a.Length
 ensures left==old(left) && right==old(right)
+ensures forall i :: ( 0<=i<left && right<i<a.Length ) ==> a[i]==old(a[i])
 ensures forall i,j :: left<=i<j<=right ==> a[i]<=a[j]
 ensures multiset(a[..]) == multiset(old(a[..]))
 {
