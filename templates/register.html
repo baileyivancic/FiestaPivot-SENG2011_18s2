@@ -42,19 +42,61 @@
 		    </div>
 		</nav>
 
-		  <!--Content (MIDDLE)-->
-		<form>
-		  <div class="form-group">
-		    <label for="exampleInputEmail1">Email</label>
-		    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example@gmail.com">
-		  </div>
-		  <div class="form-group">
-		    <label for="exampleInputPassword1">Password</label>
-		    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-		  </div>
-	
-		  <button type="submit" class="btn btn-primary">Submit</button>
-		</form>
+			<!--Content (MIDDLE)-->
+		<div class="container-fluid vertical-center" style="background: url(static/Images/darkDessert.png) center no-repeat">
+			<div class="heading-text">
+				<h1 class="text-center text-light">Join the Community</h1>
+			</div>
+				
+			<form>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<p for="inputName" class="text-light">Name</p>
+						<input type="text" class="form-control" id="inputName" placeholder="John Smith">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6" >
+						<p for="inputEmail4" class="text-light">Email</p>
+						<input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<p for="inputPassword4" class="text-light">Password</p>
+						<input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+					</div>
+				</div>
+				
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<p for="inputCity" class="text-light">City</p>
+						<input type="text" class="form-control" id="inputCity">
+					</div>
+					<div class="form-group col-md-2">
+						<p for="inputState" class="text-light">State</p>
+						<select id="inputState" class="form-control">
+							<option selected>Choose...</option>
+							<option>NSW</option>
+							<option>QLD</option>
+							<option>SA</option>
+							<option>TAS</option>
+							<option>VIC</option>
+							<option>WA</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="form-check">
+						<input class="form-check-input" type="checkbox" id="gridCheck">
+						<p class="form-check-label text-light" for="gridCheck">
+							I agree to the Terms and Conditions
+						</p>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary">Register</button>
+			</form>
+		</div>
 	</body>
 
 	<!-- Footer -->

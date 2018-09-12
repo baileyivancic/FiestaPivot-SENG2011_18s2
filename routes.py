@@ -7,4 +7,4 @@ from server import app, login_manager
 
 @app.route('/',  methods=["GET", "POST"])
 def landing_page():
-    return render_template("index.html")
+    return render_template("register.html")

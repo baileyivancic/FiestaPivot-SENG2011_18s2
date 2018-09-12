@@ -16,6 +16,11 @@ body, html {
 	padding: 13px;
 }
 
+.search {
+	margin: auto;
+	height: 100px;
+}
+
 .nav-title {
 	font-family: HelveticaNeue;
 	font-size: 15px;
@@ -23,15 +28,9 @@ body, html {
 	color: #212121;
 }
 
-#Slogan {
-	color: #ededed;
-	text-align: center;
-}
-
 /* ----------------------------------- */
 /* Cover */
 .cover-container {
-	background: url("./assets/party-whip-chef.jpg") center no-repeat;
 	background-size: cover;
 	height: 100%;
 	margin: 0px;
@@ -60,6 +59,8 @@ body, html {
 }
 
 #Slogan {
+	color: #ededed;
+	text-align: center;
 	animation: FadeIn 2s 1, SwipeIn 2s 1;
 }
 
@@ -139,4 +140,11 @@ body, html {
 
 .form-wrapper-2 button:focus::before {
 	border-right-color: #c42f2f;
+}
+
+
+
+
+.reg-body {
+    padding: 100px;
 }
