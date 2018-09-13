@@ -16,7 +16,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	</head>
 	<body>
-		<!--Navbar (Bootstrap taken from https://www.codeply.com/go/qhaBrcWp3v) -->
+		<!--Navbar things (TOP)-->
 		<nav class="navbar navbar-expand-md navbar-dark bg-primary">
 		    <a class="navbar-brand abs" href="#">FiestaPivot</a>
 		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
@@ -33,56 +33,28 @@
 		        </ul>
 		        <ul class="navbar-nav ml-auto">
 		            <li class="nav-item">
-		                <a class="nav-link" href="register.html">Register</a>
+		                <a class="nav-link" href="register.html" data-target="#myModal" data-toggle="modal">Register</a>
 		            </li>
 		            <li class="nav-item">
-		                <a class="nav-link" href="login.html">Login</a>
+		                <a class="nav-link" href="login.html" data-target="#myModal" data-toggle="modal">Login</a>
 		            </li>
 		        </ul>
 		    </div>
 		</nav>
-		<div role="main" class="inner cover search">
-			<h1 class="cover-heading" id="Slogan">Got a Party? We can help.</h1>
-			<div class="input-group mb-3 p-3">
-	            <div class="button_box2" id="SearchBar">
-	                <form class="form-wrapper-2 cf form-Search-Bar">
-	                    <input class="cover-input" type="text" placeholder="What are you looking for?" required>
-	                    <button type="submit">Search</button>
-	                </form>
-	            </div>
-	        </div>
-	    </div>
 
-		<!--Carousel (MID-TOP)-->
-		<div class="carousel slide" data-ride="carousel">
-		    <div class="carousel-inner">
-		        <div class="carousel-item active">
-		            <img class="d-block w-100" src="static/Images/catering.jpg" alt="catering">
-		        </div>
-		        <div class="carousel-item">
-		            <img class="d-block w-100" src="static/Images/dessert.png" alt="dessert">
-		        </div>
-		        <div class="carousel-item">
-		            <img class="d-block w-100" src="static/Images/picnic.png" alt="picnic">
-		        </div>
-		        <div class="carousel-item">
-		            <img class="d-block w-100" src="static/Images/cake.jpg" alt="cake">
-		        </div>
-		    </div>
-		</div>
-
-
-		  <!--Content (MID-BOTTOM)-->
-		  <div class="jumbotron">
-			<h1 class="display-4">Placeholder...</h1>
-			<p class="lead">Elementary</p>
-			<hr class="my-4">
-			<p>My Deer, Watson</p>
-			<p class="lead">
-			  <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-			</p>
+		  <!--Content (MIDDLE)-->
+		<form>
+		  <div class="form-group">
+		    <label for="exampleInputEmail1">Email</label>
+		    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example@gmail.com">
 		  </div>
-
+		  <div class="form-group">
+		    <label for="exampleInputPassword1">Password</label>
+		    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+		  </div>
+	
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
 	</body>
 
 	<!-- Footer -->
@@ -94,5 +66,4 @@
 	    </div>
 	    <div class="text-center py-3"><p class="text-light">© 2018 Copyright Team Artemis</div>
 	</footer>
-
 </html>

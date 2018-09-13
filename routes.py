@@ -58,4 +58,4 @@ login_manager.login_message = "Welcome"
 
 @app.route('/',  methods=["GET", "POST"])
 def landing_page():
-    return render_template("index.html")
+    return render_template("register.html")
