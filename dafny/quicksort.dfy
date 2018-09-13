@@ -6,6 +6,7 @@ ensures multiset(a[..]) == multiset(old(a[..]))
 ensures left<=greater<=right
 ensures forall i :: left<=i<greater ==> a[i]<=a[greater]
 ensures forall i :: greater<i<=right ==> a[i]>a[greater]
+ensures forall i :: ( 0<=i<left && right<i<a.Length ) ==> a[i] == old(a)[i]
 {
 	var j := left;
 	greater := left-1;
@@ -45,7 +46,7 @@ decreases right
 modifies a 
 requires 0<=left && right<a.Length
 ensures left==old(left) && right==old(right)
-ensures forall i :: ( 0<=i<left && right<i<a.Length ) ==> a[i]==old(a[i])
+ensures forall i :: ( 0<=i<left && right<i<a.Length ) ==> a[i]==old(a)[i]
 ensures forall i,j :: left<=i<j<=right ==> a[i]<=a[j]
 ensures multiset(a[..]) == multiset(old(a[..]))
 {
@@ -61,9 +62,9 @@ ensures multiset(a[..]) == multiset(old(a[..]))
 method swap_elements(a: array<int>, index1: int, index2: int) 
 modifies a
 requires 0<=index1<a.Length && 0<=index2<a.Length
-ensures a[index1] == old(a[index2]) && a[index2] == old(a[index1])
+ensures a[index1] == old(a)[index2] && a[index2] == old(a)[index1]
 ensures multiset(a[..]) == multiset(old(a[..]))
-ensures forall i :: ( 0<=i<a.Length && i!=index1 && i!=index2) ==> a[i] == old(a[i])
+ensures forall i :: ( 0<=i<a.Length && i!=index1 && i!=index2) ==> a[i] == old(a)[i]
 {
 	var temp := 0;
 
