@@ -58,7 +58,14 @@ def load_user(user_id):
 login_manager.login_view = "login"
 login_manager.login_message = "Welcome"
 
+# Default page, index page
 @app.route('/',  methods=["GET", "POST"])
+def default():
+	return render_template("index.html")
+
+#If we're doing modals, we probably don't need aspp routes right??
+# This should open uop the login modal and check that for credentials
+@app.route('/login',  methods=["GET", "POST"])
 def login():
 	if request.method == "POST":
 		#print("POST")
@@ -73,6 +80,7 @@ def login():
 			return render_template("login.html")
 	return render_template("login.html")
 
+# This should open up the register modal and check for credentials
 @app.route('/register', methods=["GET", "POST"])
 def register():
 	if request.method == "POST":
