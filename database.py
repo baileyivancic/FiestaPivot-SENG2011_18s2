@@ -43,12 +43,30 @@ class Database(object):
 
 
 
-    def isValidUser(self, username, password):
+    def isValidUser(self, email, password):
         db = self.get_db()
         cursor = db.cursor()
 
-        cursor.execute("SELECT EXISTS(SELECT 1 FROM loginDetails WHERE username=? AND password=?)", (username, password, ))
+        cursor.execute("SELECT EXISTS(SELECT 1 FROM accounts WHERE email=? AND password=?)", (email, password, ))
         temp =  cursor.fetchone()
+
+        isValid = False
+
+        if temp != (0, ):
+            # there is already a user using this user name
+            isValid = True
+
+
+        self.close(db)
+
+        return isValid
+
+    def get_name(self, email):
+        db = self.get_db()
+        cursor = db.cursor()
+
+        cursor.execute("SELECT EXISTS(SELECT 1 FROM accounts WHERE email=?)", (email, ))
+        temp = cursor.fetchone()
 
         isValid = False
 

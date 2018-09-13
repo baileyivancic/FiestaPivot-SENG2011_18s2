@@ -7,14 +7,17 @@ from database import Database
 from server import app, login_manager
 
 class Controller:
-    def __init__(self):
-        self.database = Database()
+	def __init__(self):
+		self.database = Database()
 
-    def register_user(self, username, password, email, city, state):
-        return self.database.register_user(username, password, email, city, state)
+	def register_user(self, username, password, email, city, state):
+		return self.database.register_user(username, password, email, city, state)
 
-    def isValidUser(self, username, password):
-        return self.database.isValidUser(username, password)
+	def isValidUser(self, username, password):
+		return self.database.isValidUser(username, password)
+
+	def get_name(self, email):
+		return self.database.get_name(email)
 
 
 class User(UserMixin):
@@ -57,19 +60,38 @@ login_manager.login_message = "Welcome"
 
 @app.route('/',  methods=["GET", "POST"])
 def login():
-    return render_template("login.html")
+	if request.method == "POST":
+		#print("POST")
+		email = request.form["email"].strip()
+		password = request.form["password"].strip()
+		user = control.get_name(email)
+		valid = control.isValidUser(email, password)
+		if valid == True:
+			login_user(User(user), remember= False)
+			return redirect("/landing-page")
+		else:
+			return render_template("login.html")
+	return render_template("login.html")
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
 	if request.method == "POST":
-		print("POST")
+		#print("POST")
 		user = request.form["username"].strip()
 		password = request.form["password"].strip()
-		print("register Attempt: user:" + user + " pass: " + password)
-		# valid = control.register_user(user, password)
-		# if valid == 1:
-		# 	login_user(User(user), remember= False)
-		# 	return redirect("/logged-in")
-		# else:
-		# 	return render_template("register.html", response=0)
+		email = request.form["email"].strip()
+		city = request.form["city"].strip()
+		state = request.form["state"] 
+		#print(f"register Attempt: U:{user}\nP:{password}\nE:{email}\nC:{city}\nS:{state}\n")
+		valid = control.register_user(user, password, email, city, state)
+		if valid == True:
+			login_user(User(user), remember= False)
+			return redirect("/landing-page")
+		else:
+			return render_template("register.html", response=0)
 	return render_template("register.html")
+
+@app.route('/landing-page',  methods=["GET", "POST"])
+@login_required
+def landing():
+    return render_template("index.html")
