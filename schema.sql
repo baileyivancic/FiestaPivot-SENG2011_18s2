@@ -6,6 +6,6 @@ CREATE TABLE accounts (
     username    TEXT        NOT NULL,
     password    TEXT        NOT NULL,
     city        TEXT        NOT NULL,
-    STATE       VARCHAR(3)  NOT NULL,
+    STATE       TEXT        NOT NULL,
     RATING      DECIMAL,
 );
