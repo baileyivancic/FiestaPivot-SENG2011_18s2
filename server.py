@@ -1,3 +1,4 @@
+import flask_login
 from flask import Flask
 from flask_login import LoginManager
 
