@@ -10,8 +10,8 @@ class Controller:
     def __init__(self):
         self.database = Database()
 
-    def register_user(self, username, password):
-        return self.database.register_user(username, password)
+    def register_user(self, username, password, email, city, state):
+        return self.database.register_user(username, password, email, city, state)
 
     def isValidUser(self, username, password):
         return self.database.isValidUser(username, password)
@@ -61,4 +61,15 @@ def login():
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
+	if request.method == "POST":
+		print("POST")
+		user = request.form["username"].strip()
+		password = request.form["password"].strip()
+		print("register Attempt: user:" + user + " pass: " + password)
+		# valid = control.register_user(user, password)
+		# if valid == 1:
+		# 	login_user(User(user), remember= False)
+		# 	return redirect("/logged-in")
+		# else:
+		# 	return render_template("register.html", response=0)
 	return render_template("register.html")
