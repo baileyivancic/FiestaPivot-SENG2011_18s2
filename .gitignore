@@ -2,3 +2,7 @@
 *.code-workspace
 *.pyc
 __pycache__/server.cpython-37.pyc
+__pycache__/server.cpython-37.pyc
+__pycache__/routes.cpython-37.pyc
+__pycache__/database.cpython-37.pyc
+*.dbz
