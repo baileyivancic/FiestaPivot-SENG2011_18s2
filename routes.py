@@ -3,7 +3,7 @@ from flask import Flask, redirect, render_template, request, url_for, flash, req
 from flask_login import UserMixin
 from flask_login import LoginManager,login_user, current_user, login_required, logout_user
 import json
-from database import Database
+import database as db
 from server import app, login_manager
 
 class Controller:

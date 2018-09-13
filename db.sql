@@ -1,9 +1,0 @@
-DROP TABLE IF EXISTS accounts;
-DROP TABLE IF EXISTS ad;
-
-CREATE TABLE accounts (
-    ID      INT              NOT NULL,
-    NAME    VARCHAR (20)     NOT NULL,
-    RATING  DECIMAL
-    PRIMARY KEY (ID)
-);
