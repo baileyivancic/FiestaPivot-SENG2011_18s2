@@ -57,5 +57,9 @@ login_manager.login_view = "login"
 login_manager.login_message = "Welcome"
 
 @app.route('/',  methods=["GET", "POST"])
-def landing_page():
-    return render_template("register.html")
+def login():
+    return render_template("login.html")
+
+@app.route('/register', methods=["GET", "POST"])
+def register():
+	return render_template("register.html")
