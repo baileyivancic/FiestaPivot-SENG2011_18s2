@@ -3,13 +3,12 @@ from flask import Flask, redirect, render_template, request, url_for, flash, req
 from flask_login import UserMixin
 from flask_login import LoginManager,login_user, current_user, login_required, logout_user
 import json
-import database as db
+from database import Database
 from server import app, login_manager
 
 class Controller:
     def __init__(self):
         self.database = Database()
-        self.database.first_run()
 
     def register_user(self, username, password):
         return self.database.register_user(username, password)
