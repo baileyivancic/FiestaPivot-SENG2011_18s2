@@ -1,2 +1,4 @@
 
 *.code-workspace
+*.pyc
+__pycache__/server.cpython-37.pyc
