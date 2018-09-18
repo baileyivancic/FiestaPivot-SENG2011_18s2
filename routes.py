@@ -60,6 +60,7 @@ login_manager.login_message = "Welcome"
 
 # Default page, index page
 @app.route('/',  methods=["GET", "POST"])
+@login_required
 def default():
 	return render_template("index.html")
 
@@ -75,7 +76,7 @@ def login():
 		valid = control.isValidUser(email, password)
 		if valid == True:
 			login_user(User(user), remember= False)
-			return redirect("/landing-page")
+			return redirect("/")
 		else:
 			return render_template("login.html")
 	return render_template("login.html")
@@ -94,12 +95,7 @@ def register():
 		valid = control.register_user(user, password, email, city, state)
 		if valid == True:
 			login_user(User(user), remember= False)
-			return redirect("/landing-page")
+			return redirect("/")
 		else:
 			return render_template("register.html", response=0)
 	return render_template("register.html")
-
-@app.route('/landing-page',  methods=["GET", "POST"])
-@login_required
-def landing():
-    return render_template("index.html")

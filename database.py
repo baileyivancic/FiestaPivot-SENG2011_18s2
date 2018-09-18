@@ -205,7 +205,7 @@ class Database(object):
         cursor.execute("SELECT EXISTS(SELECT 1 FROM bids WHERE adID=? AND userID=?)", (adID, userID))
         temp = cursor.fetchone
 
-        if temp == ( ,0) or temp == (0, ): #CHECK THIS
+        if temp == (0, ): #TODO - CHECK THIS
             # Could not find userID or adID
             print("Something went wrong, could not access correct user or ad\n")
             db.commit()
@@ -225,7 +225,7 @@ class Database(object):
         cursor.execute("SELECT EXISTS(SELECT 1 FROM bids WHERE adID=? AND userID=?)", (adID, userID))
         temp =  cursor.fetchone()
         
-        if temp == ( ,0) or temp == (0, ): #CHECK THIS
+        if temp == (0, ): #TODO - CHECK THIS
             # Could not find userID or adID
             print("Something went wrong, could not access correct user or ad\n")
             db.commit()
@@ -245,7 +245,7 @@ class Database(object):
         cursor.execute("SELECT EXISTS(SELECT 1 FROM bids WHERE adID=? AND userID=?)", (adID, userID))
         temp =  cursor.fetchone()
         
-        if temp == ( ,0) or temp == (0, ): #CHECK THIS
+        if temp == (0, ): #TODO - CHECK THIS
             # Could not find userID or adID
             print("Something went wrong, could not access correct user or ad\n")
             db.commit()

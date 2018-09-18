@@ -12,19 +12,25 @@ CREATE TABLE IF NOT EXISTS accounts(
 /* Add in extra criteria that we want to incude in the ad element */
 CREATE TABLE IF NOT EXISTS ads(
     ID          INTEGER     PRIMARY KEY AUTOINCREMENT,
-    userID      INTEGER     FOREIGN KEY,
+    userID      INTEGER     NOT NULL,
     title       TEXT        NOT NULL,
     price       DECIMAL     NOT NULL,
     area        TEXT        NOT NULL,
     descr       TEXT        NOT NULL,
-    active      BOOLEAN     NOT NULL
+    active      BOOLEAN     NOT NULL,
+    CONSTRAINT fk
+        FOREIGN KEY (userID)
+        REFERENCES accounts(ID)
 );
 
 /* Add in extra criteria we want to include*/
 CREATE TABLE IF NOT EXISTS bids(
     ID          INTEGER     PRIMARY KEY AUTOINCREMENT,
-    adID        INTEGER     FOREIGN KEY,
-    userID      INTEGER     FOREIGN KEY,
+    adID        INTEGER     NOT NULL,
+    userID      INTEGER     NOT NULL,
     price       DECIMAL     NOT NULL,
-    comment     TEXT
+    comment     TEXT,
+    CONSTRAINT fk
+        FOREIGN KEY (adID, userID)
+        REFERENCES ads(ID, userID)
 );
