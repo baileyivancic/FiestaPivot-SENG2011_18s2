@@ -146,3 +146,10 @@ body, html {
 .reg-body {
     padding: 100px;
 }
+
+/*-------------------------------------*/
+/* Log In */
+.form-control {
+	width: 500;
+	position: relative;
+}
