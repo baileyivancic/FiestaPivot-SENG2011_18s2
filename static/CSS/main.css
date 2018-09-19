@@ -1,0 +1,15 @@
+html,
+body{
+ height: 100%;
+}
+
+#cover {
+  height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+#cover-caption {
+  width: 100%;
+}

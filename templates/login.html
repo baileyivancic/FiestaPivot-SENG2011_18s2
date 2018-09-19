@@ -4,10 +4,9 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>fiestaPivot</title>
+		<title>FiestaPivot</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" media="screen" href="static/CSS/main.css" />
-		<link rel="stylesheet" type="text/css" media="screen" href="static/CSS/cover.css" />
 
 		<!--Bootstrap CDN and JS-->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -42,14 +41,42 @@
 		    </div>
 		</nav>
 
-		  <!--Content (MIDDLE)-->
-		<div class="jumbotron vertical-center" style="background: url(static/Images/catering.jpg)" style="opacity: 0.5">
-			<form action="" method="POST">
-			<div class="form-group col-md-6">
+
+		<section id="cover" style="background: url(static/Images/cateringDark.jpg) center no-repeat; background-size: cover;">
+		    <div id="cover-caption">
+		        <div id="container" class="container">
+		            <div class="row text-white">
+		                <div class="col-sm-10 offset-sm-1 text-center">
+		                    <h1 class="display-3">Welcome Back</h1>
+		                </div>
+		                    <div class="col-sm-6 offset-sm-3 text-center" class="info-form">
+		                        <form action="" class="justify-content-center">
+		                            <div class="form-group">		             	
+		                                <label class="sr-only">Email</label>
+		                                <input type="text" class="form-control" placeholder="a.nymeyer@unsw.edu.au">
+		                            </div>
+		                            <div class="form-group">
+		                                <label class="sr-only">Password</label>
+		                                <input type="text" class="form-control" placeholder="********">
+		                            </div>
+		                            <button type="submit" class="btn btn-success ">Login</button>
+		                        </form>
+		                    </div>
+		                    <br>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</section>
+
+		  <!--Content (MIDDLE)
+		<div style="background: url(static/Images/cateringDark.jpg)">
+			<form class="justify-content-center" action="" method="POST">
+			<div class="form-group col-lg-6">
 				<label for="exampleInputEmail1"><div class="text-light"><b>Email</b></div></label>
 				<input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example@gmail.com">
 			</div>
-			<div class="form-group col-md-6">
+			<div class="form-group col-lg-6">
 				<label for="exampleInputPassword1" class = "text-light"><b>Password</b></label>
 				<input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
 			</div>
@@ -57,7 +84,7 @@
 			<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
 		</div>
-	</body>
+	</body> -->
 
 	<!-- Footer -->
 	<footer class="page-footer font-small navbar-dark bg-dark pt-4">
