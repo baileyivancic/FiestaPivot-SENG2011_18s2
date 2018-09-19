@@ -18,6 +18,9 @@ CREATE TABLE IF NOT EXISTS ads(
     area        TEXT        NOT NULL,
     descr       TEXT        NOT NULL,
     active      BOOLEAN     NOT NULL,
+    date        TEXT        NOT NULL.
+    start_time  TEXT        NOT NULL,
+    end_time    TEXT        NOT NULL,
     CONSTRAINT fk
         FOREIGN KEY (userID)
         REFERENCES accounts(ID)

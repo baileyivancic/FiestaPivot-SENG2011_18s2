@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>post ad</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" media="screen" href="static/CSS/post.css">
+
+        <!--Bootstrap CDN and JS-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <!-- <div class="container">
+            <div class="title">
+                <h2>Create Your ad</h2>
+            </div>
+            <form method="POST">
+                <table>
+                    <tr>
+                        <th>Title: </th>
+                        <th><input placeholder="title" required></th>
+                    </tr>
+                    <tr>
+                        <th>Full name:</th>
+                        <th><input placeholder="Full name" required></th>
+                    </tr>
+                    <tr>
+                        <th>Price: </th>
+                        <th><input placeholder="Price" required></th>
+                    </tr>
+                    <tr>
+                        <th>Price: </th>
+                        <th><input placeholder="Full name" required></th>
+                    </tr>
+                </table>
+            </form>
+        </div> -->
+
+        <div class="jumbotron vertical-center" style="background:transparent;">
+			<div class="container" style="padding: 50px; border-radius: 5px">
+                <h1 class="text-center text-dark">Create Your Ad</h1>
+                <form action="" method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-md-6" >
+                            <p for="inputName" class="text-dark">Name</p>
+                            <input type="text" name="username" class="form-control" id="inputName" placeholder="E.g. John Smith">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6" >
+                            <p for="inputEmail4" class="text-dark">Email</p>
+                            <input type="email" name="email" class="form-control" id="inputEmail4" placeholder="E.g. john@hotmail.com">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <p for="inputPassword4" class="text-dark">Ad Title</p>
+                            <input type="password" name="password" class="form-control" id="inputPassword4" placeholder="E.g. BBQ with the bois">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <p for="inputCity" class="text-dark">City</p>
+                            <input type="text" name="city" class="form-control" placeholder="E.g. Sydney">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <p for="inputState" class="text-dark">State</p>
+                            <select name="state" id="inputState" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>NSW</option>
+                                <option>QLD</option>
+                                <option>SA</option>
+                                <option>TAS</option>
+                                <option>VIC</option>
+                                <option>WA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6" style="height: auto">
+                            <p for="inputCity" class="text-dark">Description</p>
+                            <textarea rows="4" cols="50" class="form-control">
+                            
+                            </textarea> 
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <p for="inputCity" class="text-dark">Start Date</p>
+                            <input class="form-control" type="date" name="date" min="now">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <p for="inputState" class="text-dark">Start Time</p>
+                            <input class="form-control" type="time" name="start-time">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <p for="inputState" class="text-dark">End Time</p>
+                            <input class="form-control" type="time" name="end-time">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+			</div>
+		</div>
+    </body>
+</html>

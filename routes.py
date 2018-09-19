@@ -99,3 +99,7 @@ def register():
 		else:
 			return render_template("register.html", response=0)
 	return render_template("register.html")
+
+@app.route('/post-ad', methods=["GET", "POST"])
+def post():
+	return render_template("post.html")
