@@ -47,7 +47,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6" >
                             <p for="inputName" class="text-dark">Name</p>
-                            <input type="text" name="username" class="form-control" id="inputName" placeholder="E.g. John Smith">
+                            <input type="text" name="name" class="form-control" id="inputName" placeholder="E.g. John Smith">
                         </div>
                     </div>
                     <div class="form-row">
@@ -59,7 +59,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <p for="inputPassword4" class="text-dark">Ad Title</p>
-                            <input type="password" name="password" class="form-control" id="inputPassword4" placeholder="E.g. BBQ with the bois">
+                            <input type="text" name="title" class="form-control" id="inputPassword4" placeholder="E.g. BBQ with the bois">
                         </div>
                     </div>
                     <div class="form-row">
@@ -81,9 +81,17 @@
                         </div>
                     </div>
                     <div class="form-row">
+                            <div class="form-group col-md-6" style="height: auto">
+                                <p for="inputCity" class="text-dark">Price</p>
+                                <span class="price">
+                                    <input name="price" class="form-control" type="number" min="0.00" max="10000.00" step="10.00" required/>
+                                </span>
+                            </div>
+                        </div>
+                    <div class="form-row">
                         <div class="form-group col-md-6" style="height: auto">
                             <p for="inputCity" class="text-dark">Description</p>
-                            <textarea rows="4" cols="50" class="form-control">
+                            <textarea rows="4" cols="50" name="descr" class="form-control">
                             
                             </textarea> 
                         </div>

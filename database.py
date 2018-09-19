@@ -20,15 +20,12 @@ class Database(object):
         db.commit()
         db.close()
 
-    def first_run(self):
-        pass
-
 # Login db functions
     def register_user(self, username, password, email, city, state):
         db = self.get_db()
         cursor = db.cursor()
 
-        cursor.execute("SELECT EXISTS(SELECT 1 FROM accounts WHERE username=? AND password=?)", (username, password))
+        cursor.execute("SELECT EXISTS(SELECT 1 FROM accounts WHERE email=? AND password=?)", (email, password))
         temp =  cursor.fetchone()
 
         print("result from db ", temp)
@@ -79,22 +76,12 @@ class Database(object):
 
 # Advertisement db functions
     #UNTESTED
-    def create_ad(userID, title, price, area, descr, active):
+    def create_ad(userEmail, title, price, area, descr, active):
         db = self.get_db()
         cursor = db.cursor()
 
-        cursor.execute("SELECT EXISTS(SELECT 1 FROM ads WHERE userID=?)", (userID))
-        temp = cursor.fetchone
-
-        if temp == 0:
-            # Could not find a user associated with this userID
-            print("Something went wrong, could not access correct user column\n")
-            db.commit()
-            db.close()
-            return 0
-        else :
-            cursor.execute('''INSERT INTO ads (userID, title, price, area, descr, active) VALUES (?, ?, ?, ?, ?)''',(userID, title, price, area, descr, active))
-            return 1
+        cursor.execute('''INSERT INTO ads (userEmail, title, price, city, state, descr, active, ) VALUES (?, ?, ?, ?, ?)''',(userEmail, title, price, city,state, descr, active, ))
+        return True
     
     #UNTESTED
     def updateTitle_ad(adID, newTitle):

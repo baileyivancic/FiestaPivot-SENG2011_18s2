@@ -22,10 +22,10 @@ class Controller:
 
 class User(UserMixin):
 	def __init__(self, id):
-		self.id = id
+		self.email = id
 
 	def get_id(self):
-		return self.id
+		return self.email
 
 	def is_authenticated(self):
 		return True
@@ -75,7 +75,7 @@ def login():
 		user = control.get_name(email)
 		valid = control.isValidUser(email, password)
 		if valid == True:
-			login_user(User(user), remember= False)
+			login_user(User(email), remember= False)
 			return redirect("/")
 		else:
 			return render_template("login.html")
@@ -101,5 +101,21 @@ def register():
 	return render_template("register.html")
 
 @app.route('/post-ad', methods=["GET", "POST"])
+@login_required
 def post():
+	if request.method == "POST":
+		# print(f"for user {current_user.get_id()}:\n")
+		name = request.form["name"].strip()
+		title = request.form["title"].strip()
+		email = request.form["email"].strip()
+		city = request.form["city"].strip()
+		state = request.form["state"].strip()
+		price = request.form["price"].strip()
+		descr = request.form["descr"].strip()
+		date = request.form["date"].strip()
+		start_time = request.form["start-time"].strip()
+		end_time = request.form["end-time"].strip()
+		# print(f"form: \nN:{name}\nT:{title}\nE:{email}\nC:{city}\nS:{state}\nDes:{descr}\nDa:{date}\nST:{start_time}\nET:{end_time}\n")
+		
+
 	return render_template("post.html")
