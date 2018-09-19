@@ -119,3 +119,11 @@ def post():
 		
 
 	return render_template("post.html")
+
+@app.route('/account',  methods=["GET", "POST"])
+def account():
+	if request.method == "POST":
+		print("POST")
+	return render_template("user-dashboard.html")
+
+
