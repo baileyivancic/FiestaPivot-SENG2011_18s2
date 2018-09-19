@@ -31,7 +31,6 @@ body, html {
 /* ----------------------------------- */
 /* Cover */
 .cover-container {
-	background: url("../images/catering.jpg") center no-repeat;
 	background-size: cover;
 	height: 100%;
 	margin: 0px;
