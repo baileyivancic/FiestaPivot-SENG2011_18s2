@@ -132,3 +132,10 @@ def account():
 	return render_template("user-dashboard.html")
 
 
+@app.route('/about',  methods=["GET", "POST"])
+def about():
+	if request.method == "POST":
+		print("POST")
+	return render_template("about.html")
+
+
