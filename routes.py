@@ -19,8 +19,8 @@ class Controller:
 	def get_name(self, email):
 		return self.database.get_name(email)
 
-	def post(self, email, title, price, city, descr, date, start_time, end_time):
-		return self.database.create_ad(email, title, price, city, descr, date, start_time, end_time)
+	def post(self, email, title, price, city, state, descr, date, start_time, end_time):
+		return self.database.create_ad(email, title, price, city, state, descr, date, start_time, end_time)
 
 
 class User(UserMixin):
@@ -116,6 +116,9 @@ def post():
 		date = request.form["date"].strip()
 		start_time = request.form["start-time"].strip()
 		end_time = request.form["end-time"].strip()
+
+		control.post(email, title, price, city, state, descr, date, start_time, end_time)
+		#TODO - make a post successful popup pls
 		# print(f"for user {name}:\n")
 		# print(f"form: \nN:{name}\nT:{title}\nE:{email}\nC:{city}\nS:{state}\nDes:{descr}\nDa:{date}\nST:{start_time}\nET:{end_time}\n")
 		

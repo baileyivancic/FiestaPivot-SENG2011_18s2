@@ -73,11 +73,13 @@ class Database(object):
 
 # Advertisement db functions
     #UNTESTED
-    def create_ad(userEmail, title, price, area, descr, active):
+    def create_ad(userEmail, title, price, city, state, descr, date, start_time, end_time):
         db = self.get_db()
         cursor = db.cursor()
 
-        cursor.execute('''INSERT INTO ads (userEmail, title, price, city, state, descr, active, ) VALUES (?, ?, ?, ?, ?)''',(userEmail, title, price, city,state, descr, active, ))
+        cursor.execute('''INSERT INTO ads (userEmail, title, price, city, state, descr, status, date, start_time, end_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',(userEmail, title, price, city, state, descr, "ACTIVE", date, start_time, end_time))
+        
+        self.close(db)
         return True
     
     #UNTESTED
