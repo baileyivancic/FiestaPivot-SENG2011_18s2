@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>FiestaPivot</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" type="text/css" media="screen" href="static/CSS/main.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="static/CSS/cover.css" />
 
 		<!--Bootstrap CDN and JS-->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -15,59 +15,69 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	</head>
 	<body>
-		<!--Navbar things (TOP)-->
+		
+		<!-- Need to change buttons in nav bar to correctly pop up modals -->
+		
+		<!--Navbar (Bootstrap taken from https://www.codeply.com/go/qhaBrcWp3v) -->
 		<nav class="navbar navbar-expand-md navbar-dark bg-primary">
-		    <a class="navbar-brand abs" href="#">FiestaPivot</a>
+		    <a class="navbar-brand abs" href="/">FiestaPivot</a>
 		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
 		        <span class="navbar-toggler-icon"></span>
 		    </button>
 		    <div class="navbar-collapse collapse" id="collapsingNavbar">
 		        <ul class="navbar-nav">
 		            <li class="nav-item">
-		                <a class="nav-link" href="#">About</a>
+		                <a class="nav-link" href="/about">About</a>
 		            </li>
 		            <li class="nav-item">
 		                <a class="nav-link" href="#">Search</a>
 		            </li>
-		        </ul>
+				</ul>
+				<!-- Dont need this since user already logged in -->
 		        <ul class="navbar-nav ml-auto">
-		            <li class="nav-item">
-		                <a class="nav-link" href="/register">Register</a>
-		            </li>
-		            <li class="nav-item">
-		                <a class="nav-link" href="/">Login</a>
-		            </li>
+		        	<li class="nav-item">
+						<a class="nav-link" href="/account">My Account</a>
+					</li>
+					<li class="nav-item">
+						<a href="/post-ad">
+							<button type="button" class="btn btn-light">Post an Ad</button>
+						</a>
+					</li>
 		        </ul>
 		    </div>
 		</nav>
 
-		<!-- Bootstrap adapted from https://www.codeply.com/go/Am5LvvjTxC/bootstrap-4-center-form-->
-		<section id="cover" style="background: url(static/Images/cateringDark.jpg) center no-repeat; background-size: cover;">
-		    <div id="cover-caption">
-		        <div id="container" class="container">
-		            <div class="row text-white">
-		                <div class="col-sm-10 offset-sm-1 text-center">
-		                    <h1 class="display-3">Welcome Back</h1>
-		                </div>
-		                    <div class="col-sm-6 offset-sm-3 text-center" class="info-form">
-		                        <form action="" method="POST" class="justify-content-center">
-		                            <div class="form-group">		             	
-		                                <label class="sr-only">Email</label>
-		                                <input type="email" name="email" class="form-control" placeholder="a.nymeyer@unsw.edu.au" required>
-		                            </div>
-		                            <div class="form-group">
-		                                <label class="sr-only">Password</label>
-		                                <input type="password" name="password" class="form-control" placeholder="********" required>
-		                            </div>
-		                            <button type="submit" class="btn btn-success ">Login</button>
-		                        </form>
-		                    </div>
-		                    <br>
-	                </div>
-	            </div>
-	        </div>
-		</section>
-		
+		  <!--Content (MID-BOTTOM)-->
+		  <div class="jumbotron">
+			<h1 class="display-4">What do we do?</h1>
+			<p class="lead">We help people help people.</p>
+			<hr class="my-4">
+			<p>FiestaPivot aims to bring outsourcing and all its benefits to the realm of food preparation. Sign up as an individual and find people to cater for your party, black tie function, or picnic. Alternatively, offer your services as a business to help new clients enjoy good food.</p>
+			<p class="lead">Testimonials</p>
+			<div class="embed-responsive embed-responsive-4by3">
+			  <iframe class="embed-responsive-item" src="https://www.youtube.com/watch?v=dQw4w9WgXcQ" allowfullscreen></iframe>
+			</div>
+			<p class="lead">Our Founder</p>
+			 
+			<div class="row">
+				<div class="col-xs-6">
+	              <div class="col-sm-6 col-md-6 col-xs-12 image-container">
+	                <img src="static/Images/artemis.jpg" class="img-thumbnail" style="height: 20%; width: 20%;">
+	              </div>
+
+	              <div class="col-sm-6 col-xs-12">  
+
+	                 <p>Artemis, goddess of the hunt, animals and the wild, is the fearsome leader who inspires our team everyday to strive to better people's lives.</p>
+	              </div>
+
+				 </div>
+			</div>
+
+			<p class="lead">Our Team</p>
+		  </div>
+
+	</body>
+
 	<!-- Footer -->
 	<footer class="page-footer font-small navbar-dark bg-dark pt-4">
 	    <div class="container text-center">
@@ -77,4 +87,5 @@
 	    </div>
 	    <div class="text-center py-3"><p class="text-light">© 2018 Copyright Team Artemis</div>
 	</footer>
+
 </html>
