@@ -19,6 +19,9 @@ class Controller:
 	def get_name(self, email):
 		return self.database.get_name(email)
 
+	def post(self, email, title, price, city, descr, date, start_time, end_time):
+		return self.database.create_ad(email, title, price, city, descr, date, start_time, end_time)
+
 
 class User(UserMixin):
 	def __init__(self, id):
@@ -72,7 +75,6 @@ def login():
 		#print("POST")
 		email = request.form["email"].strip()
 		password = request.form["password"].strip()
-		user = control.get_name(email)
 		valid = control.isValidUser(email, password)
 		if valid == True:
 			login_user(User(email), remember= False)
@@ -104,10 +106,9 @@ def register():
 @login_required
 def post():
 	if request.method == "POST":
-		# print(f"for user {current_user.get_id()}:\n")
-		name = request.form["name"].strip()
+		name = control.get_name( current_user.get_id() )
+		email = current_user.get_id()
 		title = request.form["title"].strip()
-		email = request.form["email"].strip()
 		city = request.form["city"].strip()
 		state = request.form["state"].strip()
 		price = request.form["price"].strip()
@@ -115,6 +116,7 @@ def post():
 		date = request.form["date"].strip()
 		start_time = request.form["start-time"].strip()
 		end_time = request.form["end-time"].strip()
+		# print(f"for user {name}:\n")
 		# print(f"form: \nN:{name}\nT:{title}\nE:{email}\nC:{city}\nS:{state}\nDes:{descr}\nDa:{date}\nST:{start_time}\nET:{end_time}\n")
 		
 

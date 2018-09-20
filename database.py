@@ -62,17 +62,14 @@ class Database(object):
         db = self.get_db()
         cursor = db.cursor()
 
-        cursor.execute("SELECT EXISTS(SELECT 1 FROM accounts WHERE email=?)", (email, ))
+        cursor.execute("SELECT username FROM accounts WHERE email=?", (email, ))
         temp = cursor.fetchone()
 
-        isValid = False
-
-        if temp != (0, ):
-            # there is already a user using this user name
-            isValid = True
+        if temp == False:
+            return False
 
         self.close(db)
-        return isValid
+        return temp[0]
 
 # Advertisement db functions
     #UNTESTED
