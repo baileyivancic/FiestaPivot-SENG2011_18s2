@@ -117,8 +117,9 @@ def post():
 		start_time = request.form["start-time"].strip()
 		end_time = request.form["end-time"].strip()
 
-		control.post(email, title, price, city, state, descr, date, start_time, end_time)
+		if control.post(email, title, price, city, state, descr, date, start_time, end_time):
 		#TODO - make a post successful popup pls
+			pass
 		# print(f"for user {name}:\n")
 		# print(f"form: \nN:{name}\nT:{title}\nE:{email}\nC:{city}\nS:{state}\nDes:{descr}\nDa:{date}\nST:{start_time}\nET:{end_time}\n")
 		
@@ -126,6 +127,7 @@ def post():
 	return render_template("post.html")
 
 @app.route('/account',  methods=["GET", "POST"])
+@login_required
 def account():
 	if request.method == "POST":
 		print("POST")

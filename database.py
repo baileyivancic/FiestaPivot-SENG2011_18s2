@@ -28,7 +28,6 @@ class Database(object):
         cursor.execute("SELECT EXISTS(SELECT 1 FROM accounts WHERE email=? AND password=?)", (email, password))
         temp =  cursor.fetchone()
 
-        print("result from db ", temp)
         if temp != (0, ):
             # there is already a user using this user name
             db.commit()
@@ -73,17 +72,17 @@ class Database(object):
 
 # Advertisement db functions
     #UNTESTED
-    def create_ad(userEmail, title, price, city, state, descr, date, start_time, end_time):
+    def create_ad(self, userEmail, title, price, city, state, descr, date, start_time, end_time):
         db = self.get_db()
         cursor = db.cursor()
 
-        cursor.execute('''INSERT INTO ads (userEmail, title, price, city, state, descr, status, date, start_time, end_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',(userEmail, title, price, city, state, descr, "ACTIVE", date, start_time, end_time))
+        cursor.execute('''INSERT INTO ads (userEmail, title, price, city, state, descr, status, date, start_time, end_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',(userEmail, title, price, city, state, descr, "ACTIVE", date, start_time, end_time,))
         
         self.close(db)
         return True
     
     #UNTESTED
-    def updateTitle_ad(adID, newTitle):
+    def updateTitle_ad(self, adID, newTitle):
         db = self.get_db()
         cursor = db.cursor()
 
@@ -103,7 +102,7 @@ class Database(object):
             return 1
 
     #UNTESTED
-    def updatePrice_ad(adID, newPrice):
+    def updatePrice_ad(self, adID, newPrice):
         db = self.get_db()
         cursor = db.cursor()
 
@@ -123,7 +122,7 @@ class Database(object):
             return 1
 
     #UNTESTED
-    def updateLocation_ad(adID, newLocation):
+    def updateLocation_ad(self, adID, newLocation):
         db = self.get_db()
         cursor = db.cursor()
 
@@ -143,7 +142,7 @@ class Database(object):
             return 1
 
     #UNTESTED
-    def updateDescription_ad(adID, newDesc):
+    def updateDescription_ad(self, adID, newDesc):
         db = self.get_db()
         cursor = db.cursor()
 
@@ -163,7 +162,7 @@ class Database(object):
             return 1
     
     #UNTESTED
-    def updateActive_ad(adID, newActive):
+    def updateActive_ad(self, adID, newActive):
         db = self.get_db()
         cursor = db.cursor()
 
@@ -184,7 +183,7 @@ class Database(object):
 
 # Bid db functions
     #UNTESTED
-    def create_bid(adID, userID, price, comment):
+    def create_bid(self, adID, userID, price, comment):
         db = self.get_db()
         cursor = db.cursor()
 
@@ -204,7 +203,7 @@ class Database(object):
             return 1
     
     #UNTESTED
-    def updatePrice_bid(adID, userID, newPrice):
+    def updatePrice_bid(self, adID, userID, newPrice):
         db = self.get_db()
         cursor = db.cursor()
 
@@ -224,7 +223,7 @@ class Database(object):
             return 1
 
     #UNTESTED
-    def updateComment_bid(adID, userID, newComment):
+    def updateComment_bid(self, adID, userID, newComment):
         db = self.get_db()
         cursor = db.cursor()
 
