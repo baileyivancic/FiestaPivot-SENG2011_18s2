@@ -61,6 +61,12 @@ def load_user(user_id):
 login_manager.login_view = "login"
 login_manager.login_message = "Welcome"
 
+@app.route("/logout",  methods=["GET", "POST"])
+@login_required
+def logout():
+	logout_user()
+	return redirect("/login")
+
 # Default page, index page
 @app.route('/',  methods=["GET", "POST"])
 @login_required
