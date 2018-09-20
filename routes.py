@@ -131,4 +131,9 @@ def account():
 		print("POST")
 	return render_template("user-dashboard.html")
 
+@app.route('/create-bid', methods=["GET", "POST"])
+@login_required
+def create_bid(): # Add in adID parameter when we create the ad modal that this is launched from
+	return render_template("create_bid.html") # Enter in (value=adID)
+
 
