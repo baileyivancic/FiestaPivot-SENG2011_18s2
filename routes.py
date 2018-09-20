@@ -61,6 +61,12 @@ def load_user(user_id):
 login_manager.login_view = "login"
 login_manager.login_message = "Welcome"
 
+@app.route("/logout",  methods=["GET", "POST"])
+@login_required
+def logout():
+	logout_user()
+	return redirect("/login")
+
 # Default page, index page
 @app.route('/',  methods=["GET", "POST"])
 @login_required
@@ -117,8 +123,9 @@ def post():
 		start_time = request.form["start-time"].strip()
 		end_time = request.form["end-time"].strip()
 
-		control.post(email, title, price, city, state, descr, date, start_time, end_time)
+		if control.post(email, title, price, city, state, descr, date, start_time, end_time):
 		#TODO - make a post successful popup pls
+			pass
 		# print(f"for user {name}:\n")
 		# print(f"form: \nN:{name}\nT:{title}\nE:{email}\nC:{city}\nS:{state}\nDes:{descr}\nDa:{date}\nST:{start_time}\nET:{end_time}\n")
 		
@@ -126,6 +133,7 @@ def post():
 	return render_template("post.html")
 
 @app.route('/account',  methods=["GET", "POST"])
+@login_required
 def account():
 	if request.method == "POST":
 		print("POST")
@@ -135,5 +143,12 @@ def account():
 @login_required
 def create_bid(): # Add in adID parameter when we create the ad modal that this is launched from
 	return render_template("create_bid.html") # Enter in (value=adID)
+
+
+@app.route('/about',  methods=["GET", "POST"])
+def about():
+	if request.method == "POST":
+		print("POST")
+	return render_template("about.html")
 
 
