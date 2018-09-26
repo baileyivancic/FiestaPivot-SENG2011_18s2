@@ -151,6 +151,7 @@ def about():
 		print("POST")
 	return render_template("about.html")
 
+# need to fix up bug where logged in user is logged out upon entering page (or is not hsown in nav bar)
 @app.route('/search', methods=["GET", "POST"])
 def search():
 	return render_template("search.html")
