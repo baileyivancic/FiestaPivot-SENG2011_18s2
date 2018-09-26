@@ -68,6 +68,7 @@ class Database(object):
             return False
 
         self.close(db)
+        print(temp)
         return temp[0]
 
 # Advertisement db functions
