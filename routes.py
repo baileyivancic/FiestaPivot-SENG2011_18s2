@@ -124,7 +124,7 @@ def post():
 		end_time = request.form["end-time"].strip()
 
 		if control.post(email, title, price, city, state, descr, date, start_time, end_time):
-		#TODO - make a post successful popup pls
+			#TODO - make a post successful popup pls
 			pass
 		# print(f"for user {name}:\n")
 		# print(f"form: \nN:{name}\nT:{title}\nE:{email}\nC:{city}\nS:{state}\nDes:{descr}\nDa:{date}\nST:{start_time}\nET:{end_time}\n")
@@ -151,4 +151,7 @@ def about():
 		print("POST")
 	return render_template("about.html")
 
+@app.route('/search', methods=["GET", "POST"])
+def search():
+	return render_template("search.html")
 
