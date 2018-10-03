@@ -3,4 +3,5 @@ from database import Database
 
 db = Database()
 
-print( db.get_name("nabil.shaikh.nabil@gmail.com")[0] ) 
+ads = db.fetch_ads()
+print( ads[0][0] )

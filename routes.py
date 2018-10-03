@@ -21,7 +21,9 @@ class Controller:
 
 	def post(self, email, title, price, city, state, descr, date, start_time, end_time):
 		return self.database.create_ad(email, title, price, city, state, descr, date, start_time, end_time)
-
+	
+	def fetch_ads(self):
+		return self.database.fetch_ads()
 
 class User(UserMixin):
 	def __init__(self, id):
