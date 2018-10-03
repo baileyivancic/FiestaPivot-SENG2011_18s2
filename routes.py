@@ -51,7 +51,6 @@ def check_password(user_id, password):
 	return False
 
 def get_user(user_id):
-
 	return User(user_id)
 
 @login_manager.user_loader
@@ -78,8 +77,6 @@ def default():
 		return search(keywords)
 	return render_template("index.html")
 
-#If we're doing modals, we probably don't need aspp routes right??
-# This should open uop the login modal and check that for credentials
 @app.route('/login',  methods=["GET", "POST"])
 def login():
 	if request.method == "POST":
@@ -94,7 +91,6 @@ def login():
 			return render_template("login.html")
 	return render_template("login.html")
 
-# This should open up the register modal and check for credentials
 @app.route('/register', methods=["GET", "POST"])
 def register():
 	if request.method == "POST":
@@ -133,16 +129,15 @@ def post():
 			pass
 		# print(f"for user {name}:\n")
 		# print(f"form: \nN:{name}\nT:{title}\nE:{email}\nC:{city}\nS:{state}\nDes:{descr}\nDa:{date}\nST:{start_time}\nET:{end_time}\n")
-		
-
 	return render_template("post.html")
 
 @app.route('/account',  methods=["GET", "POST"])
 @login_required
 def account():
-	if request.method == "POST":
-		print("POST")
-	return render_template("user-dashboard.html")
+	db = Database()
+
+	ads = db.find_user_ads( current_user.get_id() )
+	return render_template("user-dashboard.html", ads=ads)
 
 @app.route('/create-bid', methods=["GET", "POST"])
 @login_required

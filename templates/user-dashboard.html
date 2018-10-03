@@ -54,40 +54,26 @@
 
         <div class="jumbotron jumbotron-fluid">
           <div class="container">
-            <h1 class="display-5">My Advertisements</h1>
+            <h1 class="display-5">My Dashboard</h1>
             <hr class="my-4">
             <div id="active">
-                <p class="lead">Active Advertisements</p>
-               <div class="list-group">
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <p class="lead">My ads</p>
+                {% for ad in ads %}
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
                     <div class="d-flex w-100 justify-content-between">
-                      <h5 class="mb-1">Looking for a wedding caterer</h5>
-                      <small>3 days ago</small>
+                        <h5 class="mb-1">{{ ad[2] }}</h5>
+                        <small>Start date: {{ ad[8] }}</small>
                     </div>
-                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                    <small>Donec id elit non mi porta.</small>
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h5 class="mb-1">Son's 5th birthday party</h5>
-                      <small class="text-muted">6 days ago</small>
-                    </div>
-                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                    <small class="text-muted">Donec id elit non mi porta.</small>
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h5 class="mb-1">Sunday barbeque buffet</h5>
-                      <small class="text-muted">12 days ago</small>
-                    </div>
-                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                    <small class="text-muted">Donec id elit non mi porta.</small>
-                  </a>
-                </div>
+                    <p class="mb-1">{{ ad[6] }}</p>
+                    <small>{{ ad[1] }}</small>
+                    <small>Price: {{ ad[3] }}</small>
+                    <small>Status: {{ ad[7] }}</small>
+                </a>
+                {% endfor %}
             </div>
             <br>
             <div id="past">
-                <p class="lead">Past Advertisements</p>
+                <p class="lead">My bids</p>
                 <div class="list-group">
                   <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">

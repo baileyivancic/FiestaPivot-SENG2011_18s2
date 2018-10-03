@@ -251,3 +251,16 @@ class Database(object):
 
         self.close(db)
         return ads
+
+    def find_user_ads(self, email):
+        db = self.get_db()
+        cursor = db.cursor()
+
+        cursor.execute("SELECT * FROM ads WHERE userEmail=?", (email, ))
+        temp = cursor.fetchall()
+
+        if temp == False:
+            return False
+
+        self.close(db)
+        return temp
