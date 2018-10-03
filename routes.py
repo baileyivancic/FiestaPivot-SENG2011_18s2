@@ -161,5 +161,5 @@ def about():
 @app.route('/search', methods=["GET", "POST"])
 def search(keywords):
 	print(keywords)
-	return render_template("search.html")
-
+	#TODO update function fetch_ads to take in args e.g. keywords
+	return render_template("search.html", keywords=keywords, ads = control.fetch_ads() )
