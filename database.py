@@ -242,3 +242,12 @@ class Database(object):
             db.commit()
             db.close()
             return 1
+
+    def fetch_ads(self):
+        db = self.get_db()
+        cursor = db.cursor()
+
+        ads = cursor.execute("SELECT * FROM ads").fetchall()
+
+        self.close(db)
+        return ads
