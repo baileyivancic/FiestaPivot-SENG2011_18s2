@@ -71,7 +71,8 @@ def logout():
 @app.route('/',  methods=["GET", "POST"])
 @login_required
 def default():
-	return render_template("index.html")
+	keywords = request.form['index-input']
+	return render_template("index.html", keywords=keywords)
 
 #If we're doing modals, we probably don't need aspp routes right??
 # This should open uop the login modal and check that for credentials
