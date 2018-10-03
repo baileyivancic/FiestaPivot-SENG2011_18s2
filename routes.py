@@ -166,4 +166,10 @@ def about():
 # Used from nav bar
 @app.route('/search', methods=["GET", "POST"])
 def search():
-	return render_template("search.html")
+	# Pass data for searches into search page
+	ads = control.fetch_ads()
+	# Order ads by start date (Soonest first)
+	#newAds[]
+	#for ad in ads:
+	# PUT IN ORDERING ALROGITHM	
+	return render_template("search.html", ads=ads)
