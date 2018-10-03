@@ -71,8 +71,11 @@ def logout():
 @app.route('/',  methods=["GET", "POST"])
 @login_required
 def default():
-	keywords = request.form['index-input']
-	return render_template("index.html", keywords=keywords)
+	if request.method == "POST":
+		keywords = request.form['indexInput']
+		print(keywords)
+		return search(keywords)
+	return render_template("index.html")
 
 #If we're doing modals, we probably don't need aspp routes right??
 # This should open uop the login modal and check that for credentials
@@ -154,6 +157,7 @@ def about():
 
 # need to fix up bug where logged in user is logged out upon entering page (or is not hsown in nav bar)
 @app.route('/search', methods=["GET", "POST"])
-def search():
+def search(keywords):
+	print(keywords)
 	return render_template("search.html")
 
