@@ -156,7 +156,7 @@ def about():
 		print("POST")
 	return render_template("about.html")
 
-# need to fix up bug where logged in user is logged out upon entering page (or is not hsown in nav bar)
+# need to fix up bug where logged in user is logged out upon entering page (or is not shown in nav bar)
 @app.route('/search', methods=["GET", "POST"])
 def search(keywords):
 	#TODO update function fetch_ads to take in args e.g. keywords

@@ -119,37 +119,14 @@
                     {% for ad in ads %}
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">{{ ad[1] }}</h5>
-                                <small>28 days ago</small>
+                                <h5 class="mb-1">{{ ad[2] }}</h5>
+                                <small>Start date: {{ ad[8] }}</small>
                             </div>
-                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                            <small>Donec id elit non mi porta.</small>
+                            <p class="mb-1">{{ ad[6] }}</p>
+                            <small>{{ ad[1] }}</small>
+                            <small>Price: {{ ad[3] }}</small>
                         </a>
                     {% endfor %}
-                    <!-- <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                      <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Bartender needed</h5>
-                        <small>28 days ago</small>
-                      </div>
-                      <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                      <small>Donec id elit non mi porta.</small>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                      <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Daughter's 9th birthday party</h5>
-                        <small class="text-muted">3 months ago</small>
-                      </div>
-                      <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                      <small class="text-muted">Donec id elit non mi porta.</small>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                      <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Need a chef for a private function</h5>
-                        <small class="text-muted">1 year ago</small>
-                      </div>
-                      <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                      <small class="text-muted">Donec id elit non mi porta.</small>
-                    </a> -->
                   </div>
              </div>
         </div>
