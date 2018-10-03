@@ -73,8 +73,12 @@ def logout():
 @login_required
 def default():
 	if request.method == "POST":
-		keywords = request.form['indexInput']
-		return search(keywords)
+		if request.form['submit-but'] == "dash":
+			return render_template("user-dashboard.html")
+		elif reques.form['submit-but'] == "search":
+			return render_template("search.html")
+		#keywords = request.form['indexInput']
+		return searchI(keywords)
 	return render_template("index.html")
 
 @app.route('/login',  methods=["GET", "POST"])
@@ -151,11 +155,15 @@ def about():
 		print("POST")
 	return render_template("about.html")
 
-# need to fix up bug where logged in user is logged out upon entering page (or is not shown in nav bar)
+# # Used when coming straight from index page
+# @app.route('/searchI', methods=["GET", "POST"])
+# def searchI(keywords):
+# 	terms = keywords.split(",")
+# 	for item in terms:
+# 		print("item is" + item)
+# 	return render_template("search.html", keywords=keywords, ads = control.fetch_ads())
+
+# Used from nav bar
 @app.route('/search', methods=["GET", "POST"])
-def search(keywords):
-	#TODO update function fetch_ads to take in args e.g. keywords
-	terms = keywords.split(",")
-	for item in terms:
-		print("item is" + item)
-	return render_template("search.html", keywords=keywords, ads = control.fetch_ads())
+def search():
+	return render_template("search.html")
