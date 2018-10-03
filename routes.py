@@ -75,7 +75,6 @@ def logout():
 def default():
 	if request.method == "POST":
 		keywords = request.form['indexInput']
-		print(keywords)
 		return search(keywords)
 	return render_template("index.html")
 
@@ -160,6 +159,8 @@ def about():
 # need to fix up bug where logged in user is logged out upon entering page (or is not hsown in nav bar)
 @app.route('/search', methods=["GET", "POST"])
 def search(keywords):
-	print(keywords)
 	#TODO update function fetch_ads to take in args e.g. keywords
-	return render_template("search.html", keywords=keywords, ads = control.fetch_ads() )
+	terms = keywords.split(",")
+	for item in terms:
+		print("item is" + item)
+	return render_template("search.html", keywords=keywords, ads = control.fetch_ads())
