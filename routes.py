@@ -139,7 +139,6 @@ def post():
 @login_required
 def account():
 	db = Database()
-
 	ads = db.find_user_ads( current_user.get_id() )
 	return render_template("user-dashboard.html", ads=ads)
 
@@ -171,5 +170,5 @@ def search():
 	# Order ads by start date (Soonest first)
 	#newAds[]
 	#for ad in ads:
-	# PUT IN ORDERING ALROGITHM	
+	# PUT IN ORDERING	
 	return render_template("search.html", ads=ads)
