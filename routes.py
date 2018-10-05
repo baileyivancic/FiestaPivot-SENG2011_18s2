@@ -129,7 +129,6 @@ def post():
 		end_time = request.form["end-time"].strip()
 
 		if control.post(email, title, price, city, state, descr, date, start_time, end_time):
-			#TODO - make a post successful popup pls
 			pass
 		# print(f"for user {name}:\n")
 		# print(f"form: \nN:{name}\nT:{title}\nE:{email}\nC:{city}\nS:{state}\nDes:{descr}\nDa:{date}\nST:{start_time}\nET:{end_time}\n")
@@ -173,3 +172,11 @@ def search():
 	#for ad in ads:
 	# PUT IN ORDERING	
 	return render_template("search.html", ads=ads)
+
+@app.route('/bid-send', methods=['GET', 'POST'])
+def bidSend(postID, price, description, userID):
+    # Grab information from request, and put in db
+	#https://stackoverflow.com/questions/30899484/python-flask-calling-functions-using-buttons
+	
+	print("Went in here!!!")
+	return render_template("search.html")
