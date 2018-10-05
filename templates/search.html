@@ -156,7 +156,7 @@
                             
                             <div class="w3-center"><br>
                                 <span onclick="document.getElementById('bid').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
-                                <p id-="bidTitle">Placeholder text</p>
+                                <label id="bidTitle"></label>
                             </div>
                             
                             <div class="w3-container">
@@ -211,7 +211,7 @@
         
         alert("Gone in here!!!!")
         // Change title of new modal to contain title of ad
-        //document.getElementById('bidTitle').value = 'Bidding on: ' + postTitle;
+        document.getElementById('bidTitle').innerHTML = "Bidding on: " + postTitle;
         
         alert("Gone in here again!!!!!!")
         // Show new modal
