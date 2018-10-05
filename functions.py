@@ -13,8 +13,6 @@ def isSubstring(token, string):
     return r
 
 def bubble(args):
-    print("got in bubble")
-
     listCopy = copy.copy(args)
     i = (len(args) -1)
     upperbound = 0

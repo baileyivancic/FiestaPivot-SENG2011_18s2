@@ -134,6 +134,7 @@ def post():
 		# print(f"for user {name}:\n")
 		# print(f"form: \nN:{name}\nT:{title}\nE:{email}\nC:{city}\nS:{state}\nDes:{descr}\nDa:{date}\nST:{start_time}\nET:{end_time}\n")
 	return render_template("post.html")
+	
 
 @app.route('/account',  methods=["GET", "POST"])
 @login_required

@@ -115,12 +115,11 @@
              </div>
              
 
-
+             {% for ad in ads %}
              <!--Put boxes containing ads in here-->
              <div class="results">
                 <div class="list-group" style="width: 100%;">
-                    {% for ad in ads %}
-                        <a onclick="document.getElementById('id01').style.display='block'" href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
+                        <a onclick="document.getElementById('{{ad[0]}}').style.display='block'" href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">{{ ad[2] }}</h5>
                                 <small>Date: {{ ad[8] }}</small>
@@ -129,23 +128,22 @@
                             <small>{{ ad[1] }}</small>
                             <small>Price: {{ ad[3] }}</small>
                         </a>
-                    {% endfor %}
                   </div>
              </div>
         </div>
 
         <div class="Modals">
-            <div id="id01" class="w3-modal">
+            <div id="{{ad[0]}}" class="w3-modal">
                 <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
 
                 <div class="w3-center"><br>
-                    <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
-                    <p>TITLE</p>
+                    <span onclick="document.getElementById('{{ad[0]}}').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+                    <p>{{ad[2]}}</p>
                 </div>
 
                 <div class="w3-container">
                     <div class="w3-section">
-                        <label><b>Username</b></label>
+                        <label><b>{{ad[1]}}</b></label>
                         <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="usrname" required>
                         <label><b>Password</b></label>
                         <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="psw" required>
@@ -159,11 +157,8 @@
 
                 </div>
             </div>
-            <script>
-                
-            </script>
         </div>
-
+        {% endfor %}
         <!-- Footer-->
         <div id="footer">
             <footer class="page-footer font-small navbar-dark bg-dark pt-4">
@@ -176,6 +171,7 @@
         </footer>
         </div>
     </div>
-
+    <script>
+    </script>
 </body>
 </html>
