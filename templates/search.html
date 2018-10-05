@@ -126,16 +126,21 @@
                 
                                 <div class="w3-container">
                                     <div class="w3-section">
-                                        <label><b>{{ad[1]}}</b></label>
-                                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="usrname" required>
-                                        <label><b>Password</b></label>
-                                        <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="psw" required>
-                                        <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>
+                                        <h3>Posted by:</h3>
+                                            <label><b>{{ad[1]}}</b></label>
+                                        <h3>Location:</h3>
+                                            <label><b>{{ad[4]}}, {{ad[5]}}</b></label>
+                                        <h3>Price:</h3>
+                                            <label><b>{{ad[3]}}</b></label>
+                                        <h3>Date:</h3>
+                                            <label><b>{{ad[8]}}</b></label>
+                                        <h3>Job description:</h3>
+                                            <label><b>{{ad[2]}}</b></label>
                                     </div>
                                 </div>
                 
                                 <div class="w3-container w3-center w3-border-top w3-padding-16 w3-light-grey">
-                                    <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Bid Button </button>
+                                    <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Place bid</button>
                                 </div>
                 
                                 </div>
