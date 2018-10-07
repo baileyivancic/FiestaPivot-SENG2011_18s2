@@ -142,7 +142,8 @@ def post():
 def account():
 	db = Database()
 	ads = db.find_user_ads( current_user.get_id() )
-	return render_template("user-dashboard.html", ads=ads)
+	bids = db.find_user_bids( current_user.get_id() )
+	return render_template("user-dashboard.html", ads=ads, bids=bids)
 
 @app.route('/about',  methods=["GET", "POST"])
 def about():

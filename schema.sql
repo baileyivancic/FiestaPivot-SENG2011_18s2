@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS ads(
         REFERENCES accounts(email)
 );
 
+/* Add in the ad email into the bid field*/
 /* Add in extra criteria we want to include*/
 CREATE TABLE IF NOT EXISTS bids(
     ID          INTEGER     PRIMARY KEY AUTOINCREMENT,
