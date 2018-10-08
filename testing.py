@@ -3,5 +3,5 @@ from database import Database
 
 db = Database()
 
-ads = db.find_user_ads("test@gmail.com")
+ads = db.find_user_bids("test@gmail.com")
 print( ads )

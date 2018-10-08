@@ -19,8 +19,11 @@ class Controller:
 	def get_name(self, email):
 		return self.database.get_name(email)
 
-	def post(self, email, title, price, city, state, descr, date, start_time, end_time):
+	def postAd(self, email, title, price, city, state, descr, date, start_time, end_time):
 		return self.database.create_ad(email, title, price, city, state, descr, date, start_time, end_time)
+	
+	def postBid(self, adID, userID, price, comment):
+		return self.database.create_bid(adID, userID, price, comment)
 	
 	def fetch_ads(self):
 		return self.database.fetch_ads()
@@ -98,7 +101,6 @@ def login():
 @app.route('/register', methods=["GET", "POST"])
 def register():
 	if request.method == "POST":
-		#print("POST")
 		user = request.form["username"].strip()
 		password = request.form["password"].strip()
 		email = request.form["email"].strip()
@@ -128,12 +130,12 @@ def post():
 		start_time = request.form["start-time"].strip()
 		end_time = request.form["end-time"].strip()
 
-		if control.post(email, title, price, city, state, descr, date, start_time, end_time):
-			#TODO - make a post successful popup pls
+		if control.postAd(email, title, price, city, state, descr, date, start_time, end_time):
 			pass
 		# print(f"for user {name}:\n")
 		# print(f"form: \nN:{name}\nT:{title}\nE:{email}\nC:{city}\nS:{state}\nDes:{descr}\nDa:{date}\nST:{start_time}\nET:{end_time}\n")
 	return render_template("post.html")
+	
 
 @app.route('/account',  methods=["GET", "POST"])
 @login_required
@@ -142,27 +144,12 @@ def account():
 	ads = db.find_user_ads( current_user.get_id() )
 	return render_template("user-dashboard.html", ads=ads)
 
-@app.route('/create-bid', methods=["GET", "POST"])
-@login_required
-def create_bid(): # Add in adID parameter when we create the ad modal that this is launched from
-	return render_template("create_bid.html") # Enter in (value=adID)
-
-
 @app.route('/about',  methods=["GET", "POST"])
 def about():
 	if request.method == "POST":
 		print("POST")
 	return render_template("about.html")
 
-# # Used when coming straight from index page
-# @app.route('/searchI', methods=["GET", "POST"])
-# def searchI(keywords):
-# 	terms = keywords.split(",")
-# 	for item in terms:
-# 		print("item is" + item)
-# 	return render_template("search.html", keywords=keywords, ads = control.fetch_ads())
-
-# Used from nav bar
 @app.route('/search', methods=["GET", "POST"])
 def search():
 	# Pass data for searches into search page
@@ -172,3 +159,20 @@ def search():
 	#for ad in ads:
 	# PUT IN ORDERING	
 	return render_template("search.html", ads=ads)
+
+# Creating bid from user input after searching
+@app.route('/bid-send', methods=['GET', 'POST'])
+def bidSend():
+    # Grab information from request, and put in db
+	userID = current_user.get_id()
+	price = request.form['priceInput'].strip()
+	comment = request.form['commentInput'].strip()
+	adID = request.form['adID'].strip()
+	print("user os " + userID)
+	print("price is " + price)
+	print("desc " + comment)
+	print("adID is " + adID)
+
+	control.postBid(adID, userID, price, comment)
+
+	return search()

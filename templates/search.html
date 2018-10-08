@@ -129,6 +129,7 @@
                             <small>{{ ad[1] }}</small>
                             <small>Price: {{ ad[3] }}</small>
                         </a>
+                        
                     {% endfor %}
                   </div>
              </div>
@@ -145,8 +146,10 @@
 
                 <div class="w3-container">
                     <div class="w3-section">
-                        <label><b>Username</b></label>
-                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="usrname" required>
+                        <div class="form-row">
+                            <span class="w3-margin-bottom">Date: 2018-10-06</span>
+                            <span>nabil.shaikh@gmail.com</span>
+                        </div>
                         <label><b>Password</b></label>
                         <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="psw" required>
                         <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>

@@ -69,10 +69,9 @@ class Database(object):
 
         self.close(db)
         print(temp)
-        return temp[0]
+        return temp
 
 # Advertisement db functions
-    #UNTESTED
     def create_ad(self, userEmail, title, price, city, state, descr, date, start_time, end_time):
         db = self.get_db()
         cursor = db.cursor()
@@ -184,24 +183,17 @@ class Database(object):
 
 # Bid db functions
     #UNTESTED
-    def create_bid(self, adID, userID, price, comment):
+    def create_bid(self, adID, userEmail, price, comment):
         db = self.get_db()
         cursor = db.cursor()
 
-        cursor.execute("SELECT EXISTS(SELECT 1 FROM bids WHERE adID=? AND userID=?)", (adID, userID))
-        temp = cursor.fetchone
+        cursor.execute("SELECT EXISTS(SELECT 1 FROM bids WHERE adID=? AND userEmail=?)", (adID, userEmail))
+        temp = cursor.fetchone()
 
-        if temp == (0, ): #TODO - CHECK THIS
-            # Could not find userID or adID
-            print("Something went wrong, could not access correct user or ad\n")
-            db.commit()
-            db.close()
-            return 0
-        else :
-            cursor.execute('''INSERT INTO bids (adID, userID, price, comment) VALUES (?, ?, ?, ?)''',(adID, userID, price, comment))
-            db.commit()
-            db.close()
-            return 1
+        cursor.execute('''INSERT INTO bids (adID, userEmail, price, comment) VALUES (?, ?, ?, ?)''',(adID, userEmail, price, comment))
+        db.commit()
+        db.close()
+        return 1
     
     #UNTESTED
     def updatePrice_bid(self, adID, userID, newPrice):
@@ -261,6 +253,16 @@ class Database(object):
 
         if temp == False:
             return False
+
+        self.close(db)
+        return temp
+    
+    def find_user_bids(self, email):
+        db = self.get_db()
+        cursor = db.cursor()
+
+        cursor.execute("SELECT * FROM bids WHERE userEmail=?", (email, ))
+        temp = cursor.fetchall()
 
         self.close(db)
         return temp

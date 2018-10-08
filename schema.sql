@@ -30,10 +30,10 @@ CREATE TABLE IF NOT EXISTS ads(
 CREATE TABLE IF NOT EXISTS bids(
     ID          INTEGER     PRIMARY KEY AUTOINCREMENT,
     adID        INTEGER     NOT NULL,
-    userID      INTEGER     NOT NULL,
+    userEmail   INTEGER     NOT NULL,
     price       DECIMAL     NOT NULL,
     comment     TEXT,
     CONSTRAINT fk
-        FOREIGN KEY (adID, userID)
-        REFERENCES ads(ID, userID)
+        FOREIGN KEY (adID, userEmail)
+        REFERENCES ads(ID, userEmail)
 );

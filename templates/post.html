@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-md navbar-dark bg-primary">
@@ -28,7 +28,6 @@
 		                <a class="nav-link" href="/search">Search</a>
 		            </li>
 				</ul>
-				<!-- Dont need this since user already logged in -->
 		        <ul class="navbar-nav ml-auto">
 		        	<li class="nav-item">
 						<a class="nav-link" href="/account">My Account</a>
@@ -50,7 +49,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <p for="inputPassword4" class="text-dark">Ad Title</p>
-                                <input type="text" name="title" class="form-control" id="inputPassword4" placeholder="E.g. BBQ with the bois">
+                                <input type="text" name="title" class="form-control" id="title" placeholder="E.g. BBQ with the bois">
                             </div>
                         </div>
                         <div class="form-row">
@@ -75,7 +74,7 @@
                                 <div class="form-group col-md-6" style="height: auto">
                                     <p for="inputCity" class="text-dark">Price</p>
                                     <span class="price">
-                                        <input name="price" class="form-control" type="number" min="0.00" max="10000.00" step="10.00" required/>
+                                        <input name="price" class="form-control" type="number" min="0.00" max="10000.00" step="5.00" required/>
                                     </span>
                                 </div>
                             </div>
@@ -101,10 +100,19 @@
                                 <input class="form-control" type="time" name="end-time">
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Post</button>
+                        <button onclick="postSuccess(document.getElementById('title').value)" type="submit" class="btn btn-primary">Post</button>
                     </form>
                 </div>
 			</div>
-		</div>
-    </body>
+        </div>
+
+<!-- SCRIPTS -->
+        <!-- Successfulk post to website -->
+        <script>
+        function postSuccess(title) 
+        {
+        alert("Successfully posted " + title + "!");
+        }
+        </script> 
+</body>
 </html>
