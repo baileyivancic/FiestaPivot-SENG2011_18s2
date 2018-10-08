@@ -54,21 +54,6 @@
                 </div>
             </nav>
 
-    
-    <!--Need to add 
-        - Sidebar wirth search criteria
-        - Javascript to create bioxes from db information
-    -->
-
-<!--Date and Time
-    Location
-    Budget
-    Alcohol provisions
-    Number of people
-    Indoors or outdoors
-    Expiration date -->
-
-
         <!-- Body -->
         <div id="body">
              <div class="sidebar col-lg-3">
@@ -115,57 +100,84 @@
              </div>
              
 
-
              <!--Put boxes containing ads in here-->
              <div class="results">
                 <div class="list-group" style="width: 100%;">
                     {% for ad in ads %}
-                        <a onclick="document.getElementById('id01').style.display='block'" href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">{{ ad[2] }}</h5>
-                                <small>Date: {{ ad[8] }}</small>
+                    <a onclick="document.getElementById('{{ad[0]}}').style.display='block'" href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{ ad[2] }}</h5>
+                            <small>Date: {{ ad[8] }}</small>
+                        </div>
+                        <p class="mb-1">{{ ad[6] }}</p>
+                        <small>{{ ad[1] }}</small>
+                        <small>Price: {{ ad[3] }}</small>
+                    </a>
+
+                    <!--AD MODALS-->
+                    <div class="Modals">
+                        <div id="{{ad[0]}}" class="w3-modal">
+                            <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+            
+                            <div class="w3-center"><br>
+                                <span onclick="document.getElementById('{{ad[0]}}').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+                                <p id="adTitle">{{ad[2]}}</p>
                             </div>
-                            <p class="mb-1">{{ ad[6] }}</p>
-                            <small>{{ ad[1] }}</small>
-                            <small>Price: {{ ad[3] }}</small>
-                        </a>
-                        
+            
+                            <div class="w3-container">
+                                <div class="w3-section">
+                                    <h3>Posted by:</h3>
+                                        <label><b>{{ad[1]}}</b></label>
+                                    <h3>Location:</h3>
+                                        <label><b>{{ad[4]}}, {{ad[5]}}</b></label>
+                                    <h3>Price:</h3>
+                                        <label><b>{{ad[3]}}</b></label>
+                                    <h3>Date:</h3>
+                                        <label><b>{{ad[8]}}</b></label>
+                                    <h3>Job description:</h3>
+                                        <label><b>{{ad[6]}}</b></label>
+                                </div>
+                            </div>
+            
+                            <div class="w3-container w3-center w3-border-top w3-padding-16 w3-light-grey">
+                                <button onclick="bidModal('{{ad[2]}}', '{{ad[0]}}')" type="button" class="w3-button w3-red">Place bid</button>
+                            </div>
+            
+                            </div>
+                        </div>
+                    </div>
                     {% endfor %}
-                  </div>
-             </div>
-        </div>
-
-        <div class="Modals">
-            <div id="id01" class="w3-modal">
-                <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-
-                <div class="w3-center"><br>
-                    <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
-                    <p>TITLE</p>
                 </div>
 
-                <div class="w3-container">
-                    <div class="w3-section">
-                        <div class="form-row">
-                            <span class="w3-margin-bottom">Date: 2018-10-06</span>
-                            <span>nabil.shaikh@gmail.com</span>
+                <!--Modal for bid-->
+                <div class="Modals">
+                    <div id="bid" class="w3-modal">
+                        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+                            
+                            <div class="w3-center"><br>
+                                <span onclick="document.getElementById('bid').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+                                <label id="bidTitle"></label>
+                            </div>
+                            
+                            <form action="/bid-send" method="post" class="w3-container w3-center w3-border-top w3-padding-16 w3-light-grey">
+                                <div class="w3-container">
+                                    <div class="w3-section">
+                                        <h3>Your price:</h3>
+                                            <input id="priceInput" name="priceInput">
+                                        <h3>Additional messages/comments to poster:</h3>
+                                            <input id="commentInput" name="commentInput" placeholder="Please provide salt, cleanup incuded etc.">
+                                        <input id="adID" name="adID" type="hidden">
+                                    </div>
+                                </div>
+                                <button type="submit" value="Place Bid" type="button" class="w3-button w3-red">Place bid</button>
+                            </form>
                         </div>
-                        <label><b>Password</b></label>
-                        <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="psw" required>
-                        <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>
                     </div>
                 </div>
 
-                <div class="w3-container w3-center w3-border-top w3-padding-16 w3-light-grey">
-                    <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Bid Button </button>
-                </div>
 
                 </div>
             </div>
-            <script>
-                
-            </script>
-        </div>
 
         <!-- Footer-->
         <div id="footer">
@@ -180,5 +192,31 @@
         </div>
     </div>
 
+<!-- SCRIPTS -->
+    <!--Successful bid confirmation-->
+    <script>
+    function bidSuccess(title) 
+    {
+        alert("Successfully bidded on " + title + "!");
+    }
+    </script>
+
+    <!--Bring up bid modal-->
+    <script>
+    function bidModal(postTitle, postID)
+    {
+        // Hide old modal
+        document.getElementById(postID).style.display='none';
+        
+        // Change title of new modal to contain title of ad
+        document.getElementById('bidTitle').innerHTML = "Bidding on: " + postTitle;
+        
+        // Show new modal
+        document.getElementById('bid').style.display='block';
+        
+        // Change label to be id of ad
+        document.getElementById('adID').value = postID;
+    }
+    </script>
 </body>
 </html>
