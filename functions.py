@@ -12,6 +12,22 @@ def isSubstring(token, string):
         i +=1
     return r
 
+# Need to properly test
+def bubbleAds(args):
+    listCopy = copy.copy(args)
+    i = (len(args) -1)
+    upperbound = 0
+    while (upperbound < len(args)):
+        i = (len(args) - 1)
+        while (i > upperbound):
+            if (listCopy[i-1][8] > listCopy[i][8]):
+                temp = listCopy[i]
+                listCopy[i] = listCopy[i - 1]
+                listCopy[i - 1] = temp
+            i-= 1
+        upperbound +=1
+    return listCopy
+
 def bubble(args):
     listCopy = copy.copy(args)
     i = (len(args) -1)
@@ -37,36 +53,28 @@ def isPrefix(token, string):
         r = (token == string[:len(token)])
     return r
 
-def quicksort(a=[], left, right):
-    if left < (right-1):
-        p = partition(a, left, right)
-        quicksort(a, left, p)
-        quicksort(a, p+1, right)
+# def quicksort(a=[], left, right):
+#     if left < (right-1):
+#         p = partition(a, left, right)
+#         quicksort(a, left, p)
+#         quicksort(a, p+1, right)
 
-def partition(b=[], left, right):
-    p = left
-    k = left+1
+# def partition(b=[], left, right):
+#     p = left
+#     k = left+1
 
-    while k < right:
-        if a[k] < a[p]:
-            j = k+1
-            tmp = a[k]
-            a[k] = a[j]
+#     while k < right:
+#         if a[k] < a[p]:
+#             j = k+1
+#             tmp = a[k]
+#             a[k] = a[j]
             
-            while j < p:
-                a[j+1] = a[j]
-                j+=1
+#             while j < p:
+#                 a[j+1] = a[j]
+#                 j+=1
 
-            a[p+1] = a[p]
-            p+=1 
-            a[p-1] = tmp
+#             a[p+1] = a[p]
+#             p+=1 
+#             a[p-1] = tmp
 
-        k+=1
-        
-
-
-temp = isSubstring(sys.argv[1], sys.argv[2])
-if temp == True:
-    print("yay")
-else:
-print("no")
+#         k+=1

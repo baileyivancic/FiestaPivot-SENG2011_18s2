@@ -7,6 +7,7 @@ import sys
 import copy
 from database import Database
 from server import app, login_manager
+from functions import bubbleAds
 
 class Controller:
 	def __init__(self):
@@ -144,8 +145,9 @@ def post():
 def account():
 	db = Database()
 	ads = db.find_user_ads( current_user.get_id() )
+	newAds = bubbleAds(ads)
 	bids = db.find_user_bids( current_user.get_id() )
-	return render_template("user-dashboard.html", ads=ads, bids=bids)
+	return render_template("user-dashboard.html", ads=newAds, bids=bids)
 
 @app.route('/about',  methods=["GET", "POST"])
 def about():
@@ -158,8 +160,7 @@ def search():
 	ads = control.fetch_ads()
 
 # Order as most recent
-	newAds = bubble(ads)
-
+	newAds = bubbleAds(ads)
 	return render_template("search.html", ads=newAds)
 
 # Creating bid from user input after searching
@@ -178,19 +179,3 @@ def bidSend():
 	control.postBid(adID, userID, price, comment)
 
 	return search()
-
-
-def bubble(args):
-    listCopy = copy.copy(args)
-    i = (len(args) -1)
-    upperbound = 0
-    while (upperbound < len(args)):
-        i = (len(args) - 1)
-        while (i > upperbound):
-            if (listCopy[i-1][8] > listCopy[i][8]):
-                temp = listCopy[i]
-                listCopy[i] = listCopy[i - 1]
-                listCopy[i - 1] = temp
-            i-= 1
-        upperbound +=1
-    return listCopy
