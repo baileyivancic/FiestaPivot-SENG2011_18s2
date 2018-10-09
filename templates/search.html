@@ -63,15 +63,15 @@
                 <!--Input fields for search criteria-->
                 <div class="rw">
                     <p for="inputPassword4" class="text-dark">Keywords</p>
-                    <input value="{{keywords}}" type="text" name="title" class="form-control" id="inputPassword4" placeholder="Type in keywords">
+                    <input id = "keywords" value="{{keywords}}" type="text" name="title" class="form-control" id="inputPassword4" placeholder="Type in keywords">
                 </div>
                 <div class="rw">
                     <p for="inputCity" class="text-dark">City</p>
-                    <input type="text" name="city" class="form-control" placeholder="E.g. Sydney">
+                    <input id="city" type="text" name="city" class="form-control" placeholder="E.g. Sydney">
                 </div>
                 <div class="rw">
                     <p for="inputState" class="text-dark">State</p>
-                    <select name="state" id="inputState" class="form-control">
+                    <select name="state" id="state" class="form-control">
                         <option selected>Choose...</option>
                         <option>NSW</option>
                         <option>QLD</option>
@@ -84,22 +84,20 @@
                 <div class="rw" style="height: auto">
                         <p for="inputCity" class="text-dark">Min. Price</p>
                         <span class="price">
-                            <input name="price" class="form-control" type="number" min="0.00" max="10000.00" step="10.00" required/>
+                            <input id="minPrice" name="price" class="form-control" type="number" min="0.00" max="10000.00"/>
                         </span>
                 </div>
                 <div class="rw" style="height: auto">
                         <p for="inputCity" class="text-dark">Max. Price</p>
                         <span class="price">
-                            <input name="price" class="form-control" type="number" min="0.00" max="10000.00" step="10.00" required/>
+                            <input id="maxPrice" name="price" class="form-control" type="number" min="0.00" max="10000.00"/>
                         </span>
                 </div>
                 <div class="rw">
                         <p for="inputCity" class="text-dark">Date</p>
-                        <input class="form-control" type="date" name="date" min="now">
+                        <input id="date" class="form-control" type="date" name="date" min="now">
                 </div>
-                <a href="/search">
-                    <button>Refresh</button>
-                </a>
+                <button onclick="filter()">Refresh</button>
              </div>
              
 
@@ -107,14 +105,14 @@
              <div class="results">
                 <div class="list-group" style="width: 100%;">
                     {% for ad in ads %}
-                    <a onclick="document.getElementById('{{ad[0]}}').style.display='block'" href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
+                    <a onclick="document.getElementById('{{ad[0]}}').style.display='block'" href="#" class="list-group-item list-group-item-action flex-column align-items-start adResult" style="width: 100%;">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1">{{ ad[2] }}</h5>
-                            <small>Date: {{ ad[8] }}</small>
+                            <small id="date">Date: {{ ad[8] }}</small>
                         </div>
-                        <p class="mb-1">{{ ad[6] }}</p>
+                        <p id="desc" class="mb-1">{{ ad[6] }}</p>
                         <small>{{ ad[1] }}</small>
-                        <small>Price: {{ ad[3] }}</small>
+                        <small id="price" value="{{ad[3]}}">Price: {{ ad[3] }}</small>
                     </a>
 
                     <!--AD MODALS-->
@@ -221,5 +219,47 @@
         document.getElementById('adID').value = postID;
     }
     </script>
+    <!--Handle search criteria-->
+    <script>
+        function filter()
+        {
+            // Get criteria entered
+            let keywords = document.getElementById("keywords").value;
+            let city = document.getElementById("city").value;
+            let state = document.getElementById("state").value;
+            let minPrice = parseFloat(document.getElementById("minPrice").value);
+            let maxPrice = parseFloat(document.getElementById("maxPrice").value);
+            let date = document.getElementById("date").value;
+
+            // Get all ad objects
+            let adResults = document.getElementsByClassName("adResult");
+
+
+            // Set all to visible by default
+            for (let i=0; i<adResults.length; i++)
+            {
+                    adResults[i].style.display="block";
+            }
+            
+            
+            // Filtering by price
+            for (let i=0; i<adResults.length; i++)
+            {
+                let adPrice = parseFloat(adResults[i].children.price.attributes.value.value);
+                if (adPrice < minPrice || adPrice > maxPrice)
+                {
+                    adResults[i].style.display="none";
+                }
+            }
+
+
+            // Searching by keyword TODO
+
+            // Filtering by city TODO
+
+            // Filtering by state TODO
+        } 
+    </script>
+
 </body>
 </html>
