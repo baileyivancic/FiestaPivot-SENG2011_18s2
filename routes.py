@@ -3,6 +3,8 @@ from flask import Flask, redirect, render_template, request, url_for, flash, req
 from flask_login import UserMixin
 from flask_login import LoginManager,login_user, current_user, login_required, logout_user
 import json
+import sys
+import copy
 from database import Database
 from server import app, login_manager
 
@@ -153,13 +155,12 @@ def about():
 
 @app.route('/search', methods=["GET", "POST"])
 def search():
-	# Pass data for searches into search page
 	ads = control.fetch_ads()
-	# Order ads by start date (Soonest first)
-	#newAds[]
-	#for ad in ads:
-	# PUT IN ORDERING	
-	return render_template("search.html", ads=ads)
+
+# Order as most recent
+	newAds = bubble(ads)
+
+	return render_template("search.html", ads=newAds)
 
 # Creating bid from user input after searching
 @app.route('/bid-send', methods=['GET', 'POST'])
@@ -177,3 +178,19 @@ def bidSend():
 	control.postBid(adID, userID, price, comment)
 
 	return search()
+
+
+def bubble(args):
+    listCopy = copy.copy(args)
+    i = (len(args) -1)
+    upperbound = 0
+    while (upperbound < len(args)):
+        i = (len(args) - 1)
+        while (i > upperbound):
+            if (listCopy[i-1][8] > listCopy[i][8]):
+                temp = listCopy[i]
+                listCopy[i] = listCopy[i - 1]
+                listCopy[i - 1] = temp
+            i-= 1
+        upperbound +=1
+    return listCopy
