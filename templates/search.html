@@ -233,23 +233,22 @@
 
             // Get all ad objects
             let adResults = document.getElementsByClassName("adResult");
-
-
-            // Set all to visible by default
-            for (let i=0; i<adResults.length; i++)
-            {
-                    adResults[i].style.display="block";
-            }
-            
             
             // Filtering by price
             for (let i=0; i<adResults.length; i++)
             {
+                // Set all to visible by default
+                adResults[i].style.display="block";
+
+                // Filtering by price
                 let adPrice = parseFloat(adResults[i].children.price.attributes.value.value);
                 if (adPrice < minPrice || adPrice > maxPrice)
                 {
                     adResults[i].style.display="none";
+                    next;
                 }
+
+                
             }
 
 
