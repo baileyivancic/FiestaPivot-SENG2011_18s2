@@ -113,6 +113,8 @@
                         <p id="desc" class="mb-1">{{ ad[6] }}</p>
                         <small>{{ ad[1] }}</small>
                         <small id="price" value="{{ad[3]}}">Price: {{ ad[3] }}</small>
+                        <small id="city" value="{{ad[4]}}">City: {{ ad[4] }}</small>
+                        <small id="state" value="{{ad[5]}}">State: {{ ad[5] }}</small>
                     </a>
 
                     <!--AD MODALS-->
@@ -234,7 +236,7 @@
             // Get all ad objects
             let adResults = document.getElementsByClassName("adResult");
             
-            // Filtering by price
+            // Loop through all ads and check for attributes
             for (let i=0; i<adResults.length; i++)
             {
                 // Set all to visible by default
@@ -242,10 +244,24 @@
 
                 // Filtering by price
                 let adPrice = parseFloat(adResults[i].children.price.attributes.value.value);
-                if (adPrice < minPrice || adPrice > maxPrice)
+                if ((!isNaN(minPrice) && adPrice < minPrice) || (!isNaN(maxPrice) && adPrice > maxPrice))
                 {
                     adResults[i].style.display="none";
-                    next;
+                }
+
+                // Filtering by city
+                let adCity = adResults[i].children.city.attributes.value.value;
+                alert("City is " + city + "and adCity is " + adCity);
+                if (city != "" && city != adCity)
+                {
+                    adResults[i].style.display="none";
+                }
+
+                // Filtering by city
+                let adState = adResults[i].children.state.attributes.value.value;
+                if (state != "Choose..." && state != adState)
+                {
+                    adResults[i].style.display="none";
                 }
 
                 
@@ -253,10 +269,6 @@
 
 
             // Searching by keyword TODO
-
-            // Filtering by city TODO
-
-            // Filtering by state TODO
         } 
     </script>
 
