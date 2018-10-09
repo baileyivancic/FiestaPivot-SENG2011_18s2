@@ -106,11 +106,9 @@
                 <div class="list-group" style="width: 100%;">
                     {% for ad in ads %}
                     <a onclick="document.getElementById('{{ad[0]}}').style.display='block'" href="#" class="list-group-item list-group-item-action flex-column align-items-start adResult" style="width: 100%;">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">{{ ad[2] }}</h5>
-                            <small id="date">Date: {{ ad[8] }}</small>
-                        </div>
-                        <p id="desc" class="mb-1">{{ ad[6] }}</p>
+                        <h5 id="title" value="{{ad[2]}}" class="mb-1">{{ ad[2] }}</h5>
+                        <small id="date">Date: {{ ad[8] }}</small>
+                        <p id="description" value="{{ad[6]}}" class="mb-1">{{ ad[6] }}</p>
                         <small>{{ ad[1] }}</small>
                         <small id="price" value="{{ad[3]}}">Price: {{ ad[3] }}</small>
                         <small id="city" value="{{ad[4]}}">City: {{ ad[4] }}</small>
@@ -251,7 +249,6 @@
 
                 // Filtering by city
                 let adCity = adResults[i].children.city.attributes.value.value;
-                alert("City is " + city + "and adCity is " + adCity);
                 if (city != "" && city != adCity)
                 {
                     adResults[i].style.display="none";
@@ -263,13 +260,50 @@
                 {
                     adResults[i].style.display="none";
                 }
-
                 
+                // Searching by keyword
+                var splitWords = keywords.split(',');
+                let adTitle = adResults[i].children.title.attributes.value.value.toLowerCase();
+                let adDesc = adResults[i].children.description.attributes.value.value.toLowerCase();
+                alert("adtitle is " + adTitle + " adDesc is " + adDesc);
+                for (let j=0; j<splitWords.length; j++)
+                {
+                    let currWord = splitWords[j].toLowerCase();
+                    let titleFlag = isSubstring(currWord, adTitle);
+                    let descFlag = isSubstring(currWord, adDesc);
+
+                    if (!titleFlag && !descFlag)
+                    {
+                        adResults[i].style.display="none";
+                    }
+                }   
             }
-
-
-            // Searching by keyword TODO
         } 
+    </script>
+
+    <!--Substring algorithm - converted from Dafny verification-->
+    <script>
+    function isSubstring(token, string)
+    {
+        let i = 0;
+        let r = false;
+        while (i < string.length && r==false)
+        {
+            let m = isPrefix(token, string.substring(i));
+            if (m == true) { r = true; }
+            i+=1;
+        }
+        return r;
+    }
+
+    function isPrefix(token, string)
+    {
+        let r = false;
+        if (token.length == 0) {r = true;}
+        if (string.length < token.length) {r = false;}
+        else { r = (token==string.substring(0, token.length)); }
+        return r;
+    }
     </script>
 
 </body>
