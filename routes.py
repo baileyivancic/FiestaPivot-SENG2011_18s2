@@ -179,3 +179,10 @@ def bidSend():
 	control.postBid(adID, userID, price, comment)
 
 	return search()
+
+
+# TODO:
+# - Deleting ad that user has created 
+# - Deleting bid user has created 
+# - Showing all bids registered for current ad 
+# - Showing associated ad for bids in dashboard
