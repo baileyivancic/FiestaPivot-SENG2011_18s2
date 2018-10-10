@@ -183,14 +183,14 @@ class Database(object):
 
 # Bid db functions
     #UNTESTED
-    def create_bid(self, adID, userEmail, price, comment):
+    def create_bid(self, adID, adName, userEmail, price, comment):
         db = self.get_db()
         cursor = db.cursor()
 
         cursor.execute("SELECT EXISTS(SELECT 1 FROM bids WHERE adID=? AND userEmail=?)", (adID, userEmail))
         temp = cursor.fetchone()
 
-        cursor.execute('''INSERT INTO bids (adID, userEmail, price, comment) VALUES (?, ?, ?, ?)''',(adID, userEmail, price, comment))
+        cursor.execute('''INSERT INTO bids (adID, adName, userEmail, price, comment) VALUES (?, ?, ?, ?, ?)''',(adID, adName, userEmail, price, comment))
         db.commit()
         db.close()
         return 1
@@ -235,6 +235,7 @@ class Database(object):
             db.close()
             return 1
 
+    # Gets all ads that are currently in db
     def fetch_ads(self):
         db = self.get_db()
         cursor = db.cursor()
@@ -244,6 +245,7 @@ class Database(object):
         self.close(db)
         return ads
 
+    # Finds all ads for logged in user
     def find_user_ads(self, email):
         db = self.get_db()
         cursor = db.cursor()
@@ -257,6 +259,7 @@ class Database(object):
         self.close(db)
         return temp
     
+    # Finds all bids for logged in user
     def find_user_bids(self, email):
         db = self.get_db()
         cursor = db.cursor()
@@ -266,3 +269,14 @@ class Database(object):
 
         self.close(db)
         return temp
+    
+    # Function to get ad title from the id given
+    def getTitle(self, adID):
+        db = self.get_db()
+        cursor = db.cursor()
+
+        cursor.execute("SELECT * FROM ads WHERE ID=?", (adID, ))
+        temp = cursor.fetchone()
+
+        self.close(db)
+        return temp[2]

@@ -77,10 +77,11 @@
                 {% for bid in bids %}
                 <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">{{ bid[0] }}</h5>
+                        <h5 class="mb-1" id="name" >Ad name: {{ bid[2] }}</h5>
                     </div>
-                    <small>Price: {{ bid[3] }}</small>
-                    <small>Comment: {{ bid[4] }}</small>
+                    <small id="price">Price: {{ bid[4] }}</small>
+                    <small id="comment">Comment: {{ bid[5] }}</small>
+                    <small id="User">Posted by user: {{ bid[3] }}</small>
                 </a>
                 {% endfor %}
             </div>

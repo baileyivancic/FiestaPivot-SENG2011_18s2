@@ -25,8 +25,8 @@ class Controller:
 	def postAd(self, email, title, price, city, state, descr, date, start_time, end_time):
 		return self.database.create_ad(email, title, price, city, state, descr, date, start_time, end_time)
 	
-	def postBid(self, adID, userID, price, comment):
-		return self.database.create_bid(adID, userID, price, comment)
+	def postBid(self, adID, adName, userID, price, comment):
+		return self.database.create_bid(adID, adName, userID, price, comment)
 	
 	def fetch_ads(self):
 		return self.database.fetch_ads()
@@ -166,18 +166,17 @@ def search():
 # Creating bid from user input after searching
 @app.route('/bid-send', methods=['GET', 'POST'])
 def bidSend():
-    # Grab information from request, and put in db
+	db=Database()
+
+    # Grab information from request
 	userID = current_user.get_id()
 	price = request.form['priceInput'].strip()
 	comment = request.form['commentInput'].strip()
 	adID = request.form['adID'].strip()
-	print("user os " + userID)
-	print("price is " + price)
-	print("desc " + comment)
-	print("adID is " + adID)
+	adName = db.getTitle(adID)
 
-	control.postBid(adID, userID, price, comment)
-
+	# Put data in db
+	control.postBid(adID, adName, userID, price, comment)
 	return search()
 
 
@@ -186,3 +185,4 @@ def bidSend():
 # - Deleting bid user has created 
 # - Showing all bids registered for current ad 
 # - Showing associated ad for bids in dashboard
+# - Change schema to say adID and bidID and all that stuff

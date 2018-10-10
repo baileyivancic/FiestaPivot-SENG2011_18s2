@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS ads(
 CREATE TABLE IF NOT EXISTS bids(
     ID          INTEGER     PRIMARY KEY AUTOINCREMENT,
     adID        INTEGER     NOT NULL,
-    adName      TEXT,       NOT NULL,
+    adName      TEXT        NOT NULL,
     userEmail   INTEGER     NOT NULL,
     price       DECIMAL     NOT NULL,
     comment     TEXT,
