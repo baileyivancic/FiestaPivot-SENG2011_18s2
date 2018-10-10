@@ -184,5 +184,4 @@ def bidSend():
 # - Deleting ad that user has created 
 # - Deleting bid user has created 
 # - Showing all bids registered for current ad 
-# - Showing associated ad for bids in dashboard
 # - Change schema to say adID and bidID and all that stuff
