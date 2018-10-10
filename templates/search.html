@@ -107,7 +107,7 @@
                     {% for ad in ads %}
                     <a onclick="document.getElementById('{{ad[0]}}').style.display='block'" href="#" class="list-group-item list-group-item-action flex-column align-items-start adResult" style="width: 100%;">
                         <h5 id="title" value="{{ad[2]}}" class="mb-1">{{ ad[2] }}</h5>
-                        <small id="date">Date: {{ ad[8] }}</small>
+                        <small id="date" value="{{ad[8]}}">Date: {{ ad[8] }}</small>
                         <p id="description" value="{{ad[6]}}" class="mb-1">{{ ad[6] }}</p>
                         <small>{{ ad[1] }}</small>
                         <small id="price" value="{{ad[3]}}">Price: {{ ad[3] }}</small>
@@ -265,7 +265,6 @@
                 var splitWords = keywords.split(',');
                 let adTitle = adResults[i].children.title.attributes.value.value.toLowerCase();
                 let adDesc = adResults[i].children.description.attributes.value.value.toLowerCase();
-                alert("adtitle is " + adTitle + " adDesc is " + adDesc);
                 for (let j=0; j<splitWords.length; j++)
                 {
                     let currWord = splitWords[j].toLowerCase();
@@ -276,7 +275,14 @@
                     {
                         adResults[i].style.display="none";
                     }
-                }   
+                }
+
+                // Filtering by date
+                let adDate = adResults[i].children.date.attributes.value.value;
+                if (date != adDate)
+                {
+                    adResults[i].style.display="none";
+                }
             }
         } 
     </script>
