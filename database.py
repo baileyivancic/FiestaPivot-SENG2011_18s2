@@ -25,15 +25,16 @@ class Database(object):
         db = self.get_db()
         cursor = db.cursor()
 
-        cursor.execute("SELECT EXISTS(SELECT 1 FROM accounts WHERE email=? AND password=?)", (email, password))
+        cursor.execute("SELECT EXISTS(SELECT 1 FROM accounts WHERE email=?)", (email,))
         temp =  cursor.fetchone()
         print(temp)
-        if temp == (0, ):
+        if temp != (0, ):
+            print("GONE IN HERE")
             # there is already a user using this user name
             db.commit()
             db.close()
             return 0
-        else :
+        else:
             cursor.execute('''INSERT INTO accounts (username, password, email, city, state) VALUES (?, ?, ?, ?, ?)''',(username, password, email, city, state))
             db.commit()
             db.close()

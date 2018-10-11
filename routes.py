@@ -114,6 +114,7 @@ def register():
 		if valid == 1:
 			login_user(User(user), remember= False)
 			flash("Successfully created account!")
+			return account()
 		else:
 			error = "Please try again, there is already a user with this email addresss"
 			return render_template("register.html", error=error)
@@ -138,7 +139,7 @@ def post():
 			pass
 		# print(f"for user {name}:\n")
 		# print(f"form: \nN:{name}\nT:{title}\nE:{email}\nC:{city}\nS:{state}\nDes:{descr}\nDa:{date}\nST:{start_time}\nET:{end_time}\n")
-	return render_template("post.html")
+	return account()
 	
 
 @app.route('/account',  methods=["GET", "POST"])
