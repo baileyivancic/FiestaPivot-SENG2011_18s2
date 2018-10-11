@@ -48,19 +48,19 @@
                     <form action="" method="POST">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <p for="inputPassword4" class="text-dark">Ad Title</p>
-                                <input type="text" name="title" class="form-control" id="title" placeholder="E.g. BBQ with the bois">
+                                <p for="inputPassword4" class="text-dark">Name of event</p>
+                                <input type="text" name="title" class="form-control" id="title" placeholder="E.g. BBQ with the bois" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <p for="inputCity" class="text-dark">City</p>
-                                <input type="text" name="city" class="form-control" placeholder="E.g. Sydney">
+                                <input type="text" name="city" class="form-control" placeholder="E.g. Sydney" required>
                             </div>
                             <div class="form-group col-md-2">
                                 <p for="inputState" class="text-dark">State</p>
-                                <select name="state" id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
+                                <select name="state" id="inputState" class="form-control" required>
+                                    <option selected>State:</option>
                                     <option>NSW</option>
                                     <option>QLD</option>
                                     <option>SA</option>
@@ -72,7 +72,7 @@
                         </div>
                         <div class="form-row">
                                 <div class="form-group col-md-6" style="height: auto">
-                                    <p for="inputCity" class="text-dark">Price</p>
+                                    <p for="inputCity" class="text-dark">Price offered:</p>
                                     <span class="price">
                                         <input name="price" class="form-control" type="number" min="0.00" max="10000.00" step="5.00" required/>
                                     </span>
@@ -80,39 +80,28 @@
                             </div>
                         <div class="form-row">
                             <div class="form-group col-md-6" style="height: auto">
-                                <p for="inputCity" class="text-dark">Description</p>
-                                <textarea rows="4" cols="50" name="descr" class="form-control">
-                                
-                                </textarea> 
+                                <p for="inputCity" class="text-dark">Description of event:</p>
+                                <textarea rows="4" cols="50" name="descr" class="form-control" required></textarea> 
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-2">
-                                <p for="inputCity" class="text-dark">Start Date</p>
-                                <input class="form-control" type="date" name="date" min="now">
+                                <p for="inputCity" class="text-dark">Date of event:</p>
+                                <input class="form-control" type="date" name="date" min="now" required>
                             </div>
                             <div class="form-group col-md-2">
-                                <p for="inputState" class="text-dark">Start Time</p>
-                                <input class="form-control" type="time" name="start-time">
+                                <p for="inputState" class="text-dark">Start time of event:</p>
+                                <input class="form-control" type="time" name="start-time" required>
                             </div>
                             <div class="form-group col-md-2">
-                                <p for="inputState" class="text-dark">End Time</p>
-                                <input class="form-control" type="time" name="end-time">
+                                <p for="inputState" class="text-dark">End Time of event:</p>
+                                <input class="form-control" type="time" name="end-time" required>
                             </div>
                         </div>
-                        <button onclick="postSuccess(document.getElementById('title').value)" type="submit" class="btn btn-primary">Post</button>
+                        <a href="/account"><button type="submit" class="btn btn-primary">Post</button></a>
                     </form>
                 </div>
 			</div>
         </div>
-
-<!-- SCRIPTS -->
-        <!-- Successfulk post to website -->
-        <script>
-        function postSuccess(title) 
-        {
-            alert("Successfully posted " + title + "!");
-        }
-        </script> 
 </body>
 </html>

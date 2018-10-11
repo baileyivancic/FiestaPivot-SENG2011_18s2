@@ -140,7 +140,7 @@
                             </div>
             
                             <div class="w3-container w3-center w3-border-top w3-padding-16 w3-light-grey">
-                                <button onclick="bidModal('{{ad[2]}}', '{{ad[0]}}')" type="button" class="w3-button w3-red">Place bid</button>
+                                <button onclick="bidModal('{{ad[2]}}', '{{ad[0]}}', '{{ad[3]}}')" type="button" class="w3-button w3-red">Place bid</button>
                             </div>
             
                             </div>
@@ -162,8 +162,11 @@
                             <form action="/bid-send" method="post" class="w3-container w3-center w3-border-top w3-padding-16 w3-light-grey">
                                 <div class="w3-container">
                                     <div class="w3-section">
+                                        <h3>Original price: </h3>
+                                        <h3 id="oPrice" value=""></h3>
                                         <h3>Your price:</h3>
-                                            <input id="priceInput" name="priceInput">
+                                            <input id="priceInput" name="priceInput" value="" placeholder="Aim to ask for an equal or lower price than the original">
+                                        <h3 id="priceWarning" style="color: red;"></h3>
                                         <h3>Additional messages/comments to poster:</h3>
                                             <input id="commentInput" name="commentInput" placeholder="Please provide salt, cleanup incuded etc.">
                                         <input id="adID" name="adID" type="hidden">
@@ -203,13 +206,17 @@
 
     <!--Bring up bid modal-->
     <script>
-    function bidModal(postTitle, postID)
+    function bidModal(postTitle, postID, oPrice)
     {
         // Hide old modal
         document.getElementById(postID).style.display='none';
         
         // Change title of new modal to contain title of ad
         document.getElementById('bidTitle').innerHTML = "Bidding on: " + postTitle;
+
+        // Display original ad price
+        document.getElementById('oPrice').innerHTML = oPrice;
+        document.getElementById('oPrice').value = oPrice;
         
         // Show new modal
         document.getElementById('bid').style.display='block';
@@ -309,6 +316,20 @@
         if (string.length < token.length) {r = false;}
         else { r = (token==string.substring(0, token.length)); }
         return r;
+    }
+    </script>
+
+    <script>
+    document.getElementById("priceInput").addEventListener("input", checkPrice);
+
+    function checkPrice() {
+        document.getElementById("priceWarning").innerText = "";
+        let newPrice = parseInt(document.getElementById("priceInput").value);
+        let oldPrice = parseInt(document.getElementById("oPrice").value);
+        if (newPrice > oldPrice)
+        {
+            document.getElementById("priceWarning").innerText = "Price entered is over advertised amount";
+        }
     }
     </script>
 

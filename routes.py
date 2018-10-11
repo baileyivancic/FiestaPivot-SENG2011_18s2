@@ -105,18 +105,23 @@ def register():
 	if request.method == "POST":
 		user = request.form["username"].strip()
 		password = request.form["password"].strip()
+		passwordConfirm = request.form['passwordConfirm'].strip()
 		email = request.form["email"].strip()
 		city = request.form["city"].strip()
 		state = request.form["state"] 
-		#print(f"register Attempt: U:{user}\nP:{password}\nE:{email}\nC:{city}\nS:{state}\n")
-		valid = control.register_user(user, password, email, city, state)
-		print(valid)
+		if password != passwordConfirm:
+			valid = 3
+		else:
+			valid = control.register_user(user, password, email, city, state)
 		if valid == 1:
 			login_user(User(user), remember= False)
 			flash("Successfully created account!")
 			return account()
-		else:
+		elif valid == 0:
 			error = "Please try again, there is already a user with this email addresss"
+			return render_template("register.html", error=error)
+		elif valid == 3:
+			error = "Passwords do not match, please try again"
 			return render_template("register.html", error=error)
 	return render_template("register.html")
 
@@ -136,10 +141,8 @@ def post():
 		end_time = request.form["end-time"].strip()
 
 		if control.postAd(email, title, price, city, state, descr, date, start_time, end_time):
-			pass
-		# print(f"for user {name}:\n")
-		# print(f"form: \nN:{name}\nT:{title}\nE:{email}\nC:{city}\nS:{state}\nDes:{descr}\nDa:{date}\nST:{start_time}\nET:{end_time}\n")
-	return account()
+			return account()
+	return render_template("post.html")
 	
 
 @app.route('/account',  methods=["GET", "POST"])
