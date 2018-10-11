@@ -157,6 +157,7 @@ def about():
 	return render_template("about.html")
 
 @app.route('/search', methods=["GET", "POST"])
+@login_required
 def search():
 	ads = control.fetch_ads()
 
