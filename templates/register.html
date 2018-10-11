@@ -41,6 +41,21 @@
 		    </div>
 		</nav>
 
+		<!--Please style this :)-->
+		{% if error %}
+		<p><strong>Error:</strong> {{ error }}
+		{% endif %}
+
+		{% with messages = get_flashed_messages() %}
+         {% if messages %}
+            <ul>
+               {% for message in messages %}
+               <li<{{ message }}</li>
+               {% endfor %}
+            </ul>
+         {% endif %}
+      	{% endwith %}
+
 			<!--Content (MIDDLE)-->
 			<!-- Bootstrap adapted from https://www.codeply.com/go/Am5LvvjTxC/bootstrap-4-center-form-->
 		<section id="cover" style="background: url(static/Images/darkDessert.png) center no-repeat;background-size: cover;">

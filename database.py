@@ -27,8 +27,8 @@ class Database(object):
 
         cursor.execute("SELECT EXISTS(SELECT 1 FROM accounts WHERE email=? AND password=?)", (email, password))
         temp =  cursor.fetchone()
-
-        if temp != (0, ):
+        print(temp)
+        if temp == (0, ):
             # there is already a user using this user name
             db.commit()
             db.close()
@@ -51,8 +51,6 @@ class Database(object):
         if temp != (0, ):
             # there is already a user using this user name
             isValid = True
-
-
         self.close(db)
 
         return isValid

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 	<head>
 		<meta charset="utf-8" />
@@ -40,6 +39,21 @@
 		        </ul>
 		    </div>
 		</nav>
+
+		<!--Please style this :)-->
+		{% if error %}
+		<p><strong>Error:</strong> {{ error }}
+		{% endif %}
+
+		{% with messages = get_flashed_messages() %}
+         {% if messages %}
+            <ul>
+               {% for message in messages %}
+               <li<{{ message }}</li>
+               {% endfor %}
+            </ul>
+         {% endif %}
+      	{% endwith %}
 
 		<!-- Bootstrap adapted from https://www.codeply.com/go/Am5LvvjTxC/bootstrap-4-center-form-->
 		<section id="cover" style="background: url(static/Images/cateringDark.jpg) center no-repeat; background-size: cover;">

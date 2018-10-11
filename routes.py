@@ -76,30 +76,29 @@ def logout():
 
 # Default page, index page
 @app.route('/',  methods=["GET", "POST"])
-@login_required
 def default():
 	if request.method == "POST":
 		if request.form['submit-but'] == "dash":
 			return render_template("user-dashboard.html")
-		elif reques.form['submit-but'] == "search":
+		elif request.form['submit-but'] == "search":
 			return render_template("search.html")
 		#keywords = request.form['indexInput']
-		return searchI(keywords)
 	return render_template("index.html")
 
 @app.route('/login',  methods=["GET", "POST"])
 def login():
+	error = None
 	if request.method == "POST":
-		#print("POST")
 		email = request.form["email"].strip()
 		password = request.form["password"].strip()
 		valid = control.isValidUser(email, password)
 		if valid == True:
 			login_user(User(email), remember= False)
-			return redirect("/")
+			flash('You were successfully logged in')
+			return account()
 		else:
-			return render_template("login.html")
-	return render_template("login.html")
+			error = 'Invalid username or password. Please try again!'
+	return render_template("login.html", error=error)
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
@@ -111,11 +110,13 @@ def register():
 		state = request.form["state"] 
 		#print(f"register Attempt: U:{user}\nP:{password}\nE:{email}\nC:{city}\nS:{state}\n")
 		valid = control.register_user(user, password, email, city, state)
-		if valid == True:
+		print(valid)
+		if valid == 1:
 			login_user(User(user), remember= False)
-			return redirect("/")
+			flash("Successfully created account!")
 		else:
-			return render_template("register.html", response=0)
+			error = "Please try again, there is already a user with this email addresss"
+			return render_template("register.html", error=error)
 	return render_template("register.html")
 
 @app.route('/post-ad', methods=["GET", "POST"])
