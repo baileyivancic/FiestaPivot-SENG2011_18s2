@@ -279,7 +279,7 @@
 
                 // Filtering by date
                 let adDate = adResults[i].children.date.attributes.value.value;
-                if (date != adDate)
+                if (date != "" && date != adDate)
                 {
                     adResults[i].style.display="none";
                 }
