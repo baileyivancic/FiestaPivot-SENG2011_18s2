@@ -158,7 +158,8 @@ def account():
 	ads = db.find_user_ads( current_user.get_id() )
 	newAds = bubbleAds(ads)
 	bids = db.find_user_bids( current_user.get_id() )
-	return render_template("user-dashboard.html", ads=newAds, bids=bids)
+	name = db.get_name( current_user.get_id() )
+	return render_template("user-dashboard.html", ads=newAds, bids=bids, name=name)
 
 @app.route('/about',  methods=["GET", "POST"])
 def about():
