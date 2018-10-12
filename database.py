@@ -46,11 +46,10 @@ class Database(object):
 
         cursor.execute("SELECT EXISTS(SELECT 1 FROM accounts WHERE email=? AND password=?)", (email, password, ))
         temp =  cursor.fetchone()
-
         isValid = False
 
+        # there is already a user using this user name
         if temp != (0, ):
-            # there is already a user using this user name
             isValid = True
         self.close(db)
 
@@ -67,7 +66,32 @@ class Database(object):
             return False
 
         self.close(db)
-        print(temp)
+        return temp
+
+    def get_state(self, email):
+        db = self.get_db()
+        cursor = db.cursor()
+
+        cursor.execute("SELECT state FROM accounts WHERE email=?", (email, ))
+        temp = cursor.fetchone()
+
+        if temp == False:
+            return False
+
+        self.close(db)
+        return temp
+
+    def get_city(self, email):
+        db = self.get_db()
+        cursor = db.cursor()
+
+        cursor.execute("SELECT city FROM accounts WHERE email=?", (email, ))
+        temp = cursor.fetchone()
+
+        if temp == False:
+            return False
+
+        self.close(db)
         return temp
 
 # Advertisement db functions

@@ -55,18 +55,18 @@
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <p for="inputCity" class="text-dark">City</p>
-                                <input type="text" name="city" class="form-control" placeholder="E.g. Sydney" required>
+                                <input type="text" name="city" class="form-control" placeholder="E.g. Sydney" value="{{city[0]}}" required>
                             </div>
                             <div class="form-group col-md-2">
                                 <p for="inputState" class="text-dark">State</p>
-                                <select name="state" id="inputState" class="form-control" required>
-                                    <option selected>State:</option>
-                                    <option>NSW</option>
-                                    <option>QLD</option>
-                                    <option>SA</option>
-                                    <option>TAS</option>
-                                    <option>VIC</option>
-                                    <option>WA</option>
+                                <select id="stateSelect" name="state" id="inputState" class="form-control" selected="{{state[0]}}" required>
+                                    <option selected disabled hidden>State:</option>
+                                    <option value="nsw">NSW</option>
+                                    <option value="qld">QLD</option>
+                                    <option value="sa">SA</option>
+                                    <option value="tas">TAS</option>
+                                    <option value="vic">VIC</option>
+                                    <option value="wa">WA</option>
                                 </select>
                             </div>
                         </div>
@@ -103,5 +103,20 @@
                 </div>
 			</div>
         </div>
+    
+    <!-- <script>
+    let temp = "{{state[0]}}";
+    let mySelect = document.getElementById('mySelect');
+    //alert ("hello in here " + temp + mySelect)
+    for(let i, j = 0; i = mySelect.options[j]; j++) {
+        alert("going through");
+        if(i.value.value == temp) {
+            mySelect.selectedIndex = j;
+            break;
+        }
+    }
+    alert("ending")
+    </script> -->
+    
 </body>
 </html>
