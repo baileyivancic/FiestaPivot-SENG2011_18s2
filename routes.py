@@ -31,6 +31,12 @@ class Controller:
 	def fetch_ads(self):
 		return self.database.fetch_ads()
 
+	def find_user_ads(self, id):
+		return self.database.find_user_ads(id)
+
+	def find_user_bids(self, id):
+		return self.database.find_user_bids(id)
+
 class User(UserMixin):
 	def __init__(self, id):
 		self.email = id
@@ -147,19 +153,26 @@ def post():
 		end_time = request.form["end-time"].strip()
 
 		if control.postAd(email, title, price, city, state, descr, date, start_time, end_time):
-			return account()
+			return redirect("/account")
 	return render_template("post.html")
 	
 
 @app.route('/account',  methods=["GET", "POST"])
 @login_required
 def account():
-	db = Database()
-	ads = db.find_user_ads( current_user.get_id() )
+	ads = control.find_user_ads( current_user.get_id() )
 	newAds = bubbleAds(ads)
-	bids = db.find_user_bids( current_user.get_id() )
-	name = db.get_name( current_user.get_id() )
-	return render_template("user-dashboard.html", ads=newAds, bids=bids, name=name)
+	bids = control.find_user_bids( current_user.get_id() )
+	print(f"inside accoubts: args: {request.args}")
+	print(f"accouts: form: {request.form}")
+	return render_template("user-dashboard.html", ads=newAds, bids=bids)
+
+@app.route('/delete-ad',  methods=["GET", "POST"])
+@login_required
+def delete_ad():
+	print(f"form: {request.form}")
+	print(f"args: {request.args}")
+	return redirect("/account")
 
 @app.route('/about',  methods=["GET", "POST"])
 def about():
