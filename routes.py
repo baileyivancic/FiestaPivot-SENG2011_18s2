@@ -107,10 +107,13 @@ def register():
 		password = request.form["password"].strip()
 		passwordConfirm = request.form['passwordConfirm'].strip()
 		email = request.form["email"].strip()
+		emailConfirm = request.form['emailConfirm'].strip()
 		city = request.form["city"].strip()
 		state = request.form["state"] 
 		if password != passwordConfirm:
 			valid = 3
+		elif email != emailConfirm:
+			valid = 4
 		else:
 			valid = control.register_user(user, password, email, city, state)
 		if valid == 1:
@@ -122,6 +125,9 @@ def register():
 			return render_template("register.html", error=error)
 		elif valid == 3:
 			error = "Passwords do not match, please try again"
+			return render_template("register.html", error=error)
+		elif valid == 4:
+			error = "Emails do not match, please try again"
 			return render_template("register.html", error=error)
 	return render_template("register.html")
 
