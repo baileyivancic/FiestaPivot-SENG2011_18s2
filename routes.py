@@ -170,11 +170,13 @@ def about():
 @app.route('/search', methods=["GET", "POST"])
 @login_required
 def search():
+	db = Database()
 	ads = control.fetch_ads()
+	name = db.get_name( current_user.get_id() )
 
-# Order as most recent
+	# Order as most recent
 	newAds = bubbleAds(ads)
-	return render_template("search.html", ads=newAds)
+	return render_template("search.html", ads=newAds, name=name)
 
 # Creating bid from user input after searching
 @app.route('/bid-send', methods=['GET', 'POST'])
