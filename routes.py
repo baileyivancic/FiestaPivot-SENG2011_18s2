@@ -31,6 +31,12 @@ class Controller:
 	def fetch_ads(self):
 		return self.database.fetch_ads()
 
+	def find_user_bids(self, id):
+		return self.database.find_user_bids(id)
+
+	def find_user_ads(self, id):
+		return self.database.find_user_ads(id)
+
 class User(UserMixin):
 	def __init__(self, id):
 		self.email = id
@@ -154,11 +160,17 @@ def post():
 @app.route('/account',  methods=["GET", "POST"])
 @login_required
 def account():
-	db = Database()
-	ads = db.find_user_ads( current_user.get_id() )
+	ads = control.find_user_ads( current_user.get_id() )
 	newAds = bubbleAds(ads)
-	bids = db.find_user_bids( current_user.get_id() )
+	bids = control.find_user_bids( current_user.get_id() )
 	return render_template("user-dashboard.html", ads=newAds, bids=bids)
+
+@app.route('/delete-ad',  methods=["GET", "POST"])
+@login_required
+def delete_ad():
+	ad_id = request.args
+	print(f"ad_id: {ad_id}")
+	return account()
 
 @app.route('/about',  methods=["GET", "POST"])
 def about():
@@ -177,6 +189,7 @@ def search():
 
 # Creating bid from user input after searching
 @app.route('/bid-send', methods=['GET', 'POST'])
+@login_required
 def bidSend():
 	db=Database()
 
