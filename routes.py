@@ -188,6 +188,8 @@ def bidSend():
 
 # TODO:
 # - Deleting ad that user has created 
+# - Editing ad that user has created (Nabil)
 # - Deleting bid user has created 
 # - Showing all bids registered for current ad 
 # - Change schema to say adID and bidID and all that stuff
+# - shouldn't be able to make a bid for your own ad in the user-dashboard (Nabil)
