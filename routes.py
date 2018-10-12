@@ -31,11 +31,11 @@ class Controller:
 	def fetch_ads(self):
 		return self.database.fetch_ads()
 
-	def find_user_bids(self, id):
-		return self.database.find_user_bids(id)
-
 	def find_user_ads(self, id):
 		return self.database.find_user_ads(id)
+
+	def find_user_bids(self, id):
+		return self.database.find_user_bids(id)
 
 class User(UserMixin):
 	def __init__(self, id):
@@ -191,7 +191,6 @@ def search():
 
 # Creating bid from user input after searching
 @app.route('/bid-send', methods=['GET', 'POST'])
-@login_required
 def bidSend():
 	db=Database()
 
@@ -209,8 +208,6 @@ def bidSend():
 
 # TODO:
 # - Deleting ad that user has created 
-# - Editing ad that user has created (Nabil)
 # - Deleting bid user has created 
 # - Showing all bids registered for current ad 
 # - Change schema to say adID and bidID and all that stuff
-# - shouldn't be able to make a bid for your own ad in the user-dashboard (Nabil)
