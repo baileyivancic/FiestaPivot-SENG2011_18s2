@@ -93,7 +93,7 @@
                         </span>
                 </div>
                 <div class="rw">
-                        <p for="inputCity" class="text-dark">Date</p>
+                        <p for="inputCity" class="text-dark">From date:</p>
                         <input id="date" class="form-control" type="date" name="date" min="now">
                 </div>
                 <button onclick="filter()">Refresh</button>
@@ -286,7 +286,7 @@
 
                 // Filtering by date
                 let adDate = adResults[i].children.date.attributes.value.value;
-                if (date != "" && date != adDate)
+                if (date != "" && adDate < date)
                 {
                     adResults[i].style.display="none";
                 }
