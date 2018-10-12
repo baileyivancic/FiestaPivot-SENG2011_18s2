@@ -153,7 +153,7 @@ def post():
 		end_time = request.form["end-time"].strip()
 
 		if control.postAd(email, title, price, city, state, descr, date, start_time, end_time):
-			return account()
+			return redirect("/account")
 	return render_template("post.html")
 	
 
@@ -163,14 +163,16 @@ def account():
 	ads = control.find_user_ads( current_user.get_id() )
 	newAds = bubbleAds(ads)
 	bids = control.find_user_bids( current_user.get_id() )
+	print(f"inside accoubts: args: {request.args}")
+	print(f"accouts: form: {request.form}")
 	return render_template("user-dashboard.html", ads=newAds, bids=bids)
 
 @app.route('/delete-ad',  methods=["GET", "POST"])
 @login_required
 def delete_ad():
-	ad_id = request.args
-	print(f"ad_id: {ad_id}")
-	return account()
+	print(f"form: {request.form}")
+	print(f"args: {request.args}")
+	return redirect("/account")
 
 @app.route('/about',  methods=["GET", "POST"])
 def about():
