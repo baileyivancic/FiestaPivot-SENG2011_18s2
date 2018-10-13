@@ -154,16 +154,6 @@ class Database(object):
         self.close(db)
         return
 
-    def delete_bid(self, bid_id):
-        db = self.get_db()
-        cursor = db.cursor()
-
-        print(bid_id)
-        cursor.execute("DELETE FROM bids WHERE ID=?", bid_id)
-
-        self.close(db)
-        return
-
     #UNTESTED
     def updateLocation_ad(self, adID, newLocation):
         db = self.get_db()

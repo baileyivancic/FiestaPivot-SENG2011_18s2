@@ -1,23 +1,16 @@
 
 
+
 CREATE TABLE IF NOT EXISTS accounts(
     email       TEXT        PRIMARY KEY,
     username    TEXT        NOT NULL,
     password    TEXT        NOT NULL,
     city        TEXT        NOT NULL,
     state       TEXT        NOT NULL,
-    rating      DECIMAL,
-    adsPosted   INTEGER,
-    bidsPosted  INTEGER,
+    rating      DECIMAL
 );  
 
-/* Add in extra criteria that we want to incude in the ad element 
-* State for ad will be either:
-* - ACTIVE if thr ad is open and receiving bids
-* - PROGRESS when a bid has been selected but the event has not happened
-* - COMPLETED when date of ad is passed and ad had a winning bid
-* - CLOSED when date of ad is passed and ad did not have a winning bid
-*/
+/* Add in extra criteria that we want to incude in the ad element */
 CREATE TABLE IF NOT EXISTS ads(
     ID          INTEGER     PRIMARY KEY AUTOINCREMENT,
     userEmail   INTEGER     NOT NULL,
@@ -30,22 +23,13 @@ CREATE TABLE IF NOT EXISTS ads(
     date        TEXT        NOT NULL,
     start_time  TEXT        NOT NULL,
     end_time    TEXT        NOT NULL,
-    alcohol     INTEGER     NOT NULL,
-    noPeople    INTEGER     NOT NULL,
-    setting     TEXT        NOT NULL,
-    bidID       INTEGER     FOREIGN KEY,  
     CONSTRAINT fk
         FOREIGN KEY (userEmail)
         REFERENCES accounts(email)
 );
 
 /* Add in the ad email into the bid field*/
-/* 
-* Status for bids will be either:
-* - PENDING when ad does not have a winning bid
-* - ACCEPTED when ad becomes the winning bid of ad
-* - DECLINED when ad has different winning bid
-*/
+/* Add in extra criteria we want to include*/
 CREATE TABLE IF NOT EXISTS bids(
     ID          INTEGER     PRIMARY KEY AUTOINCREMENT,
     adID        INTEGER     NOT NULL,
@@ -53,7 +37,6 @@ CREATE TABLE IF NOT EXISTS bids(
     userEmail   INTEGER     NOT NULL,
     price       DECIMAL     NOT NULL,
     comment     TEXT,
-    status      TEXT,
     CONSTRAINT fk
         FOREIGN KEY (adID, userEmail)
         REFERENCES ads(ID, userEmail)

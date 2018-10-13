@@ -48,9 +48,9 @@ class Controller:
 
 	def delete_ad(self, ad_id):
 		return self.database.delete_ad(ad_id)
-
-	def delete_bid(self, bid_id):
-		return self.database.delete_bid(bid_id)
+	
+	def getBids(self, adID):
+		return self.database.getBids(adID)
 
 class User(UserMixin):
 	def __init__(self, id):
@@ -97,7 +97,6 @@ def logout():
 
 # Default page, index page
 @app.route('/',  methods=["GET", "POST"])
-@login_required
 def default():
 	if request.method == "POST":
 		if request.form['submit-but'] == "dash":
@@ -189,7 +188,17 @@ def account():
 	newAds = bubbleAds(ads)
 	bids = control.find_user_bids( current_user.get_id() )
 	name = control.database.get_name( current_user.get_id() )
+	print(name)
+	
+	# Get bids associated with each ad
+	# WORKING
+	bidsOrdered=[]
+	for ad in ads:
+		tempArr = control.getBids(ad[0])
+		tempArr.insert(0, ad[0])
+		bidsOrdered.append(tempArr)
 
+	print(bidsOrdered)
 	if request.method == "POST":
 		print(f"accounts: args: {request.args}")
 		print(f"accounts: form: {request.form}")
@@ -202,15 +211,6 @@ def delete_ad():
 	ad_id = request.form["id"]
 		
 	control.delete_ad(ad_id)
-	return redirect("/account")
-
-@app.route('/delete-bid',  methods=["GET", "POST"])
-@login_required
-def delete_bid():
-	# print(f"delete: form: {request.form}")
-	bid_id = request.form["id"]
-		
-	control.delete_bid(bid_id)
 	return redirect("/account")
 
 @app.route('/about',  methods=["GET", "POST"])
@@ -231,14 +231,15 @@ def search():
 
 # Creating bid from user input after searching
 @app.route('/bid-send', methods=['GET', 'POST'])
-@login_required
 def bidSend():
+	db = Database()
+
     # Grab information from request
 	userID = current_user.get_id()
 	price = request.form['priceInput'].strip()
 	comment = request.form['commentInput'].strip()
 	adID = request.form['adID'].strip()
-	adName = control.get_Title(adID)
+	adName = db.getTitle(adID)
 
 	# Put data in db
 	control.postBid(adID, adName, userID, price, comment)
@@ -246,10 +247,7 @@ def bidSend():
 
 
 # TODO:
+# - Deleting ad that user has created 
+# - Deleting bid user has created 
 # - Showing all bids registered for current ad 
-# - Choose a bid for your ad
 # - Change schema to say adID and bidID and all that stuff
-
-# DONE 
-# - Deleting ad that user has created DONE
-# - Deleting bid user has created DONE
