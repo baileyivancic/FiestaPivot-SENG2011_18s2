@@ -1,0 +1,35 @@
+<!--  Taken from user dashboard
+    <br>
+            <div id="active">
+                <p class="lead">My information</p>
+                <a class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1" id="name" >Username: {{ info[1] }}</h5>
+                    </div>
+                    <small id="price">Password: {{ info[2] }}</small>
+                    <button>Change password</button>
+                    <small id="comment">City: {{ info[3] }}</small>
+                        <button>Change city</button>
+                    <small id="User">State: {{ info[4] }}</small>
+                        <button>Change state</button>
+                </a>
+            </div>
+
+            <div class="Modals">
+                    <div id="{{ad[0]}}" class="w3-modal>
+                        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+                        <div class="w3-center"><br>
+                            <span onclick="document.getElementById('{{ad[0]}}').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+                            <p id="adTitle">{{ad[0]}}. {{ad[2]}}</p>
+                        </div>
+                        <div class="w3-container w3-center w3-border-top w3-padding-16 w3-light-grey">
+                            <form>
+                                <button type="button" class="w3-button w3-green">Edit</button>
+                            </form>
+                            <form action="/delete-ad">
+                                <button onclick="updateURL('id', '{{ad[0]}}')" type="submit" class="w3-button w3-red">Delete</button>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                </div> -->

@@ -36,6 +36,12 @@ class Controller:
 
 	def find_user_bids(self, id):
 		return self.database.find_user_bids(id)
+	
+	def get_city(self, id):
+		return self.database.get_city(id)
+	
+	def get_state(self, id):
+		return self.database.get_state(id)
 
 class User(UserMixin):
 	def __init__(self, id):
@@ -140,6 +146,10 @@ def register():
 @app.route('/post-ad', methods=["GET", "POST"])
 @login_required
 def post():
+	state = control.get_state(current_user.get_id())
+	city = control.get_city(current_user.get_id())
+
+	# Submit putton pressed
 	if request.method == "POST":
 		name = control.get_name( current_user.get_id() )
 		email = current_user.get_id()
@@ -154,7 +164,7 @@ def post():
 
 		if control.postAd(email, title, price, city, state, descr, date, start_time, end_time):
 			return redirect("/account")
-	return render_template("post.html")
+	return render_template("post.html", state=state, city=city)
 	
 
 @app.route('/account',  methods=["GET", "POST"])
@@ -188,22 +198,21 @@ def about():
 @login_required
 def search():
 	ads = control.fetch_ads()
+	name = control.get_name( current_user.get_id() )
 
-# Order as most recent
+	# Order as most recent
 	newAds = bubbleAds(ads)
-	return render_template("search.html", ads=newAds)
+	return render_template("search.html", ads=newAds, name=name)
 
 # Creating bid from user input after searching
 @app.route('/bid-send', methods=['GET', 'POST'])
 def bidSend():
-	db=Database()
-
     # Grab information from request
 	userID = current_user.get_id()
 	price = request.form['priceInput'].strip()
 	comment = request.form['commentInput'].strip()
 	adID = request.form['adID'].strip()
-	adName = db.getTitle(adID)
+	adName = control.getTitle(adID)
 
 	# Put data in db
 	control.postBid(adID, adName, userID, price, comment)
