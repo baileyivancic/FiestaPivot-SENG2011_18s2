@@ -42,6 +42,9 @@ class Controller:
 	
 	def get_state(self, id):
 		return self.database.get_state(id)
+	
+	def get_Title(self, id):
+		return self.database.getTitle(id)
 
 	def delete_ad(self, ad_id):
 		return self.database.delete_ad(ad_id)
@@ -165,6 +168,11 @@ def post():
 		start_time = request.form["start-time"].strip()
 		end_time = request.form["end-time"].strip()
 
+		print("name is ")
+		print(name)
+		print(" email is ")
+		print(email)
+
 		if control.postAd(email, title, price, city, state, descr, date, start_time, end_time):
 			return redirect("/account")
 	return render_template("post.html", state=state, city=city)
@@ -216,7 +224,7 @@ def bidSend():
 	price = request.form['priceInput'].strip()
 	comment = request.form['commentInput'].strip()
 	adID = request.form['adID'].strip()
-	adName = control.getTitle(adID)
+	adName = control.get_Title(adID)
 
 	# Put data in db
 	control.postBid(adID, adName, userID, price, comment)

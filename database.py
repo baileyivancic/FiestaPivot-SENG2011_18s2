@@ -313,3 +313,14 @@ class Database(object):
 
         self.close(db)
         return temp[2]
+    
+    # Returns bids for a given adID
+    def getBids(self, adID):
+        db = self.get_db()
+        cursor=db.cursor()
+
+        cursor.execute("SELECT * FROM bids WHERE adID=?", (adID, ))
+        temp = cursor.fetchall()
+
+        self.close(db)
+        return temp
