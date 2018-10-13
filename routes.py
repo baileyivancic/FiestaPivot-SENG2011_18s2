@@ -239,6 +239,7 @@ def bidSend():
 
 # TODO:
 # - Showing all bids registered for current ad 
+# - Choose a bid for your ad
 # - Change schema to say adID and bidID and all that stuff
 
 # DONE 
