@@ -46,6 +46,9 @@ class Controller:
 	def delete_ad(self, ad_id):
 		return self.database.delete_ad(ad_id)
 
+	def delete_bid(self, bid_id):
+		return self.database.delete_bid(bid_id)
+
 class User(UserMixin):
 	def __init__(self, id):
 		self.email = id
@@ -91,6 +94,7 @@ def logout():
 
 # Default page, index page
 @app.route('/',  methods=["GET", "POST"])
+@login_required
 def default():
 	if request.method == "POST":
 		if request.form['submit-but'] == "dash":
@@ -192,6 +196,15 @@ def delete_ad():
 	control.delete_ad(ad_id)
 	return redirect("/account")
 
+@app.route('/delete-bid',  methods=["GET", "POST"])
+@login_required
+def delete_bid():
+	# print(f"delete: form: {request.form}")
+	bid_id = request.form["id"]
+		
+	control.delete_bid(bid_id)
+	return redirect("/account")
+
 @app.route('/about',  methods=["GET", "POST"])
 def about():
 	if request.method == "POST":
@@ -210,13 +223,14 @@ def search():
 
 # Creating bid from user input after searching
 @app.route('/bid-send', methods=['GET', 'POST'])
+@login_required
 def bidSend():
     # Grab information from request
 	userID = current_user.get_id()
 	price = request.form['priceInput'].strip()
 	comment = request.form['commentInput'].strip()
 	adID = request.form['adID'].strip()
-	adName = control.getTitle(adID)
+	adName = control.database.getTitle(adID)
 
 	# Put data in db
 	control.postBid(adID, adName, userID, price, comment)
@@ -224,7 +238,9 @@ def bidSend():
 
 
 # TODO:
-# - Deleting ad that user has created 
-# - Deleting bid user has created 
 # - Showing all bids registered for current ad 
 # - Change schema to say adID and bidID and all that stuff
+
+# DONE 
+# - Deleting ad that user has created DONE
+# - Deleting bid user has created DONE

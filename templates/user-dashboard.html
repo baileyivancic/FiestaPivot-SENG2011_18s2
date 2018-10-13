@@ -60,7 +60,7 @@
             <div id="active">
                 <p class="lead">My ads</p>
                 {% for ad in ads %}
-                <a onclick="modal_bid('{{ad[0]}}')" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
+                <a onclick="show_modal('ad-{{ad[0]}}')" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{ ad[2] }}</h5>
                         <small>Start date: {{ ad[8] }}</small>
@@ -74,10 +74,10 @@
                 <!--Modals for each ad-->
                 <!--AD MODALS-->
                 <div class="Modals">
-                    <div id="{{ad[0]}}" class="w3-modal">
+                    <div id="ad-{{ad[0]}}" class="w3-modal">
                         <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
                         <div class="w3-center"><br>
-                            <span onclick="document.getElementById('{{ad[0]}}').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+                            <span onclick="document.getElementById('ad-{{ad[0]}}').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
                             <p id="adTitle">{{ad[0]}}. {{ad[2]}}</p>
                         </div>
                         <div class="w3-container w3-center w3-border-top w3-padding-16 w3-light-grey">
@@ -86,7 +86,7 @@
                             </div>
                             <form style="display: inline;" action="/delete-ad" method="POST">
                                 <input style="display: none" name="id" type="text" value="{{ad[0]}}">
-                                <button onclick="updateURL('id', '{{ad[0]}}')" type="submit" class="w3-button w3-red">Delete</button>
+                                <button type="submit" class="w3-button w3-red">Delete</button>
                             </form>
                         </div>
                         </div>
@@ -98,7 +98,7 @@
             <div id="active">
                 <p class="lead">My Bids</p>
                 {% for bid in bids %}
-                <a class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
+                <a onclick="show_modal('bid-{{bid[0]}}')" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1" id="name" >Ad name: {{ bid[2] }}</h5>
                     </div>
@@ -106,6 +106,28 @@
                     <small id="comment">Comment: {{ bid[5] }}</small>
                     <small id="User">Posted by user: {{ bid[3] }}</small>
                 </a>
+
+                <!--Modals for each bid-->
+                <!--bid MODALS-->
+                <div class="Modals">
+                    <div id="bid-{{bid[0]}}" class="w3-modal">
+                        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+                        <div class="w3-center"><br>
+                            <span onclick="document.getElementById('bid-{{bid[0]}}').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+                            <p id="adTitle">{{bid[0]}}. {{bid[2]}}</p>
+                        </div>
+                        <div class="w3-container w3-center w3-border-top w3-padding-16 w3-light-grey">
+                            <div style="display: inline;" >
+                                <button type="button" class="w3-button w3-green">Edit</button>
+                            </div>
+                            <form style="display: inline;" action="/delete-bid" method="POST">
+                                <input style="display: none" name="id" type="text" value="{{bid[0]}}">
+                                <button type="submit" class="w3-button w3-red">Delete</button>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                </div>
                 {% endfor %}
             </div>
 
@@ -167,24 +189,8 @@
     </footer>
 
     <script>
-    function modal()
-    {
-        return;
-    }
-
-    function modal_bid(id) {
-        document.getElementById(id).style.display='block'
-        updateURL("id", id)
-    }
-    </script>
-
-    <!-- passing search params to server -->
-    <script type="text/javascript">
-        function updateURL(key, value) {
-            if (history.pushState) {
-                var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?' + key + "=" + value;
-                window.history.pushState({path:newurl},'',newurl);
-            }
+        function show_modal(id) {
+            document.getElementById(id).style.display='block'
         }
     </script>
     </body>
