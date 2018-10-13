@@ -31,17 +31,20 @@ class Controller:
 	def fetch_ads(self):
 		return self.database.fetch_ads()
 
-	def find_user_ads(self, id):
-		return self.database.find_user_ads(id)
+	def find_user_ads(self, ad_id):
+		return self.database.find_user_ads(ad_id)
 
-	def find_user_bids(self, id):
-		return self.database.find_user_bids(id)
+	def find_user_bids(self, bid_id):
+		return self.database.find_user_bids(bid_id)
 	
 	def get_city(self, id):
 		return self.database.get_city(id)
 	
 	def get_state(self, id):
 		return self.database.get_state(id)
+
+	def delete_ad(self, ad_id):
+		return self.database.delete_ad(ad_id)
 
 class User(UserMixin):
 	def __init__(self, id):
@@ -183,9 +186,10 @@ def account():
 @app.route('/delete-ad',  methods=["GET", "POST"])
 @login_required
 def delete_ad():
-	if request.method == "POST":
-		print(f"delete: args: {request.args}")
-		print(f"delete: form: {request.form}")
+	# print(f"delete: form: {request.form}")
+	ad_id = request.form["id"]
+		
+	control.delete_ad(ad_id)
 	return redirect("/account")
 
 @app.route('/about',  methods=["GET", "POST"])

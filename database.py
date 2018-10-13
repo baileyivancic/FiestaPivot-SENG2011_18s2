@@ -129,7 +129,7 @@ class Database(object):
         db = self.get_db()
         cursor = db.cursor()
 
-        cursor.execute("SELECT EXISTS(SELECT 1 FROM ads WHERE adID=?)", (adID))
+        cursor.execute("SELECT EXISTS(SELECT 1 FROM ads WHERE ID=?)", (adID))
         temp =  cursor.fetchone()
         
         if temp == 0:
@@ -144,12 +144,22 @@ class Database(object):
             db.close()
             return 1
 
+    def delete_ad(self, ad_id):
+        db = self.get_db()
+        cursor = db.cursor()
+
+        print(ad_id)
+        cursor.execute("DELETE FROM ads WHERE ID=?", ad_id)
+
+        self.close(db)
+        return
+
     #UNTESTED
     def updateLocation_ad(self, adID, newLocation):
         db = self.get_db()
         cursor = db.cursor()
 
-        cursor.execute("SELECT EXISTS(SELECT 1 FROM ads WHERE adID=?)", (adID))
+        cursor.execute("SELECT EXISTS(SELECT 1 FROM ads WHERE adID=?)", (adID, ))
         temp =  cursor.fetchone()
         
         if temp == 0:
