@@ -81,9 +81,11 @@
                             <p id="adTitle">{{ad[0]}}. {{ad[2]}}</p>
                         </div>
                         <div class="w3-container w3-center w3-border-top w3-padding-16 w3-light-grey">
-                            <button type="button" class="w3-button w3-green">Edit</button>
-                            <form action="/delete-ad" method="POST">
-                                <input type="text" value='{{ad[0]}}'>
+                            <div style="display: inline;" >
+                                <button type="button" class="w3-button w3-green">Edit</button>
+                            </div>
+                            <form style="display: inline;" action="/delete-ad" method="POST">
+                                <input style="display: none" name="id" type="text" value="{{ad[0]}}">
                                 <button onclick="updateURL('id', '{{ad[0]}}')" type="submit" class="w3-button w3-red">Delete</button>
                             </form>
                         </div>

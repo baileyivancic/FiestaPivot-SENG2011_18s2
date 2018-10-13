@@ -163,15 +163,19 @@ def account():
 	ads = control.find_user_ads( current_user.get_id() )
 	newAds = bubbleAds(ads)
 	bids = control.find_user_bids( current_user.get_id() )
-	print(f"inside accoubts: args: {request.args}")
-	print(f"accouts: form: {request.form}")
-	return render_template("user-dashboard.html", ads=newAds, bids=bids)
+	name = control.database.get_name( current_user.get_id() )
+
+	if request.method == "POST":
+		print(f"accounts: args: {request.args}")
+		print(f"accounts: form: {request.form}")
+	return render_template("user-dashboard.html", ads=newAds, bids=bids, name=name)
 
 @app.route('/delete-ad',  methods=["GET", "POST"])
 @login_required
 def delete_ad():
-	print(f"form: {request.form}")
-	print(f"args: {request.args}")
+	if request.method == "POST":
+		print(f"delete: args: {request.args}")
+		print(f"delete: form: {request.form}")
 	return redirect("/account")
 
 @app.route('/about',  methods=["GET", "POST"])
