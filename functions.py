@@ -12,8 +12,8 @@ def isSubstring(token, string):
         i +=1
     return r
 
-# Need to properly test
-def bubbleAds(args):
+# Bubble sort to sort ads by date 
+def bubbleDateAds(args):
     listCopy = copy.copy(args)
     i = (len(args) -1)
     upperbound = 0
@@ -21,6 +21,22 @@ def bubbleAds(args):
         i = (len(args) - 1)
         while (i > upperbound):
             if (listCopy[i-1][8] > listCopy[i][8]):
+                temp = listCopy[i]
+                listCopy[i] = listCopy[i - 1]
+                listCopy[i - 1] = temp
+            i-= 1
+        upperbound +=1
+    return listCopy
+
+# Bubble sort to sort ads by price
+def bubblePriceAds(args):
+    listCopy = copy.copy(args)
+    i = (len(args) -1)
+    upperbound = 0
+    while (upperbound < len(args)):
+        i = (len(args) - 1)
+        while (i > upperbound):
+            if (listCopy[i-1][3] > listCopy[i][3]):
                 temp = listCopy[i]
                 listCopy[i] = listCopy[i - 1]
                 listCopy[i - 1] = temp

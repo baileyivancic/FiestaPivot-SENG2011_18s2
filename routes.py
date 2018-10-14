@@ -7,7 +7,7 @@ import sys
 import copy
 from database import Database
 from server import app, login_manager
-from functions import bubbleAds
+from functions import bubbleDateAds, bubblePriceAds
 
 class Controller:
 	def __init__(self):
@@ -192,13 +192,12 @@ def post():
 @login_required
 def account():
 	ads = control.find_user_ads( current_user.get_id() )
-	newAds = bubbleAds(ads)
+	newAds = bubbleDateAds(ads)
 	bids = control.find_user_bids( current_user.get_id() )
 	name = control.database.get_name( current_user.get_id() )
 	print(name)
 	
 	# Get bids associated with each ad
-	# WORKING
 	bidsOrdered=[]
 	for ad in ads:
 		# print( control.getBids(ad[0]) )
@@ -238,10 +237,32 @@ def about():
 def search():
 	ads = control.fetch_ads()
 	name = control.get_name( current_user.get_id() )
+	newAds = bubbleDateAds(ads)
 
-	# Order as most recent
-	newAds = bubbleAds(ads)
+	# Changing sorting of ads based on user choice
+	if request.method == "POST":
+		sort = request.form['sortSelect']
+		if sort == "dateAsc":
+			newAds = bubbleDateAds(ads)
+			print("Date asc ")
+
+		elif sort == "dateDes":
+			newAds = list(reversed(bubbleDateAds(ads)))
+			print("Date des ")
+		
+		elif sort == "priceAsc":
+			newAds = bubblePriceAds(ads)
+			print("Price asc ")
+		
+		elif sort == "priceDes":
+			newAds = list(reversed(bubblePriceAds(ads)))
+			print("Price des")
+	
+	print(newAds)
+	
 	return render_template("search.html", ads=newAds, name=name)
+
+	
 
 # Creating bid from user input after searching
 @app.route('/bid-send', methods=['GET', 'POST'])

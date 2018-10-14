@@ -96,6 +96,21 @@
                         <p for="inputCity" class="text-dark">From date:</p>
                         <input id="date" class="form-control" type="date" name="date" min="now">
                 </div>
+
+                <!--Ordering results by certain criteria-->
+                <div class="rw">
+                    <p>Sort by:</p>
+                    <form action="/search" method="POST">
+                        <select onchange="this.form.submit()" id="sortSelect" name="sortSelect" class="form-control" required>
+                            <option selected value="dateAsc">Date: Soonest first</option>
+                            <option value="dateDes">Date: Furthest first</option>
+                            <option value="priceAsc">Price: Highest first</option>
+                            <option value="priceDes">Price: Lowest first</option>
+                        </select>
+                    </form>
+                </div>
+               
+
                 <button onclick="filter()">Refresh</button>
              </div>
              
