@@ -109,6 +109,26 @@
                         </select>
                     </form>
                 </div>
+
+                <div class="rw">
+                    <p>Size:</p>
+                        <select id="noPeople" name="noPeople" class="form-control">
+                            <option value="1">1-10</option>
+                            <option value="2">11-20</option>
+                            <option value="3">21-50</option>
+                            <option value="4">51 - 100</option>
+                            <option value="5">101-200</option>
+                            <option value="6">200+</option>
+                        </select>
+                </div>
+
+                <div class="rw">
+                    <p>Alcohol provisions:</p>
+                        <select id="alcohol" name="alcohol" class="form-control">
+                            <option value="No" selected>No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                </div>
                
 
                 <button onclick="filter()">Refresh</button>
@@ -258,17 +278,24 @@
             let minPrice = parseFloat(document.getElementById("minPrice").value);
             let maxPrice = parseFloat(document.getElementById("maxPrice").value);
             let date = document.getElementById("date").value;
+            let alcohol = document.getElementById("alcohol").value;
+            let noPeople = document.getElementById("noPeople").value;
 
             // Get all ad objects
             let adResults = document.getElementsByClassName("adResult");
 
-
-            
             // Loop through all ads and check for attributes
             for (let i=0; i<adResults.length; i++)
             {
                 // Set all to visible by default
                 adResults[i].style.display="block";
+
+                // Filtering by alcohol
+                let adAlc = adResults[i].children.alcohol.attributes.value.value;
+                if (adAlc != alcohol)
+                {
+                    adResults[i].style.display="none";
+                }
 
                 // Filtering by price
                 let adPrice = parseFloat(adResults[i].children.price.attributes.value.value);
