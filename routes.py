@@ -22,11 +22,11 @@ class Controller:
 	def get_name(self, email):
 		return self.database.get_name(email)
 
-	def postAd(self, email, title, price, city, state, descr, date, start_time, end_time):
-		return self.database.create_ad(email, title, price, city, state, descr, date, start_time, end_time)
+	def postAd(self, email, title, price, city, state, descr, date, start_time, end_time, alcohol, noPeople):
+		return self.database.create_ad(email, title, price, city, state, descr, date, start_time, end_time, alcohol, noPeople)
 	
-	def postBid(self, adID, adName, userID, price, comment):
-		return self.database.create_bid(adID, adName, userID, price, comment)
+	def postBid(self, adID, adName, userID, price, comment, status):
+		return self.database.create_bid(adID, adName, userID, price, comment, status)
 	
 	def fetch_ads(self):
 		return self.database.fetch_ads()
@@ -177,13 +177,15 @@ def post():
 		date = request.form["date"].strip()
 		start_time = request.form["start-time"].strip()
 		end_time = request.form["end-time"].strip()
+		alcohol = request.form['alcohol'].strip()
+		noPeople = request.form['noPeople'].strip()
 
-		print("name is ")
-		print(name)
-		print(" email is ")
-		print(email)
+		print("alcohol is ")
+		print(alcohol)
+		print(" noPeople is ")
+		print(noPeople)
 
-		if control.postAd(email, title, price, city, state, descr, date, start_time, end_time):
+		if control.postAd(email, title, price, city, state, descr, date, start_time, end_time, alcohol, noPeople):
 			return redirect("/account")
 	return render_template("post.html", state=state, city=city)
 	
@@ -240,7 +242,7 @@ def search():
 	newAds = bubbleDateAds(ads)
 
 	# Changing sorting of ads based on user choice
-	if request.method == "POST":
+	if request.method == "SORT":
 		sort = request.form['sortSelect']
 		if sort == "dateAsc":
 			newAds = bubbleDateAds(ads)
@@ -276,9 +278,10 @@ def bidSend():
 	comment = request.form['commentInput'].strip()
 	adID = request.form['adID'].strip()
 	adName = db.getTitle(adID)
+	status = "ACTIVE"
 
 	# Put data in db
-	control.postBid(adID, adName, userID, price, comment)
+	control.postBid(adID, adName, userID, price, comment, status)
 	return search()
 
 

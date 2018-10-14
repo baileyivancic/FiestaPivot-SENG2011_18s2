@@ -100,12 +100,12 @@
                 <!--Ordering results by certain criteria-->
                 <div class="rw">
                     <p>Sort by:</p>
-                    <form action="/search" method="POST">
-                        <select onchange="this.form.submit()" id="sortSelect" name="sortSelect" class="form-control" required>
-                            <option selected value="dateAsc">Date: Soonest first</option>
+                    <form action="/search" method="SORT">
+                        <select onchange="this.form.submit()" id="sortSelect" name="sortSelect" class="form-control">
+                            <option value="dateAsc">Date: Soonest first</option>
                             <option value="dateDes">Date: Furthest first</option>
-                            <option value="priceAsc">Price: Highest first</option>
-                            <option value="priceDes">Price: Lowest first</option>
+                            <option value="priceAsc">Price: Lowest first</option>
+                            <option value="priceDes">Price: Highest first</option>
                         </select>
                     </form>
                 </div>
@@ -127,6 +127,8 @@
                         <small id="price" value="{{ad[3]}}">Price: {{ ad[3] }}</small>
                         <small id="city" value="{{ad[4]}}">City: {{ ad[4] }}</small>
                         <small id="state" value="{{ad[5]}}">State: {{ ad[5] }}</small>
+                        <small id="alcohol" value="{{ad[11]}}">Alcohol provisions: {{ ad[11] }}</small>
+                        <small id="noPeople" value="{{ad[12]}}">Number of people: {{ ad[12] }}</small>
                     </a>
 
                     <!--AD MODALS-->
@@ -149,6 +151,10 @@
                                         <label><b>{{ad[3]}}</b></label>
                                     <h3>Date:</h3>
                                         <label><b>{{ad[8]}}</b></label>
+                                    <h3>Alcohol provisions:</h3>
+                                        <label><b>{{ad[11]}}</b></label>
+                                    <h3>Number of people:</h3>
+                                        <label><b>{{ad[12]}}</b></label>
                                     <h3>Job description:</h3>
                                         <label><b>{{ad[6]}}</b></label>
                                 </div>
@@ -255,6 +261,8 @@
 
             // Get all ad objects
             let adResults = document.getElementsByClassName("adResult");
+
+
             
             // Loop through all ads and check for attributes
             for (let i=0; i<adResults.length; i++)
@@ -334,6 +342,7 @@
     }
     </script>
 
+    <!--Price checking when bidding, if price is higher than advertised amount-->
     <script>
     document.getElementById("priceInput").addEventListener("input", checkPrice);
 
@@ -346,6 +355,10 @@
             document.getElementById("priceWarning").innerText = "Price entered is over advertised amount";
         }
     }
+    </script>
+
+    <script>
+    
     </script>
 
 </body>

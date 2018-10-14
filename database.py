@@ -95,11 +95,11 @@ class Database(object):
         return temp
 
 # Advertisement db functions
-    def create_ad(self, userEmail, title, price, city, state, descr, date, start_time, end_time):
+    def create_ad(self, userEmail, title, price, city, state, descr, date, start_time, end_time, alcohol, noPeople):
         db = self.get_db()
         cursor = db.cursor()
 
-        cursor.execute('''INSERT INTO ads (userEmail, title, price, city, state, descr, status, date, start_time, end_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',(userEmail, title, price, city, state, descr, "ACTIVE", date, start_time, end_time,))
+        cursor.execute('''INSERT INTO ads (userEmail, title, price, city, state, descr, status, date, start_time, end_time, alcohol, noPeople) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',(userEmail, title, price, city, state, descr, "ACTIVE", date, start_time, end_time, alcohol, noPeople))
         
         self.close(db)
         return True
@@ -227,14 +227,14 @@ class Database(object):
 
 # Bid db functions
     #UNTESTED
-    def create_bid(self, adID, adName, userEmail, price, comment):
+    def create_bid(self, adID, adName, userEmail, price, comment, status):
         db = self.get_db()
         cursor = db.cursor()
 
         cursor.execute("SELECT EXISTS(SELECT 1 FROM bids WHERE adID=? AND userEmail=?)", (adID, userEmail))
         temp = cursor.fetchone()
 
-        cursor.execute('''INSERT INTO bids (adID, adName, userEmail, price, comment) VALUES (?, ?, ?, ?, ?)''',(adID, adName, userEmail, price, comment))
+        cursor.execute('''INSERT INTO bids (adID, adName, userEmail, price, comment, status) VALUES (?, ?, ?, ?, ?, ?)''',(adID, adName, userEmail, price, comment, status))
         db.commit()
         db.close()
         return 1

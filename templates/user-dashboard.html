@@ -67,6 +67,8 @@
                     </div>
                     <p class="mb-1">{{ ad[6] }}</p>
                     <small>Price: {{ ad[3] }}</small>
+                    <small>Alcohol provisions: {{ ad[11] }}</small>
+                    <small>Number of people: {{ ad[12] }}</small>
                     <small>Status: {{ ad[7] }}</small>
                 </a>
 
@@ -119,6 +121,7 @@
                     <p class="mb-1" id="comment">Special request: {{ bid[5] }}</p>
                     <small id="price">Bid: {{ bid[4] }}</small>
                     <small id="User">Posted by user: {{ bid[3] }}</small>
+                    <small id="status">Status: {{ bid[7] }}</small>
                 </a>
 
                 <!--Modals for each bid-->
@@ -144,22 +147,11 @@
                 </div>
                 {% endfor %}
             </div>
-
-            <!-- Going to contain user info, need to add to scheme first and send info to html page
             <br>
             <div id="active">
-                <p class="lead">My Bids</p>
-                {% for bid in bids %}
-                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1" id="name" >Ad name: {{ bid[2] }}</h5>
-                    </div>
-                    <small id="price">Price: {{ bid[4] }}</small>
-                    <small id="comment">Comment: {{ bid[5] }}</small>
-                    <small id="User">Posted by user: {{ bid[3] }}</small>
-                </a>
-                {% endfor %}
-            </div> -->
+                <p class="lead">My Info</p>
+                
+            </div>
 
           </div>
         </div>
