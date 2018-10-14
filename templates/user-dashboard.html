@@ -9,7 +9,8 @@
         <link rel="stylesheet" type="text/css" media="screen" href="static/CSS/userDash.css" />
 
         <!-- W3 schools modal stylsheet  -->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="../static/CSS/main.css"
 
         <!--Bootstrap CDN and JS-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -66,10 +67,10 @@
                         <small>Start date: {{ ad[8] }}</small>
                     </div>
                     <p class="mb-1">{{ ad[6] }}</p>
-                    <small>Price: {{ ad[3] }}</small>
-                    <small>Alcohol provisions: {{ ad[11] }}</small>
-                    <small>Number of people: {{ ad[12] }}</small>
-                    <small>Status: {{ ad[7] }}</small>
+                    <small class="info">Price: {{ ad[3] }}</small>
+                    <small class="info">Alcohol provisions: {{ ad[11] }}</small>
+                    <small class="info">Number of people: {{ ad[12] }}</small>
+                    <small class="info">Status: {{ ad[7] }}</small>
                 </a>
 
                 <!--Modals for each ad-->
