@@ -262,7 +262,9 @@ def bidSend():
 
 
 # TODO:
+# - Change schema to say adID and bidID and all that stuff
+
+#Done 
 # - Deleting ad that user has created 
 # - Deleting bid user has created 
 # - Showing all bids registered for current ad 
-# - Change schema to say adID and bidID and all that stuff
