@@ -48,7 +48,10 @@ class Controller:
 
 	def delete_ad(self, ad_id):
 		return self.database.delete_ad(ad_id)
-	
+
+	def delete_bid(self, bid_id):
+		return self.database.delete_bid(bid_id)
+
 	def getBids(self, adID):
 		return self.database.getBids(adID)
 
@@ -104,7 +107,11 @@ def default():
 		elif request.form['submit-but'] == "search":
 			return render_template("search.html")
 		#keywords = request.form['indexInput']
-	return render_template("index.html")
+
+	name = control.database.get_name( current_user.get_id() )
+
+	print(current_user.get_id())
+	return render_template("index.html", user=current_user.get_id(), name=name)
 
 @app.route('/login',  methods=["GET", "POST"])
 def login():
@@ -138,7 +145,7 @@ def register():
 		else:
 			valid = control.register_user(user, password, email, city, state)
 		if valid == 1:
-			login_user(User(user), remember= False)
+			login_user(User(email), remember= False)
 			flash("Successfully created account!")
 			return account()
 		elif valid == 0:
@@ -213,6 +220,16 @@ def delete_ad():
 	control.delete_ad(ad_id)
 	return redirect("/account")
 
+@app.route('/delete-bid',  methods=["GET", "POST"])
+@login_required
+def delete_bid():
+	# print(f"delete: form: {request.form}")
+	bid_id = request.form["id"]
+		
+	control.delete_bid(bid_id)
+	return redirect("/account")
+
+
 @app.route('/about',  methods=["GET", "POST"])
 def about():
 	if request.method == "POST":
@@ -231,6 +248,7 @@ def search():
 
 # Creating bid from user input after searching
 @app.route('/bid-send', methods=['GET', 'POST'])
+@login_required
 def bidSend():
 	db = Database()
 
