@@ -202,7 +202,7 @@ def account():
 	if request.method == "POST":
 		print(f"accounts: args: {request.args}")
 		print(f"accounts: form: {request.form}")
-	return render_template("user-dashboard.html", ads=newAds, bids=bids, name=name)
+	return render_template("user-dashboard.html", ads=newAds, bids=bids, name=name, bidsOrdered=bidsOrdered)
 
 @app.route('/delete-ad',  methods=["GET", "POST"])
 @login_required

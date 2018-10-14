@@ -79,7 +79,14 @@
                             <span onclick="document.getElementById('ad-{{ad[0]}}').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
                             <p id="adTitle">{{ad[0]}}. {{ad[2]}}</p>
                         </div>
-                        <p>Hello there</p>
+                        
+                <!--Put bids for ad in here-->
+                {% for bidO in bidsOrdered %}
+                        {%if bidO[0] == ad[0]%}
+                        <p>{{bidO}}</p>
+                        {%endif%}
+                {% endfor %}
+
                         <div class="w3-container w3-center w3-border-top w3-padding-16 w3-light-grey">
                             <div style="display: inline;" >
                                 <button type="button" class="w3-button w3-green">Edit</button>
