@@ -333,5 +333,6 @@ class Database(object):
         cursor.execute("SELECT * FROM bids WHERE adID=?", (adID, ))
         temp = cursor.fetchall()
 
+
         self.close(db)
         return temp

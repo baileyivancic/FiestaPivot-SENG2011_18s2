@@ -201,14 +201,11 @@ def account():
 	# WORKING
 	bidsOrdered=[]
 	for ad in ads:
-		tempArr = control.getBids(ad[0])
-		tempArr.insert(0, ad[0])
-		bidsOrdered.append(tempArr)
+		# print( control.getBids(ad[0]) )
+		for bid in control.getBids(ad[0]):
+			bidsOrdered.append( bid )
 
-	print(bidsOrdered)
-	if request.method == "POST":
-		print(f"accounts: args: {request.args}")
-		print(f"accounts: form: {request.form}")
+	# print(bidsOrdered)
 	return render_template("user-dashboard.html", ads=newAds, bids=bids, name=name, bidsOrdered=bidsOrdered)
 
 @app.route('/delete-ad',  methods=["GET", "POST"])
