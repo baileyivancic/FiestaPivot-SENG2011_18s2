@@ -212,8 +212,6 @@ def account():
 		# print( control.getBids(ad[0]) )
 		for bid in control.getBids(ad[0]):
 			bidsOrdered.append( bid )
-
-	# print(bidsOrdered)
 	return render_template("user-dashboard.html", ads=newAds, bids=bids, name=name, bidsOrdered=bidsOrdered, edit=False)
 
 @app.route('/delete-ad',  methods=["GET", "POST"])
