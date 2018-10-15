@@ -56,6 +56,43 @@ body {
   width: 50%;
 }
 
+.overlay-accepted {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: green;
+  width: 25%;
+  left: 75%;
+  height: 100%;
+}
+
+.overlay-declined {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 25%;
+  left: 75%;
+  background-color: red;
+  height: 100%;
+}
+
+.chosen-text {
+  color: black;
+  background: transparent;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  overflow: hidden;
+}
+
 .overlay {
   position: absolute;
   bottom: 0;
@@ -66,14 +103,6 @@ body {
   width: 0;
   height: 100%;
   transition: .5s ease;
-}
-
-.ACCEPTED {
-  background: green;
-}
-
-.DECLINED {
-  background: red;
 }
 
 .content {
