@@ -344,14 +344,27 @@ class Database(object):
         return temp[1]
     
     # Sets status of bid to given status string
-    def setBidStatus(self, status):
+    def setBidStatus(self, status, bidID):
         db = self.get_db()
         cursor=db.cursor()
 
-        cursor.execute("SELECT EXISTS(SELECT 1 FROM bids WHERE bidID=?)", (bidID))
+        cursor.execute("SELECT EXISTS(SELECT 1 FROM bids WHERE ID=?)", (bidID))
         temp =  cursor.fetchone()
 
         cursor.execute('''INSERT INTO bids (status) VALUES (?)''',(status))
         db.commit()
         db.close()
         return 0
+
+    # Sets status of ad to given status string
+    def setBidStatus(self, status, adID):
+        db = self.get_db()
+        cursor=db.cursor()
+
+        cursor.execute("SELECT EXISTS(SELECT 1 FROM ads WHERE ID=?)", (bidID))
+        temp =  cursor.fetchone()
+
+        cursor.execute('''INSERT INTO ads (status) VALUES (?)''',(status))
+        db.commit()
+        db.close()
+        return 0    
