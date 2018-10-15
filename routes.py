@@ -56,7 +56,10 @@ class Controller:
 		return self.database.getBids(adID)
 	
 	def getAdBid(self, bidID):
-		return self.database.getAdFromBid(bidID)
+		return self.database.getAdIDFromBid(bidID)
+	
+	def setBidStatus(self, status, bidID):
+		return self.database.setBidStatus(status)
 
 class User(UserMixin):
 	def __init__(self, id):
@@ -238,6 +241,7 @@ def choose_bid():
 	adID = bid[1]
 
 	# Set status of chosen bid to ACCEPTED
+
 
 	# Set status of other bids to 	
 	

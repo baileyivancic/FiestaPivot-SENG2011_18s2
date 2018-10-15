@@ -243,7 +243,7 @@ class Database(object):
         cursor.execute("SELECT EXISTS(SELECT 1 FROM bids WHERE adID=? AND userID=?)", (adID, userID))
         temp =  cursor.fetchone()
         
-        if temp == (0, ): #TODO - CHECK THIS
+        if temp == (0, ):
             # Could not find userID or adID
             print("Something went wrong, could not access correct user or ad\n")
             db.commit()
@@ -333,7 +333,7 @@ class Database(object):
         return temp
     
     # Gets ad from bid id
-    def getAdFromBid(self, bidID):
+    def getAdIDFromBid(self, bidID):
         db = self.get_db()
         cursor=db.cursor()
 
@@ -341,4 +341,17 @@ class Database(object):
         temp = cursor.fetchone()
 
         self.close(db)
-        return temp
+        return temp[1]
+    
+    # Sets status of bid to given status string
+    def setBidStatus(self, status):
+        db = self.get_db()
+        cursor=db.cursor()
+
+        cursor.execute("SELECT EXISTS(SELECT 1 FROM bids WHERE bidID=?)", (bidID))
+        temp =  cursor.fetchone()
+
+        cursor.execute('''INSERT INTO bids (status) VALUES (?)''',(status))
+        db.commit()
+        db.close()
+        return 0
