@@ -10,9 +10,9 @@
 
         <!-- W3 schools modal stylsheet  -->
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" href="../static/CSS/main.css"
+        <link rel="stylesheet" href="../static/CSS/main.css">
 
-        <!--Bootstrap CDN and JS-->
+         <!-- Bootstrap CDN and JS  -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -86,13 +86,21 @@
                         <!--Put bids for ad in here-->
                         {% for bid in bidsOrdered %}
                             {% if bid[1] == ad[0] %}
-                            <a onclick="" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1" id="name" >Ad name: {{ bid[2] }}</h5>
-                                </div>
-                                <p class="mb-1" id="comment">Special request: {{ bid[5] }}</p>
-                                <small id="price">Bid: {{ bid[4] }}</small>
-                                <small id="User">Posted by user: {{ bid[3] }}</small>
+                            <a class="choose-bids list-group-item list-group-item-action flex-column align-items-start">
+                                <form action="/choose-bid" method="POST">
+                                    <div class="overlay">
+                                        <button type="submit" class="overlay text">Choose Bid</button>
+                                    </div>
+                                    <input style="display:none" name="id" value="{{bid[0]}}">
+                                    <div class="content">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1" id="name" >Ad name: {{ bid[2] }}</h5>
+                                        </div>
+                                        <p class="mb-1" id="comment">Special request: {{ bid[5] }}</p>
+                                        <small id="price">Bid: {{ bid[4] }}</small>
+                                        <small id="User">Posted by user: {{ bid[3] }}</small>
+                                    </div>
+                                </form>
                             </a>
                             {% endif %}
                         {% endfor %}

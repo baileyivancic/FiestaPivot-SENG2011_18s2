@@ -218,13 +218,22 @@ def delete_ad():
 	control.delete_ad(ad_id)
 	return redirect("/account")
 
-@app.route('/delete-bid',  methods=["GET", "POST"])
+@app.route('/delete-bid',  methods=["POST"])
 @login_required
 def delete_bid():
 	# print(f"delete: form: {request.form}")
 	bid_id = request.form["id"]
 		
 	control.delete_bid(bid_id)
+	return redirect("/account")
+
+@app.route('/choose-bid',  methods=["POST"])
+@login_required
+def choose_bid():
+	# print(f"delete: form: {request.form}")
+	bid_id = request.form["id"]
+		
+	print("bid ID:" + bid_id)
 	return redirect("/account")
 
 
