@@ -331,13 +331,13 @@ class Database(object):
 
         self.close(db)
         return temp
-    
+
     # Gets ad from bid id
     def getAdIDFromBid(self, bidID):
         db = self.get_db()
         cursor=db.cursor()
 
-        cursor.execute("SELECT * FROM bids WHERE bidID=?", (bidID, ))
+        cursor.execute("SELECT * FROM bids WHERE ID=?", (bidID, ))
         temp = cursor.fetchone()
 
         self.close(db)

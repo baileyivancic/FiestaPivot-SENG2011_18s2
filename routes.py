@@ -237,14 +237,18 @@ def delete_bid():
 def choose_bid():
 	# print(f"delete: form: {request.form}")
 	bidID = request.form["id"]
-	bid = control.getAdBid(bidID)
-	adID = bid[1]
+	adID = control.getAdBid(bidID)[1]
 
 	# Set status of chosen bid to ACCEPTED
+	# Set Statue of chosen bid to PROGRESS
+	# Set status of other bids to DECLINED
 
+<<<<<<< HEAD
 
 	# Set status of other bids to 	
 	
+=======
+>>>>>>> 51de6906bd6a802a3012f05b73a78eae62900013
 	return redirect("/account")
 
 
