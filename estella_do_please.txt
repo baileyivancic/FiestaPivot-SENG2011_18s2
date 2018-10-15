@@ -7,6 +7,8 @@ Hello Estella (and Jacob). These are the things Nabil and I need you to do for t
 - Error messages (flashes) that user is given as warning prompts. 
     - This happens in things like registering, logging in
     - Currently appears at the top of the page, above background image
+- Modal that pops up showing the ad information (titles, colour, text font and size etc.)
+- Modal that pops up when bidding on ad
 
 Thank you :)
-Ps. Will keep adding to this when we discover more stuff and/or break stuff
+Ps. Will keep adding to this when we discover more stuff and/or break stuffzA
