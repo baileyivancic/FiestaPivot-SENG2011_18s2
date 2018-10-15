@@ -229,7 +229,6 @@ def delete_bid():
 @app.route('/choose-bid',  methods=["POST"])
 @login_required
 def choose_bid():
-	# print(f"delete: form: {request.form}")
 	bid_id = request.form["id"]
 		
 	print("bid ID:" + bid_id)
