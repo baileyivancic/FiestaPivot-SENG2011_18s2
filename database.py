@@ -361,7 +361,7 @@ class Database(object):
         db = self.get_db()
         cursor=db.cursor()
 
-        cursor.execute("SELECT EXISTS(SELECT 1 FROM ads WHERE ID=?)", (bidID))
+        cursor.execute("SELECT EXISTS(SELECT 1 FROM ads WHERE ID=?)", (adID))
         temp =  cursor.fetchone()
 
         cursor.execute('''INSERT INTO ads (status) VALUES (?)''',(status))
