@@ -197,7 +197,6 @@ def account():
 	newAds = bubbleDateAds(ads)
 	bids = control.find_user_bids( current_user.get_id() )
 	name = control.database.get_name( current_user.get_id() )
-	print(name)
 	
 	# Get bids associated with each ad
 	bidsOrdered=[]

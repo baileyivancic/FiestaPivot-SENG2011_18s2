@@ -27,9 +27,7 @@ class Database(object):
 
         cursor.execute("SELECT EXISTS(SELECT 1 FROM accounts WHERE email=?)", (email,))
         temp =  cursor.fetchone()
-        print(temp)
         if temp != (0, ):
-            print("GONE IN HERE")
             # there is already a user using this user name
             db.commit()
             db.close()
@@ -148,7 +146,6 @@ class Database(object):
         db = self.get_db()
         cursor = db.cursor()
 
-        print(ad_id)
         cursor.execute("DELETE FROM ads WHERE ID=?", ad_id)
 
         self.close(db)
@@ -158,7 +155,6 @@ class Database(object):
         db = self.get_db()
         cursor = db.cursor()
 
-        print(bid_id)
         cursor.execute("DELETE FROM bids WHERE ID=?", bid_id)
 
         self.close(db)
