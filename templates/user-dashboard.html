@@ -109,9 +109,17 @@
                                     <a class="choose-bids list-group-item list-group-item-action flex-column align-items-start">
                                         <form action="/choose-bid" method="POST">
                                             {% if bid[6] == "PENDING" %}
-                                            <div class="overlay">
-                                                <button type="submit" class="text">Choose Bid</button>
-                                            </div>
+                                                <div class="overlay">
+                                                    <button type="submit" class="text">Choose Bid</button>
+                                                </div>
+                                            {% elif bid[6] == "ACCEPTED" %}
+                                                <div class="overlay-accepted">
+                                                    <button disabled type="submit" class="chosen-text">Accepted</button>
+                                                </div>
+                                            {% elif bid[6] == "DECLINED" %}
+                                                <div class="overlay-declined">
+                                                    <button disabled type="submit" class="chosen-text">Declined</button>
+                                                </div>
                                             {% endif %}
 
                                             <input style="display:none" name="id" value="{{bid[0]}}">
