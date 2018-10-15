@@ -84,25 +84,33 @@
                         </div>
                         
                         <!--Put bids for ad in here-->
-                        <p>Choose a bid:</p>    
+                        {% if bidsOrdered[0][6] == "PENDING" %}
+                            <p>Choose a bid:</p> 
+                        {% endif %}   
+
                         {% for bid in bidsOrdered %}
-                        {% if bid[1] == ad[0] %}
-                            <a class="choose-bids list-group-item list-group-item-action flex-column align-items-start">
-                                <form action="/choose-bid" method="POST">
-                                    <div class="overlay">
-                                        <button type="submit" class="text">Choose Bid</button>
-                                    </div>
-                                    <input style="display:none" name="id" value="{{bid[0]}}">
-                                    <div class="content">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="mb-1" id="name" >Ad name: {{ bid[2] }}</h5>
-                                        </div>
-                                        <p class="mb-1" id="comment">Special request: {{ bid[5] }}</p>
-                                        <small id="price">Bid: {{ bid[4] }}</small>
-                                        <small id="User">Posted by user: {{ bid[3] }}</small>
-                                    </div>
-                                </form>
-                            </a>
+                            {% if bid[1] == ad[0] %}
+                                <div>
+                                    <a class="choose-bids list-group-item list-group-item-action flex-column align-items-start">
+                                        <form action="/choose-bid" method="POST">
+                                            {% if bid[6] == "PENDING" %}
+                                            <div class="overlay">
+                                                <button type="submit" class="text">Choose Bid</button>
+                                            </div>
+                                            {% endif %}
+
+                                            <input style="display:none" name="id" value="{{bid[0]}}">
+                                            <div class="content">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h5 class="mb-1" id="name" >Ad name: {{ bid[2] }}</h5>
+                                                </div>
+                                                <p class="mb-1" id="comment">Special request: {{ bid[5] }}</p>
+                                                <small id="price">Bid: {{ bid[4] }}</small>
+                                                <small id="User">Posted by user: {{ bid[3] }}</small>
+                                            </div>
+                                        </form>
+                                    </a>
+                                </div>
                             {% endif %}
                         {% endfor %}
 

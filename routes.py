@@ -1,7 +1,6 @@
 import flask_login
 from flask import Flask, redirect, render_template, request, url_for, flash, request, Response
-from flask_login import UserMixin
-from flask_login import LoginManager,login_user, current_user, login_required, logout_user
+from flask_login import LoginManager,login_user, current_user, login_required, logout_user, UserMixin
 import json
 import sys
 import copy
@@ -242,16 +241,16 @@ def choose_bid():
 	bidID = request.form["id"]
 	adID = control.getAdBid(bidID)
 
-	# Set status of chosen bid to ACCEPTED
-	control.setBidStatus("ACCEPTED", bidID)
-	
 	# Set Status of chosen ad to PROGRESS
 	control.setAdStatus("PROGRESS", adID)
 
 	# Set status of other bids to DECLINED	
 	bids = control.getBids(adID)
 	for bid in bids:
-		control.setBidStatus("DECLINED", bid[0])	
+		control.setBidStatus("DECLINED", bid[0])
+
+	# Set status of chosen bid to ACCEPTED
+	control.setBidStatus("ACCEPTED", bidID)	
 
 	return redirect("/account")
 
@@ -315,6 +314,7 @@ def bidSend():
 
 # TODO:
 # - Change schema to say adID and bidID and all that stuff
+# - put date on ACCEPTED bids
 
 #Done 
 # - Deleting ad that user has created 

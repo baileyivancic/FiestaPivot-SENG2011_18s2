@@ -68,6 +68,14 @@ body {
   transition: .5s ease;
 }
 
+.ACCEPTED {
+  background: green;
+}
+
+.DECLINED {
+  background: red;
+}
+
 .content {
   display: block;
   width: 100%;

@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS ads(
 * - PENDING when the ad does not yet have a winning bid and is still ACTIVE
 * - ACCEPTED if the ad is the winning bid for the ad
 * - DECLINED if the ad is CLOSED or PROGRESS or COMPLETED and the bid is not the winning bid of the ad
+* - COMPLETED when dfate has arrived and bid is the winning bid
 */
 CREATE TABLE IF NOT EXISTS bids(
     ID          INTEGER     PRIMARY KEY AUTOINCREMENT,
