@@ -1,0 +1,75 @@
+
+<div>
+    <form action="" method="POST">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <p for="inputPassword4" class="text-dark">Name of event</p>
+                <input type="text" name="title" class="form-control" id="title" placeholder="E.g. BBQ with the bois" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <p for="inputCity" class="text-dark">City</p>
+                <input type="text" name="city" class="form-control" placeholder="E.g. Sydney" value="{{city[0]}}" required>
+            </div>
+            <div class="form-group col-md-2">
+                <p for="inputState" class="text-dark">State</p>
+                <select id="stateSelect" name="state" id="inputState" class="form-control" required>
+                    <option selected disabled hidden>State:</option>
+                    <option value="nsw">NSW</option>
+                    <option value="qld">QLD</option>
+                    <option value="sa">SA</option>
+                    <option value="tas">TAS</option>
+                    <option value="vic">VIC</option>
+                    <option value="wa">WA</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <p for="alcoholSelect" class="text-dark">ALcohol?</p>
+                <select  name="alcohol" id="inputAlcohol" class="form-control" required>
+                    <option value="No" selected>No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6" style="height: auto">
+                <p for="inputCity" class="text-dark">Number of people:</p>
+                <span class="noPeople">
+                    <input name="noPeople" class="form-control" type="number" min="0" max="100000" step="1" required/>
+                </span>
+            </div>
+        </div>
+        <div class="form-row">
+                <div class="form-group col-md-6" style="height: auto">
+                    <p for="inputCity" class="text-dark">Price offered:</p>
+                    <span class="price">
+                        <input name="price" class="form-control" type="number" min="0.00" max="10000.00" step="5.00" required/>
+                    </span>
+                </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6" style="height: auto">
+                <p for="inputCity" class="text-dark">Description of event:</p>
+                <textarea rows="4" cols="50" name="descr" class="form-control" required></textarea> 
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <p for="inputCity" class="text-dark">Date of event:</p>
+                <input class="form-control" type="date" name="date" min="now" required>
+            </div>
+            <div class="form-group col-md-2">
+                <p for="inputState" class="text-dark">Start time of event:</p>
+                <input class="form-control" type="time" name="start-time" required>
+            </div>
+            <div class="form-group col-md-2">
+                <p for="inputState" class="text-dark">End Time of event:</p>
+                <input class="form-control" type="time" name="end-time" required>
+            </div>
+        </div>
+        <a href="/account"><button type="submit" class="btn btn-primary">Post</button></a>
+    </form>
+</div>

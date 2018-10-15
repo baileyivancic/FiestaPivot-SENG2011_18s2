@@ -214,7 +214,7 @@ def account():
 			bidsOrdered.append( bid )
 
 	# print(bidsOrdered)
-	return render_template("user-dashboard.html", ads=newAds, bids=bids, name=name, bidsOrdered=bidsOrdered)
+	return render_template("user-dashboard.html", ads=newAds, bids=bids, name=name, bidsOrdered=bidsOrdered, edit=False)
 
 @app.route('/delete-ad',  methods=["GET", "POST"])
 @login_required
