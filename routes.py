@@ -54,6 +54,9 @@ class Controller:
 
 	def getBids(self, adID):
 		return self.database.getBids(adID)
+	
+	def getAdBid(self, bidID):
+		return self.database.getAdFromBid(bidID)
 
 class User(UserMixin):
 	def __init__(self, id):
@@ -229,9 +232,14 @@ def delete_bid():
 @app.route('/choose-bid',  methods=["POST"])
 @login_required
 def choose_bid():
-	bid_id = request.form["id"]
-		
-	print("bid ID:" + bid_id)
+	# print(f"delete: form: {request.form}")
+	bidID = request.form["id"]
+	adID = control.getAdBid(bidID)[1]
+
+	# Set status of chosen bid to ACCEPTED
+	# Set Statue of chosen bid to PROGRESS
+	# Set status of other bids to DECLINED
+
 	return redirect("/account")
 
 

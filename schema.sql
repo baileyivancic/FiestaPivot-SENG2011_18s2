@@ -15,10 +15,9 @@ CREATE TABLE IF NOT EXISTS accounts(
 
 /* Add in extra criteria that we want to incude in the ad element 
 * Status for ads will be one of the following:
-* - ACTIVE when date has not been reached and a winning bid has not been chosen (DEFAULT WHEN CREATEDz)
+* - ACTIVE when date has not been reached and a winning bid has not been chosen (DEFAULT WHEN CREATED)
 * - PROGRESS when date has not been reached and a winnign bid has been chosen
 * - COMPLETED when date has been reached and a winning bid has been chosen
-* - CLOSED when date has been reached and no winning bid OR user closes before date
 */
 CREATE TABLE IF NOT EXISTS ads(
     ID          INTEGER     PRIMARY KEY AUTOINCREMENT,
