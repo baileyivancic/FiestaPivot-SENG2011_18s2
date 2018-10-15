@@ -245,9 +245,12 @@ def choose_bid():
 	# Set status of chosen bid to ACCEPTED
 	control.setBidStatus("ACCEPTED", bidID)
 
-	# Set Statue of chosen ad to PROGRESS
 	# Set status of other bids to DECLINED	
+	bids = control.getBids(adID)
+	for bid in bids:
+		control.setBidStatus("DECLINED", bid[0])
 
+	# Set Status of chosen ad to PROGRESS
 
 
 	return redirect("/account")
