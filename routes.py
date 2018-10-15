@@ -243,12 +243,9 @@ def choose_bid():
 	# Set Statue of chosen bid to PROGRESS
 	# Set status of other bids to DECLINED
 
-<<<<<<< HEAD
 
 	# Set status of other bids to 	
 	
-=======
->>>>>>> 51de6906bd6a802a3012f05b73a78eae62900013
 	return redirect("/account")
 
 
