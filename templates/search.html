@@ -113,6 +113,7 @@
                 <div class="rw">
                     <p>Size:</p>
                         <select id="noPeople" name="noPeople" class="form-control">
+                            <option value="0" selected>None</option>
                             <option value="1">1-10</option>
                             <option value="2">11-20</option>
                             <option value="3">21-50</option>
@@ -296,6 +297,35 @@
                 {
                     adResults[i].style.display="none";
                 }
+
+                // Filtering by number of people
+                let adNo = parseInt(adResults[i].children.noPeople.attributes.value.value);
+                if (noPeople == 1)
+                {
+                    if (adNo > 10) { adResults[i].style.display="none"; }
+                }
+                else if (noPeople == 2)
+                {
+                    if (adNo < 11 || adNo > 20) { adResults[i].style.display="none"; }
+                }
+                if (noPeople == 3)
+                {
+                    if (adNo < 21 || adNo > 50) { adResults[i].style.display="none"; }
+                }
+                if (noPeople == 4)
+                {
+                    if (adNo < 51 || adNo > 100) { adResults[i].style.display="none"; }
+                }
+                if (noPeople == 5)
+                {
+                    if (adNo < 101 || adNo > 200 ) { adResults[i].style.display="none"; }
+                }
+                if (noPeople == 6)
+                {
+                    if (adNo < 200) { adResults[i].style.display="none"; }
+                }
+
+
 
                 // Filtering by price
                 let adPrice = parseFloat(adResults[i].children.price.attributes.value.value);
