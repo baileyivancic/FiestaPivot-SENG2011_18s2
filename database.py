@@ -329,6 +329,16 @@ class Database(object):
         cursor.execute("SELECT * FROM bids WHERE adID=?", (adID, ))
         temp = cursor.fetchall()
 
+        self.close(db)
+        return temp
+    
+    # Gets ad from bid id
+    def getAdFromBid(self, bidID):
+        db = self.get_db()
+        cursor=db.cursor()
+
+        cursor.execute("SELECT * FROM bids WHERE bidID=?", (bidID, ))
+        temp = cursor.fetchone()
 
         self.close(db)
         return temp

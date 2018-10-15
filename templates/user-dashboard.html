@@ -85,7 +85,8 @@
                         
                         <!--Put bids for ad in here-->
                         {% for bid in bidsOrdered %}
-                            {% if bid[1] == ad[0] %}
+                        <p>Choose bid:</p>    
+                        {% if bid[1] == ad[0] %}
                             <a class="choose-bids list-group-item list-group-item-action flex-column align-items-start">
                                 <form action="/choose-bid" method="POST">
                                     <div class="overlay">
