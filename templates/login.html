@@ -16,7 +16,7 @@
 	<body>
 		<!--Navbar things (TOP)-->
 		<nav class="navbar navbar-expand-md navbar-dark bg-primary">
-		    <a class="navbar-brand abs" href="#">FiestaPivot</a>
+		    <a class="navbar-brand abs" href="/">FiestaPivot</a>
 		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
 		        <span class="navbar-toggler-icon"></span>
 		    </button>
@@ -40,20 +40,22 @@
 		    </div>
 		</nav>
 
-		<!--Please style this :)-->
-		{% if error %}
-		<p><strong>Error:</strong> {{ error }}
-		{% endif %}
+			{% if error %}
+			<div class="alert alert-danger center-block text-center" role="alert" style="position: absolute; width: 100%; z-index: 1">
+				<p><strong>Error:</strong> {{ error }} </p>
+			</div>
+			{% endif %}
 
-		{% with messages = get_flashed_messages() %}
-         {% if messages %}
-            <ul>
-               {% for message in messages %}
-               <li<{{ message }}</li>
-               {% endfor %}
-            </ul>
-         {% endif %}
-      	{% endwith %}
+			{% with messages = get_flashed_messages() %}
+	         {% if messages %}
+	            <ul>
+	               {% for message in messages %}
+	               <li<{{ message }}</li>
+	               {% endfor %}
+	            </ul>
+	         {% endif %}
+	      	{% endwith %}
+	    </div>
 
 		<!-- Bootstrap adapted from https://www.codeply.com/go/Am5LvvjTxC/bootstrap-4-center-form-->
 		<section id="cover" style="background: url(static/Images/cateringDark.jpg) center no-repeat; background-size: cover;">
