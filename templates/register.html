@@ -7,6 +7,7 @@
 		<title>fiestaPivot</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" media="screen" href="static/CSS/main.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="static/CSS/cover.css" />
 
 		<!--Bootstrap CDN and JS-->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -59,10 +60,10 @@
       	{% endwith %}
 
 			<!-- Bootstrap adapted from https://www.codeply.com/go/Am5LvvjTxC/bootstrap-4-center-form-->
-		<section id="cover" style="background: url(static/Images/darkDessert.png) center no-repeat;background-size: cover;">
+		<section role="main" class="cover-container" id="cover" style="background: url(static/Images/darkDessert.png) center no-repeat;background-size: cover;">
 			<div id="cover-caption">
-				<div id="container" class="container">
-					<div class="col-sm-10 offset-sm-1 text-center text-light">
+				
+					<div class="offset-sm-1 text-center text-light" id="Slogan">
 		                <h1 class="display-3">Join the Community</h1>
 		            </div>
 		            <div class="col-sm-6 offset-sm-3 text-center" class="info-form">
@@ -116,7 +117,7 @@
 							<button type="submit" class="btn btn-primary">Register</button>
 						</form>
 					</div>
-				</div>
+				
 			</div>
 		</section>
 	</body>
