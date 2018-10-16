@@ -98,7 +98,7 @@ def load_user(user_id):
 	return user
 
 login_manager.login_view = "login"
-login_manager.login_message = "Welcome"
+login_manager.login_message = ""
 
 @app.route("/logout",  methods=["GET", "POST"])
 @login_required
