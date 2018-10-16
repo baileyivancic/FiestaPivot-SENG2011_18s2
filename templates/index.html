@@ -50,12 +50,12 @@
 						</li>
 						<li class="nav-item">
 							<a href="/post-ad">
-								<button type="button" class="btn btn-light">Post an Ad</button>
+								<button type="button" class="btn btn-outline-light">Post an Ad</button>
 							</a>
 						</li>
 						<li style="margin-left: 10px;" class="nav-item">
 							<a href="/logout">
-								<button type="button" class="btn btn-light">Sign Out</button>
+								<button type="button" class="btn btn-outline-light">Sign Out</button>
 							</a>
 						</li>
 					</ul>
@@ -63,15 +63,15 @@
 		    </div>
 		</nav>
 
-
-		<div role="main" class="inner cover search cover-container">
-			<div>
-				<h1 class="cover-heading" id="Slogan">New here? Let's get started</h1>
+		<div role="main" class="cover-container">
+			<div class="col-md-12 text-center" id="Slogan">
+				<h1 class="mb-4 display-4 text-white">New here? Let's get started</h1>
+				<p class="lead mb-5 text-light">View your active ads and bids or search for an ad and place a bid.</p>
 				<div class="button_box2" id="SearchBar">
 					<form method="post">
 					
-					<button formaction="/account" type="submit" name="submit-but" value="dash">My Dashboard</button>
-					<button formaction="/search" type="submit" name="submit-but" value="Search">Search for ads</button>
+					<button class="btn btn-lg btn-primary" formaction="/account" type="submit" name="submit-but" value="dash">My Dashboard</button>
+					<button class="btn btn-lg btn-outline-light" formaction="/search" type="submit" name="submit-but" value="Search">Search for ads</button>
 					</form>
 				</div>
 			</div>

@@ -1,9 +1,11 @@
 html,
 body{
- height: 100%;
+  margin:0;
+  padding:0;
+  height: 100%;
 }
 
-#cover {
+-#cover {
   height: 100%;
   text-align: center;
   display: flex;
@@ -14,12 +16,6 @@ body{
   width: 100%;
 }
 
-html,
-body {
-   margin:0;
-   padding:0;
-   height:100%;
-}
 #container {
    min-height:100%;
    position:relative;

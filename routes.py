@@ -98,7 +98,7 @@ def load_user(user_id):
 	return user
 
 login_manager.login_view = "login"
-login_manager.login_message = "Welcome"
+login_manager.login_message = ""
 
 @app.route("/logout",  methods=["GET", "POST"])
 @login_required
@@ -257,7 +257,11 @@ def choose_bid():
 def about():
 	if request.method == "POST":
 		print("POST")
-	return render_template("about.html")
+
+	name = control.database.get_name( current_user.get_id() )
+
+	print(current_user.get_id())
+	return render_template("about.html", user=current_user.get_id(), name=name)
 
 @app.route('/search', methods=["GET", "POST"])
 @login_required

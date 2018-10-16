@@ -63,27 +63,11 @@ body, html {
 }
 
 #Slogan {
-	color: #ededed;
-	text-align: center;
 	animation: FadeIn 2s 1, SwipeIn 2s 1;
 }
 
 #SearchBar {
 	animation: FadeIn 2s 1;
-}
-
-.cover-input {
-	width: 75%;
-	height: 40px;
-	padding: 10px 5px;
-	float: left;
-	font: bold 15px 'Raleway', sans-serif;
-	border: 0;
-	background: #ededed;
-	border-radius: 3px 0 0 3px;
-	color: rgb(57, 57, 57);
-	font-weight: normal;
-	font-style: italic;
 }
 
 .form-Search-Bar {
