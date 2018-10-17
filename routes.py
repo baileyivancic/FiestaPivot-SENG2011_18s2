@@ -303,7 +303,7 @@ def bidSend():
 	comment = request.form['commentInput'].strip()
 	adID = request.form['adID'].strip()
 	adName = db.getTitle(adID)
-	status = "ACTIVE"
+	status = "PENDING"
 
 	# Put data in db
 	control.postBid(adID, adName, userID, price, comment, status)
