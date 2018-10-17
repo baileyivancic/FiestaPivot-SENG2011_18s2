@@ -188,12 +188,10 @@ def post():
 		alcohol = request.form['alcohol'].strip()
 		noPeople = request.form['noPeople'].strip()
 
-		print("alcohol is ")
-		print(alcohol)
-		print(" noPeople is ")
-		print(noPeople)
+		print(title)
 
 		if control.postAd(email, title, price, city, state, descr, date, start_time, end_time, alcohol, noPeople):
+			print("WENT IN HERE")
 			return redirect("/account")
 	return render_template("post.html", state=state, city=city)
 	
@@ -292,8 +290,6 @@ def search():
 	print(newAds)
 	
 	return render_template("search.html", ads=newAds, name=name)
-
-	
 
 # Creating bid from user input after searching
 @app.route('/bid-send', methods=['GET', 'POST'])
