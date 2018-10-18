@@ -143,7 +143,6 @@ def login():
 		valid = control.isValidUser(email, password)
 		if valid == True:
 			login_user(User(email), remember= False)
-			flash('You were successfully logged in')
 			return account()
 		else:
 			error = 'Invalid username or password. Please try again!'
@@ -167,7 +166,6 @@ def register():
 			valid = control.register_user(user, password, email, city, state)
 		if valid == 1:
 			login_user(User(email), remember= False)
-			flash("Successfully created account!")
 			return account()
 		elif valid == 0:
 			error = "Please try again, there is already a user with this email addresss"

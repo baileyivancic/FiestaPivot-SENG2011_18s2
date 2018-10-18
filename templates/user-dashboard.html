@@ -20,8 +20,6 @@
     </head>
     <body>
         
-        <!-- Need to change buttons in nav bar to correctly pop up modals -->
-        
         <!--Navbar (Bootstrap taken from https://www.codeply.com/go/qhaBrcWp3v) -->
         <nav class="navbar navbar-expand-md navbar-dark bg-primary">
             <a class="navbar-brand abs" href="/">FiestaPivot</a>
@@ -39,34 +37,36 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
+                            <a class="nav-link" href="/account">{{name[0]}}</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="/post-ad">
-                            <button type="button" class="btn btn-light">Post an Ad</button>
+                            <button type="button" class="btn btn-outline-light">Post an Ad</button>
                         </a>
                     </li>
                     <li style="margin-left: 10px;" class="nav-item">
                         <a href="/logout">
-                            <button type="button" class="btn btn-light">Sign Out</button>
+                            <button type="button" class="btn btn-outline-light">Sign Out</button>
                         </a>
                     </li>
                 </ul>
             </div>
         </nav>
 
+        <!--Body-->
         <div class="jumbotron jumbotron-fluid">
           <div class="container">
-            <h1 class="display-5">Welcome back {{name[0]}}</h1>
-            <hr>
-            <h1 class="display-5">My Dashboard</h1>
+            <h1 class="display-5">Welcome Back {{name[0]}}</h1>
             <hr class="my-4">
             <div id="active">
-                <p class="lead">My ads</p>
+                <p class="lead">My Ads</p>
                 {% for ad in ads %}
-                <a onclick="show_modal('ad-{{ad[0]}}')" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
+                <a href="#ad-{{ad[0]}}" data-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{ ad[2] }}</h5>
                         <small>Start date: {{ ad[8] }}</small>
                     </div>
-                    <p class="mb-1">{{ ad[6] }}</p>
+                    <p>{{ ad[6] }}</p>
                     <small class="info">Price: {{ ad[3] }}</small>
                     <small class="info">Alcohol provisions: {{ ad[11] }}</small>
                     <small class="info">Number of people: {{ ad[12] }}</small>
@@ -75,77 +75,38 @@
 
                 <!--Modals for each ad-->
                 <!--AD MODALS-->
-                <div class="Modals">
-                    <div id="ad-{{ad[0]}}" class="w3-modal">
-                        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
-                        <div class="w3-center"><br>
-                            <span onclick="document.getElementById('ad-{{ad[0]}}').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
-                            <p id="adTitle">{{ad[0]}}. {{ad[2]}}</p>
-                            {% if edit == False %}
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1">{{ ad[2] }}</h5>
-                                    <small>Start date: {{ ad[8] }}</small>
-                                </div>
-                                <p class="mb-1">{{ ad[6] }}</p>
-                                <small class="info">Price: {{ ad[3] }}</small>
-                                <small class="info">Alcohol provisions: {{ ad[11] }}</small>
-                                <small class="info">Number of people: {{ ad[12] }}</small>
-                                <small class="info">Status: {{ ad[7] }}</small>
-                            {% else %}
-                                {% include "forum-ad.html" %}
-                            {% endif %}
-                        </div>
-                        
-                        {% if bidsOrdered %}
-                        <!--Put bids for ad in here-->
-                        {% if bidsOrdered[0][6] == "PENDING" %}
-                            <p>Choose a bid:</p> 
-                        {% endif %}   
-
-                        {% for bid in bidsOrdered %}
-                            {% if bid[1] == ad[0] %}
-                                <div>
-                                    <a class="choose-bids list-group-item list-group-item-action flex-column align-items-start">
-                                        <form action="/choose-bid" method="POST">
-                                            {% if bid[6] == "PENDING" %}
-                                                <div class="overlay">
-                                                    <button type="submit" class="text">Choose Bid</button>
-                                                </div>
-                                            {% elif bid[6] == "ACCEPTED" %}
-                                                <div class="overlay-accepted">
-                                                    <button disabled type="submit" class="chosen-text">Accepted</button>
-                                                </div>
-                                            {% elif bid[6] == "DECLINED" %}
-                                                <div class="overlay-declined">
-                                                    <button disabled type="submit" class="chosen-text">Declined</button>
-                                                </div>
-                                            {% endif %}
-
-                                            <input style="display:none" name="id" value="{{bid[0]}}">
-                                            <div class="content">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h5 class="mb-1" id="name" >Ad name: {{ bid[2] }}</h5>
-                                                </div>
-                                                <p class="mb-1" id="comment">Special request: {{ bid[5] }}</p>
-                                                <small id="price">Bid: {{ bid[4] }}</small>
-                                                <small id="User">Posted by user: {{ bid[3] }}</small>
-                                                <small id="status">Status: {{bid[6]}}</small>
-                                            </div>
-                                        </form>
-                                    </a>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                        {% endif %} 
-                        <div class="w3-container w3-center w3-border-top w3-padding-16 w3-light-grey">
-                            <div style="display: inline;" >
-                                <button type="button" class="w3-button w3-green">Edit</button>
+                <div class="modal fade" id="ad-{{ad[0]}}" tabindex="-1" role="dialog" aria-labelledby="exampleTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">{{ ad[2] }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                            <form style="display: inline;" action="/delete-ad" method="POST">
-                                <input style="display: none" name="id" type="text" value="{{ad[0]}}">
-                                <button type="submit" class="w3-button w3-red">Delete</button>
-                            </form>
-                        </div>
+                            <div class="modal-body">
+                                {% if edit == False %}
+                                <!-- TODO -->
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">{{ ad[2] }}</h5>
+                                        <small>Start date: {{ ad[8] }}</small>
+                                    </div>
+                                    <p class="mb-1">{{ ad[6] }}</p>
+                                    <small class="info">Price: {{ ad[3] }}</small>
+                                    <small class="info">Alcohol provisions: {{ ad[11] }}</small>
+                                    <small class="info">Number of people: {{ ad[12] }}</small>
+                                    <small class="info">Status: {{ ad[7] }}</small>
+                                {% else %}
+                                    {% include "forum-ad.html" %}
+                                {% endif %}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">Edit</button>
+                                <form action="/delete-ad" method="POST">
+                                    <input style="display: none" name="id" type="text" value="{{ad[0]}}">
+                                    <button type="submit" class="btn btn-secondary">Delete</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -155,9 +116,9 @@
             <div id="active">
                 <p class="lead">My Bids</p>
                 {% for bid in bids %}
-                <a onclick="show_modal('bid-{{bid[0]}}')" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
+                <a data-target="bid-{{bid[0]}}" data-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1" id="name" >Ad name: {{ bid[2] }}</h5>
+                        <h5 class="mb-1" id="name" >{{ bid[2] }}</h5>
                     </div>
                     <p class="mb-1" id="comment">Special request: {{ bid[5] }}</p>
                     <small id="price">Bid: {{ bid[4] }}</small>

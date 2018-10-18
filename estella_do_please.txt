@@ -4,7 +4,4 @@ Hello Estella (and Jacob). These are the things Nabil and I need you to do for t
 - My Dashboard (headings, font inside boxes)
 - Modal that pops up showing the ad information (titles, colour, text font and size etc.)
 - Modal that pops up when bidding on ad
-Ad details above bids in the bids for ad Modal
-
-Thank you :)
-Ps. Will keep adding to this when we discover more stuff and/or break stuffzA
+- Ad details above bids in the bids for ad Modal
