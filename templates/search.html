@@ -140,7 +140,8 @@
              <div class="results">
                 <div class="list-group" style="width: 100%;">
                     {% for ad in ads %}
-                    <a onclick="document.getElementById('{{ad[0]}}').style.display='block'" href="#" class="list-group-item list-group-item-action flex-column align-items-start adResult" style="width: 100%;">
+                    {% if ad[7] == "ACTIVE" %}
+                    <a onclick="document.getElementById('{{ad[0]}}').style.display='block'" href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
                         <h5 id="title" value="{{ad[2]}}" class="mb-1">{{ ad[2] }}</h5>
                         <small id="date" value="{{ad[8]}}">Date: {{ ad[8] }}</small>
                         <p id="description" value="{{ad[6]}}" class="mb-1">{{ ad[6] }}</p>
@@ -188,6 +189,7 @@
                             </div>
                         </div>
                     </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
 
@@ -283,7 +285,7 @@
             let noPeople = document.getElementById("noPeople").value;
 
             // Get all ad objects
-            let adResults = document.getElementsByClassName("adResult");
+            let adResults = document.getElementsByClassName("flex-column");
 
             // Loop through all ads and check for attributes
             for (let i=0; i<adResults.length; i++)
@@ -412,10 +414,6 @@
             document.getElementById("priceWarning").innerText = "Price entered is over advertised amount";
         }
     }
-    </script>
-
-    <script>
-    
     </script>
 
 </body>
