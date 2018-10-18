@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS accounts(
 * - ACTIVE when date has not been reached and a winning bid has not been chosen (DEFAULT WHEN CREATED)
 * - PROGRESS when date has not been reached and a winnign bid has been chosen
 * - COMPLETED when date has been reached and a winning bid has been chosen
+* - EXPIRED when date has been reached and no winning bid chosen
 */
 CREATE TABLE IF NOT EXISTS ads(
     ID          INTEGER     PRIMARY KEY AUTOINCREMENT,

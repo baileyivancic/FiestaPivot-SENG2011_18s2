@@ -4,6 +4,7 @@ from flask_login import LoginManager,login_user, current_user, login_required, l
 import json
 import sys
 import copy
+import datetime
 from database import Database
 from server import app, login_manager
 from functions import bubbleDateAds, bubblePriceAds
@@ -62,6 +63,18 @@ class Controller:
 
 	def setAdStatus(self, status, adID):
 		return self.database.setAdStatus(status, adID)
+	
+	# Determines if the ad has a winning bid
+	# Returns 1 for yes, 0 for no
+	def findWinning(self, adID):
+		bids = self.getBids(adID)
+		flag = 0
+		for bid in bids:
+			if (bid[6] == "PROGRESS"):
+				flag = 1
+				break
+		
+		return flag
 
 class User(UserMixin):
 	def __init__(self, id):
@@ -310,6 +323,25 @@ def bidSend():
 	return search()
 
 
+# def checkAds():
+# 	ads = control.fetch_ads()
+# 	for ad in ads:
+# 		adDate = ad[8]
+# 		currDate = datetime.datetime.now().date()
+# 		adID = ad[0]
+# 		adTime = ad[9]
+		
+# 		# Check if the bid has expired
+# 		if (adDate > currDate): # Date has been passed,
+# 			if (findWinning(adID) == 0): # Ad does not have a winning bid associated with it
+# 				control.setAdStatus("EXPIRED", asID)
+# 			else:
+# 				control.setAdStatus("COMPLETED", adID)
+
+# 		if (adDate == currDate): # Check if the starting time has been reached
+# 			pass
+
+		
 # TODO:
 # - Change schema to say adID and bidID and all that stuff
 # - put date on ACCEPTED bids

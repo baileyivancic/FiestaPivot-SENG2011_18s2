@@ -140,6 +140,7 @@
              <div class="results">
                 <div class="list-group" style="width: 100%;">
                     {% for ad in ads %}
+                    {% if ad[7] == "ACTIVE" %}
                     <a onclick="document.getElementById('{{ad[0]}}').style.display='block'" href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
                         <h5 id="title" value="{{ad[2]}}" class="mb-1">{{ ad[2] }}</h5>
                         <small id="date" value="{{ad[8]}}">Date: {{ ad[8] }}</small>
@@ -188,6 +189,7 @@
                             </div>
                         </div>
                     </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
 
