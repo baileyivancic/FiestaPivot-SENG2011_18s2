@@ -10,7 +10,8 @@ CREATE TABLE IF NOT EXISTS accounts(
     rating      DECIMAL,
     adsPosted   INTEGER,
     bidsPosted  INTEGER,
-    about       TEXT
+    about       TEXT,
+    phoneNo     TEXT
 );  
 
 /* Add in extra criteria that we want to incude in the ad element 
