@@ -183,6 +183,7 @@ def register():
 def post():
 	state = control.get_state(current_user.get_id())
 	city = control.get_city(current_user.get_id())
+	name = control.database.get_name( current_user.get_id() )
 
 	# Submit putton pressed
 	if request.method == "POST":
@@ -204,7 +205,7 @@ def post():
 		if control.postAd(email, title, price, city, state, descr, date, start_time, end_time, alcohol, noPeople):
 			print("WENT IN HERE")
 			return redirect("/account")
-	return render_template("post.html", state=state, city=city)
+	return render_template("post.html", name=name, state=state, city=city)
 	
 
 @app.route('/account',  methods=["GET", "POST"])

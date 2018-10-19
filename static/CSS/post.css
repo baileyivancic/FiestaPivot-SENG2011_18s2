@@ -1,40 +1,7 @@
 /* thinking of sleek, faded black with picture in the backgroun. rounded edges and such */
 
-body, html {
-	margin: 0px;
-	padding: 0px;
-	background: url("../images/cake.jpg") no-repeat;
-    height: 100%;
-}
-
-.container {
-    margin: 50px 15% 0px 15%;
-    background: rgb(240, 240, 240);
-    height: 100%;
-}
-
-.title {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 3em;
-    background: rgb(236, 177, 75);
-    color: rgb(250,250,250);
-    font-family: "Times New Roman", Times, serif;
-}
 
 /* 
-table {
-    padding: 2em;
-    width: 100%;
-}
-
-table, th, td {
-    border: 1px solid black;
-}
-
 input {
     width: 25em;
 }
