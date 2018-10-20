@@ -54,7 +54,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <p for="inputCity" class="text-dark">City</p>
-                                <input type="text" name="city" class="form-control" placeholder="E.g. Sydney" value="{{city[0]}}" required>
+                                <input type="text" name="city" class="form-control" placeholder="E.g. Sydney" value="{{city}}" required>
                             </div>
                             <div class="form-group col-md-2">
                                 <p for="inputState" class="text-dark">State</p>
@@ -73,7 +73,8 @@
                             <div class="form-group col-md-2">
                                 <p for="alcoholSelect" class="text-dark">Alcohol?</p>
                                 <select  name="alcohol" id="inputAlcohol" class="form-control" required>
-                                    <option value="No" selected>No</option>
+                                    <option value="both" selected>Both</option>
+                                    <option value="No">No</option>
                                     <option value="Yes">Yes</option>
                                 </select>
                             </div>
