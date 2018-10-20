@@ -126,7 +126,8 @@
                 <div class="rw">
                     <p>Alcohol provisions:</p>
                         <select id="alcohol" name="alcohol" class="form-control">
-                            <option value="No" selected>No</option>
+                            <option value="Both" selected>Both</option>
+                            <option value="No">No</option>
                             <option value="Yes">Yes</option>
                         </select>
                 </div>
@@ -295,7 +296,7 @@
 
                 // Filtering by alcohol
                 let adAlc = adResults[i].children.alcohol.attributes.value.value;
-                if (adAlc != alcohol)
+                if (adAlc != alcohol && alcohol != "BOTH")
                 {
                     adResults[i].style.display="none";
                 }

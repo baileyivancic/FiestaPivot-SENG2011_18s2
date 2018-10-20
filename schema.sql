@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS ads(
 * - ACCEPTED if the ad is the winning bid for the ad
 * - DECLINED if the ad is CLOSED or PROGRESS or COMPLETED and the bid is not the winning bid of the ad
 * - COMPLETED when dfate has arrived and bid is the winning bid
+# - AD DELETED if original 
 */
 CREATE TABLE IF NOT EXISTS bids(
     ID          INTEGER     PRIMARY KEY AUTOINCREMENT,
@@ -55,6 +56,8 @@ CREATE TABLE IF NOT EXISTS bids(
     price       DECIMAL     NOT NULL,
     comment     TEXT,
     status      TEXT,
+    date        TEXT,
+    oPrice      INTEGER,
     CONSTRAINT fk
         FOREIGN KEY (adID, userEmail)
         REFERENCES ads(ID, userEmail)

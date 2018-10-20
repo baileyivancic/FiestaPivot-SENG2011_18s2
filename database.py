@@ -375,4 +375,40 @@ class Database(object):
         ''',(status,adID))
         db.commit()
         db.close()
-        return 0    
+        return 0  
+    
+    def incrementBids(self, email):
+        db = self.get_db()
+        cursor=db.cursor()
+
+        cursor.execute("SELECT * FROM accounts WHERE email=?", (ID, ))
+        temp = cursor.fetchone()
+        bids = temp[7]
+
+        bids = bids + 1
+        cursor.execute('''
+        UPDATE accounts
+        SET bidsPosted = ?
+        WHERE email = ?
+        ''',(bids,email))
+        db.commit()
+        db.close()
+        return 0
+
+    def incrementAds(self, email):
+        db = self.get_db()
+        cursor=db.cursor()
+
+        cursor.execute("SELECT * FROM accounts WHERE email=?", (ID, ))
+        temp = cursor.fetchone()
+        ads = temp[6]
+
+        ads = ads + 1
+        cursor.execute('''
+        UPDATE accounts
+        SET adsPosted = ?
+        WHERE email = ?
+        ''',(ads,email))
+        db.commit()
+        db.close()
+        return 0
