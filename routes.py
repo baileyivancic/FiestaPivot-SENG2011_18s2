@@ -197,7 +197,6 @@ def register():
 
 		if (about == ""):
 			about = "I just love food!"
-		phone = request.form
 
 		if password != passwordConfirm:
 			valid = 3
