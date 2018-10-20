@@ -27,8 +27,8 @@ class Controller:
 	def postAd(self, email, title, price, city, state, descr, date, start_time, end_time, alcohol, noPeople):
 		return self.database.create_ad(email, title, price, city, state, descr, date, start_time, end_time, alcohol, noPeople)
 	
-	def postBid(self, adID, adName, userID, price, comment, status):
-		return self.database.create_bid(adID, adName, userID, price, comment, status)
+	def postBid(self, adID, adName, userID, price, comment, status, oPrice, date):
+		return self.database.create_bid(adID, adName, userID, price, comment, status, oPrice, date)
 	
 	def fetch_ads(self):
 		return self.database.fetch_ads()
@@ -95,6 +95,10 @@ class Controller:
 		user.append(self.get_rating(email))
 		return user
 	
+	def getAdPrice(self, adID):
+		return self.database.getAdPrice(adID)
+
+
 	# Determines if the ad has a winning bid
 	# Returns 1 for yes, 0 for no
 	def findWinning(self, adID):
@@ -363,9 +367,11 @@ def bidSend():
 	adID = request.form['adID'].strip()
 	adName = db.getTitle(adID)
 	status = "PENDING"
+	oPrice = int(control.getAdPrice(adID))
+	date = datetime.datetime.today().strftime('%Y-%m-%d')
 
 	# Put data in db
-	control.postBid(adID, adName, userID, price, comment, status)
+	control.postBid(adID, adName, userID, price, comment, status, oPrice, date)
 	return search()
 
 

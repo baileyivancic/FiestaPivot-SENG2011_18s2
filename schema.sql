@@ -54,10 +54,10 @@ CREATE TABLE IF NOT EXISTS bids(
     adName      TEXT        NOT NULL,
     userEmail   INTEGER     NOT NULL,
     price       DECIMAL     NOT NULL,
-    comment     TEXT,
-    status      TEXT,
-    date        TEXT,
-    oPrice      INTEGER,
+    comment     TEXT        NOT NULL,
+    status      TEXT        NOT NULL,
+    date        TEXT        NOT NULL,
+    oPrice      INTEGER     NOT NULL,
     CONSTRAINT fk
         FOREIGN KEY (adID, userEmail)
         REFERENCES ads(ID, userEmail)

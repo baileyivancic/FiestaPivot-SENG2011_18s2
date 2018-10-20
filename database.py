@@ -210,14 +210,14 @@ class Database(object):
 
 # Bid db functions
     #UNTESTED
-    def create_bid(self, adID, adName, userEmail, price, comment, status):
+    def create_bid(self, adID, adName, userEmail, price, comment, status, oPrice, date):
         db = self.get_db()
         cursor = db.cursor()
 
         cursor.execute("SELECT EXISTS(SELECT 1 FROM bids WHERE adID=? AND userEmail=?)", (adID, userEmail))
         temp = cursor.fetchone()
 
-        cursor.execute('''INSERT INTO bids (adID, adName, userEmail, price, comment, status) VALUES (?, ?, ?, ?, ?, ?)''',(adID, adName, userEmail, price, comment, status))
+        cursor.execute('''INSERT INTO bids (adID, adName, userEmail, price, comment, status, oPrice, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',(adID, adName, userEmail, price, comment, status, oPrice, date))
         db.commit()
         db.close()
         return 1
@@ -401,3 +401,13 @@ class Database(object):
         db.commit()
         db.close()
         return 0
+    
+    def getAdPrice(self, adID):
+        db = self.get_db()
+        cursor=db.cursor()
+
+        cursor.execute("SELECT price FROM ads WHERE ID=?", (adID, ))
+        temp = cursor.fetchone()
+
+        self.close(db)
+        return temp[0]
