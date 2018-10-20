@@ -13,8 +13,10 @@ class Controller:
 	def __init__(self):
 		self.database = Database()
 
-	def register_user(self, username, password, email, city, state):
-		return self.database.register_user(username, password, email, city, state)
+	def register_user(self, email, user, password, city, state, rating, adsPosted, bidsPosted, about, phone):
+		print("In register phone is ")
+		print(phone)
+		return self.database.register_user(email, user, password, city, state, rating, adsPosted, bidsPosted, about, phone)
 
 	def isValidUser(self, username, password):
 		return self.database.isValidUser(username, password)
@@ -187,16 +189,22 @@ def register():
 		email = request.form["email"].strip()
 		emailConfirm = request.form['emailConfirm'].strip()
 		city = request.form["city"].strip()
-		state = request.form["state"]
-		about = request.form["about"]
+		state = request.form["state"].strip()
+		about = request.form["about"].strip()
+		phone = request.form["phoneNo"].strip()
+
+		print("Phone is " + phone)
+
 		if (about == ""):
 			about = "I just love food!"
+		phone = request.form
+
 		if password != passwordConfirm:
 			valid = 3
 		elif email != emailConfirm:
 			valid = 4
 		else:
-			valid = control.register_user(user, password, email, city, state)
+			valid = control.register_user(email, user, password, city, state, 0, 0, 0, about, phone)
 		if valid == 1:
 			login_user(User(email), remember= False)
 			flash("Successfully created account!")
@@ -260,7 +268,7 @@ def account():
 
 	x = 0
 	while x < 8:
-		print("info is " + info[x])
+		print(info[x])
 		x+=1
 	return render_template("user-dashboard.html", ads=newAds, bids=bids, name=name, bidsOrdered=bidsOrdered, info=info, edit=False)
 

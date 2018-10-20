@@ -90,7 +90,7 @@
 							<div class="form-row">
 								<div class="form-group col-sm-7">
 									<label class="sr-only">City</label>
-									<input type="text" name="city" class="form-control" id="inputCity" placeholder="eg. Sydney" required>
+									<input type="text" name="city" class="form-control" id="inputCity" placeholder="State: (eg. Sydney)" required>
 								</div>
 								<div class="form-group col-md-5">
 									<label class="sr-only">State</label>
@@ -106,9 +106,13 @@
 								</div>
 							</div>
 							<div class="form-group">
-									<label class="sr-only">About me</label>
-									<input type="text" name="about" class="form-control" id="inputName" placeholder="Speclialising in baking, tarts.."">
-							</div>	
+								<label class="sr-only">About me</label>
+								<input type="text" name="about" class="form-control" id="inputName" placeholder="About me: (eg. Speclialising in baking, tarts..)">
+							</div>
+							<div class="form-group">
+								<label class="sr-only">Phone number</label>
+								<input type="number" name="phoneNo" class="form-control" id="inputPhone" placeholder="Phone number: (eg. 0412 345 678)" pattern=".{10}" required>
+							</div>
 							<!--<div class="form-group">
 								 <div class="form-check">
 									<input class="form-check-input" type="checkbox" id="gridCheck">

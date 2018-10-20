@@ -56,7 +56,7 @@
         <!--Body-->
         <div class="jumbotron jumbotron-fluid" style="height: 100vh">
           <div class="container">
-            <h1 class="display-5">Welcome Back {{name[0]}}</h1>
+            <h1 class="display-5">Welcome back: {{name[0]}}</h1>
             <hr class="my-4">
             <div id="active">
                 <p class="lead">My Ads</p>
@@ -156,7 +156,7 @@
                 {%endif %}
 
             </div>
-            <br>
+            <hr class="my-4">
             <div id="active">
                 <p class="lead">My Bids</p>
                 {% if bids %}
@@ -201,12 +201,18 @@
                 <p>Use the 'Search' tab to bid on your first ad!</p>
                 {% endif %}
             </div>
-            <br>
+            <hr class="my-4">
             <div id="active">
                 <p class="lead">My Info</p>
-                
-                
-                
+                <p>Email is: {{info[0]}}</p>
+                <p>City is: {{info[1]}}</p>
+                <p>State is: {{info[2]}}</p>
+                <p>About is: {{info[3]}}</p>      
+                <p>Phone number is: {{info[4]}}</p>   
+                <p>Events held: {{info[5]}}</p>
+                <p>Bids completed: {{info[6]}}</p>   
+                <p>Fiesta score is: {{info[7]}}</p>   
+
                 <button>Change Password</button>
 
 

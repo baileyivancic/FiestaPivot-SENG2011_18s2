@@ -21,9 +21,12 @@ class Database(object):
         db.close()
 
 # Login db functions
-    def register_user(self, username, password, email, city, state):
+    def register_user(self, email, user, password, city, state, rating, adsPosted, bidsPosted, about, phone):
         db = self.get_db()
         cursor = db.cursor()
+
+        print("In db phone is ")
+        print(phone)
 
         cursor.execute("SELECT EXISTS(SELECT 1 FROM accounts WHERE email=?)", (email,))
         temp =  cursor.fetchone()
@@ -33,7 +36,7 @@ class Database(object):
             db.close()
             return 0
         else:
-            cursor.execute('''INSERT INTO accounts (username, password, email, city, state) VALUES (?, ?, ?, ?, ?)''',(username, password, email, city, state))
+            cursor.execute('''INSERT INTO accounts (email, username, password, city, state, rating, adsPosted, bidsPosted, about, phoneNo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',(email, user, password, city, state, rating, adsPosted, bidsPosted, about, str(phone)))
             db.commit()
             db.close()
             return 1
@@ -77,7 +80,7 @@ class Database(object):
             return False
 
         self.close(db)
-        return temp
+        return temp[0]
 
     def get_city(self, email):
         db = self.get_db()
@@ -90,7 +93,7 @@ class Database(object):
             return False
 
         self.close(db)
-        return temp
+        return temp[0]
     
     def get_about(self, email):
         db = self.get_db()
@@ -103,7 +106,7 @@ class Database(object):
             return False
 
         self.close(db)
-        return temp
+        return temp[0]
 
     def get_phone(self, email):
         db = self.get_db()
@@ -116,7 +119,7 @@ class Database(object):
             return False
 
         self.close(db)
-        return temp
+        return temp[0]
     
     def get_adsPosted(self, email):
         db = self.get_db()
@@ -129,7 +132,7 @@ class Database(object):
             return False
 
         self.close(db)
-        return temp
+        return temp[0]
 
     def get_bidsPosted(self, email):
         db = self.get_db()
@@ -142,7 +145,7 @@ class Database(object):
             return False
 
         self.close(db)
-        return temp
+        return temp[0]
     
     def get_rating(self, email):
         db = self.get_db()
@@ -155,7 +158,7 @@ class Database(object):
             return False
 
         self.close(db)
-        return temp
+        return temp[0]
 
 # Advertisement db functions
     def create_ad(self, userEmail, title, price, city, state, descr, date, start_time, end_time, alcohol, noPeople):
