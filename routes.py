@@ -229,6 +229,7 @@ def post():
 	state = control.get_state(current_user.get_id())
 	city = control.get_city(current_user.get_id())
 	name = control.get_name(current_user.get_id())
+	checkAds() # Automatic ad expiry
 
 	# Submit putton pressed
 	if request.method == "POST":
@@ -259,6 +260,7 @@ def account():
 	newAds = bubbleDateAds(ads)
 	bids = control.find_user_bids( current_user.get_id() )
 	name = control.database.get_name( current_user.get_id() )
+	checkAds() # Automatic ad expiry
 	
 	# Get bids associated with each ad
 	bidsOrdered=[]
@@ -330,6 +332,9 @@ def search():
 	ads = control.fetch_ads()
 	name = control.get_name( current_user.get_id() )
 	newAds = bubbleDateAds(ads)
+	checkAds() # Automatic ad expiry
+
+	# TODO - put different sorted lists into a big list, and pass that into html page
 
 	# Changing sorting of ads based on user choice
 	if request.method == "SORT":
@@ -375,24 +380,23 @@ def bidSend():
 	return search()
 
 
-# def checkAds():
-# 	ads = control.fetch_ads()
-# 	for ad in ads:
-# 		adDate = ad[8]
-# 		currDate = datetime.datetime.now().date()
-# 		adID = ad[0]
-# 		adTime = ad[9]
+def checkAds():
+	ads = control.fetch_ads()
+	for ad in ads:
+		adDate = ad[8]
+		currDate = datetime.datetime.today().strftime('%Y-%m-%d')
+		adID = ad[0]
+		adTime = ad[9]
 		
-# 		# Check if the bid has expired
-# 		if (adDate > currDate): # Date has been passed,
-# 			if (findWinning(adID) == 0): # Ad does not have a winning bid associated with it
-# 				control.setAdStatus("EXPIRED", asID)
-# 			else:
-# 				control.setAdStatus("COMPLETED", adID)
+		# Check if the bid has expired
+		if (adDate > currDate): # Date has been passed,
+			if (control.findWinning(adID) == 0): # Ad does not have a winning bid associated with it
+				control.setAdStatus("EXPIRED", adID)
+			else:
+				control.setAdStatus("COMPLETED", adID)
 
-
-# 		if (adDate == currDate): # Check if the starting time has been reached
-# 			pass
+		if (adDate == currDate): # Check if the starting time has been reached
+			pass
 
 		
 # TODO:
