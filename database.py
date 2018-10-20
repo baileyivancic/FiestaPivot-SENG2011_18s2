@@ -411,3 +411,14 @@ class Database(object):
 
         self.close(db)
         return temp[0]
+    
+
+    def getAllBids(self):
+        db = self.get_db()
+        cursor=db.cursor()
+
+        cursor.execute("SELECT * FROM bids", (adID, ))
+        temp = cursor.fetchall()
+
+        self.close(db)
+        return temp

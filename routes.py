@@ -110,6 +110,9 @@ class Controller:
 				break
 		
 		return flag
+	
+	def fetch_bids(self):
+		return self.database.getAllBids()
 
 class User(UserMixin):
 	def __init__(self, id):
@@ -377,7 +380,7 @@ def bidSend():
 	control.postBid(adID, adName, userID, price, comment, status, oPrice, date)
 	return search()
 
-
+# Checks all ads in the system to see if they have been completed, or if they are expired
 def checkAds():
 	ads = control.fetch_ads()
 	for ad in ads:
@@ -394,8 +397,12 @@ def checkAds():
 				control.setAdStatus("COMPLETED", adID)
 				# find winning bid and set that to completed
 
-		if (adDate == currDate): # Check if the starting time has been reached
-			pass
+		# if (adDate == currDate): # Check if the starting time has been reached
+		# 	pass
+
+# Checks all bids in the system to update status
+def checkBids():
+
 
 		
 # TODO:
