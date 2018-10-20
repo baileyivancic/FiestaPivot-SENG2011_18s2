@@ -7,11 +7,11 @@ CREATE TABLE IF NOT EXISTS accounts(
     password    TEXT        NOT NULL,
     city        TEXT        NOT NULL,
     state       TEXT        NOT NULL,
-    rating      DECIMAL,
-    adsPosted   INTEGER,
-    bidsPosted  INTEGER,
-    about       TEXT,
-    phoneNo     TEXT
+    rating      DECIMAL     NOT NULL,
+    adsPosted   INTEGER     NOT NULL,
+    bidsPosted  INTEGER     NOT NULL,
+    about       TEXT        NOT NULL,
+    phoneNo     TEXT        NOT NULL
 );  
 
 /* Add in extra criteria that we want to incude in the ad element 

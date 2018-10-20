@@ -91,6 +91,71 @@ class Database(object):
 
         self.close(db)
         return temp
+    
+    def get_about(self, email):
+        db = self.get_db()
+        cursor = db.cursor()
+
+        cursor.execute("SELECT about FROM accounts WHERE email=?", (email, ))
+        temp = cursor.fetchone()
+
+        if temp == False:
+            return False
+
+        self.close(db)
+        return temp
+
+    def get_phone(self, email):
+        db = self.get_db()
+        cursor = db.cursor()
+
+        cursor.execute("SELECT phoneNo FROM accounts WHERE email=?", (email, ))
+        temp = cursor.fetchone()
+
+        if temp == False:
+            return False
+
+        self.close(db)
+        return temp
+    
+    def get_adsPosted(self, email):
+        db = self.get_db()
+        cursor = db.cursor()
+
+        cursor.execute("SELECT adsPosted FROM accounts WHERE email=?", (email, ))
+        temp = cursor.fetchone()
+
+        if temp == False:
+            return False
+
+        self.close(db)
+        return temp
+
+    def get_bidsPosted(self, email):
+        db = self.get_db()
+        cursor = db.cursor()
+
+        cursor.execute("SELECT bidsPosted FROM accounts WHERE email=?", (email, ))
+        temp = cursor.fetchone()
+
+        if temp == False:
+            return False
+
+        self.close(db)
+        return temp
+    
+    def get_rating(self, email):
+        db = self.get_db()
+        cursor = db.cursor()
+
+        cursor.execute("SELECT rating FROM accounts WHERE email=?", (email, ))
+        temp = cursor.fetchone()
+
+        if temp == False:
+            return False
+
+        self.close(db)
+        return temp
 
 # Advertisement db functions
     def create_ad(self, userEmail, title, price, city, state, descr, date, start_time, end_time, alcohol, noPeople):
@@ -101,46 +166,6 @@ class Database(object):
         
         self.close(db)
         return True
-    
-    #UNTESTED
-    def updateTitle_ad(self, adID, newTitle):
-        db = self.get_db()
-        cursor = db.cursor()
-
-        cursor.execute("SELECT EXISTS(SELECT 1 FROM ads WHERE adID=?)", (adID))
-        temp =  cursor.fetchone()
-        
-        if temp == 0:
-            # Could not find ad assocoated with this adID
-            print("Something went wrong, ad does not exist\n")
-            db.commit()
-            db.close()
-            return 0
-        else :
-            cursor.execute('''INSERT INTO ads (title) VALUES (?)''',(newTitle))
-            db.commit()
-            db.close()
-            return 1
-
-    #UNTESTED
-    def updatePrice_ad(self, adID, newPrice):
-        db = self.get_db()
-        cursor = db.cursor()
-
-        cursor.execute("SELECT EXISTS(SELECT 1 FROM ads WHERE ID=?)", (adID))
-        temp =  cursor.fetchone()
-        
-        if temp == 0:
-            # Could not find ad assocoated with this adID
-            print("Something went wrong, ad does not exist\n")
-            db.commit()
-            db.close()
-            return 0
-        else :
-            cursor.execute('''INSERT INTO ads (price) VALUES (?)''',(newPrice))
-            db.commit()
-            db.close()
-            return 1
 
     def delete_ad(self, ad_id):
         db = self.get_db()
@@ -159,47 +184,6 @@ class Database(object):
 
         self.close(db)
         return
-
-
-    #UNTESTED
-    def updateLocation_ad(self, adID, newLocation):
-        db = self.get_db()
-        cursor = db.cursor()
-
-        cursor.execute("SELECT EXISTS(SELECT 1 FROM ads WHERE adID=?)", (adID, ))
-        temp =  cursor.fetchone()
-        
-        if temp == 0:
-            # Could not find ad assocoated with this adID
-            print("Something went wrong, ad does not exist\n")
-            db.commit()
-            db.close()
-            return 0
-        else :
-            cursor.execute('''INSERT INTO ads (location) VALUES (?)''',(newLocation))
-            db.commit()
-            db.close()
-            return 1
-
-    #UNTESTED
-    def updateDescription_ad(self, adID, newDesc):
-        db = self.get_db()
-        cursor = db.cursor()
-
-        cursor.execute("SELECT EXISTS(SELECT 1 FROM ads WHERE adID=?)", (adID))
-        temp =  cursor.fetchone()
-        
-        if temp == 0:
-            # Could not find ad assocoated with this adID
-            print("Something went wrong, ad does not exist\n")
-            db.commit()
-            db.close()
-            return 0
-        else :
-            cursor.execute('''INSERT INTO ads (description) VALUES (?)''',(newDesc))
-            db.commit()
-            db.close()
-            return 1
     
     #UNTESTED
     def updateActive_ad(self, adID, newActive):
@@ -377,6 +361,7 @@ class Database(object):
         db.close()
         return 0  
     
+    # Incrememnt number of bids the user has completed
     def incrementBids(self, email):
         db = self.get_db()
         cursor=db.cursor()
@@ -395,6 +380,7 @@ class Database(object):
         db.close()
         return 0
 
+    # Increment number of ads user has completed
     def incrementAds(self, email):
         db = self.get_db()
         cursor=db.cursor()

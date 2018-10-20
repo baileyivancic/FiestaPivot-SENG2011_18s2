@@ -60,6 +60,7 @@
             <hr class="my-4">
             <div id="active">
                 <p class="lead">My Ads</p>
+                {% if ads %}
                 {% for ad in ads %}
                 <a href="#ad-{{ad[0]}}" data-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
@@ -150,10 +151,15 @@
                     </div>
                 </div>
                 {% endfor %}
+                {% else %}
+                <p>Click on "Post an Ad" tab to create your first ad!</p>
+                {%endif %}
+
             </div>
             <br>
             <div id="active">
                 <p class="lead">My Bids</p>
+                {% if bids %}
                 {% for bid in bids %}
                 <a href="#bid-{{bid[0]}}" data-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
                     <h5 class="mb-1" id="name" >{{ bid[2] }}</h5>
@@ -191,11 +197,19 @@
                       </div>
                     </div>
                 {% endfor %}
+                {% else %}
+                <p>Use the 'Search' tab to bid on your first ad!</p>
+                {% endif %}
             </div>
             <br>
             <div id="active">
                 <p class="lead">My Info</p>
                 
+                
+                
+                <button>Change Password</button>
+
+
             </div>
 
           </div>

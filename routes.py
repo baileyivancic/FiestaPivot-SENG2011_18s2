@@ -64,6 +64,35 @@ class Controller:
 	def setAdStatus(self, status, adID):
 		return self.database.setAdStatus(status, adID)
 	
+	def get_about(self, email):
+		return self.database.get_about(email)
+
+	def get_phone(self, email):
+		return self.database.get_phone(email)
+	
+	def get_adsPosted(self, email):
+		return self.database.get_adsPosted(email)
+	
+	def get_bidsPosted(self, email):
+		return self.database.get_bidsPosted(email)
+	
+	def get_rating(self, email):
+		return self.database.get_rating(email)
+
+	def getInfo(self, ID):
+		user = []
+		email = current_user.get_id()
+
+		user.append(email)
+		user.append(self.get_city(email))
+		user.append(self.get_state(email))
+		user.append(self.get_about(email))
+		user.append(self.get_phone(email))
+		user.append(self.get_adsPosted(email))
+		user.append(self.get_bidsPosted(email))
+		user.append(self.get_rating(email))
+		return user
+	
 	# Determines if the ad has a winning bid
 	# Returns 1 for yes, 0 for no
 	def findWinning(self, adID):
@@ -143,6 +172,7 @@ def login():
 		valid = control.isValidUser(email, password)
 		if valid == True:
 			login_user(User(email), remember= False)
+			flash('You were successfully logged in')
 			return account()
 		else:
 			error = 'Invalid username or password. Please try again!'
@@ -157,7 +187,10 @@ def register():
 		email = request.form["email"].strip()
 		emailConfirm = request.form['emailConfirm'].strip()
 		city = request.form["city"].strip()
-		state = request.form["state"] 
+		state = request.form["state"]
+		about = request.form["about"]
+		if (about == ""):
+			about = "I just love food!"
 		if password != passwordConfirm:
 			valid = 3
 		elif email != emailConfirm:
@@ -166,6 +199,7 @@ def register():
 			valid = control.register_user(user, password, email, city, state)
 		if valid == 1:
 			login_user(User(email), remember= False)
+			flash("Successfully created account!")
 			return account()
 		elif valid == 0:
 			error = "Please try again, there is already a user with this email addresss"
@@ -183,7 +217,6 @@ def register():
 def post():
 	state = control.get_state(current_user.get_id())
 	city = control.get_city(current_user.get_id())
-	name = control.database.get_name( current_user.get_id() )
 
 	# Submit putton pressed
 	if request.method == "POST":
@@ -205,7 +238,7 @@ def post():
 		if control.postAd(email, title, price, city, state, descr, date, start_time, end_time, alcohol, noPeople):
 			print("WENT IN HERE")
 			return redirect("/account")
-	return render_template("post.html", name=name, state=state, city=city)
+	return render_template("post.html", state=state, city=city)
 	
 
 @app.route('/account',  methods=["GET", "POST"])
@@ -222,7 +255,14 @@ def account():
 		# print( control.getBids(ad[0]) )
 		for bid in control.getBids(ad[0]):
 			bidsOrdered.append( bid )
-	return render_template("user-dashboard.html", ads=newAds, bids=bids, name=name, bidsOrdered=bidsOrdered, edit=False)
+
+	info = control.getInfo(current_user.get_id())
+
+	x = 0
+	while x < 8:
+		print("info is " + info[x])
+		x+=1
+	return render_template("user-dashboard.html", ads=newAds, bids=bids, name=name, bidsOrdered=bidsOrdered, info=info, edit=False)
 
 @app.route('/delete-ad',  methods=["GET", "POST"])
 @login_required
@@ -336,6 +376,7 @@ def bidSend():
 # 				control.setAdStatus("EXPIRED", asID)
 # 			else:
 # 				control.setAdStatus("COMPLETED", adID)
+
 
 # 		if (adDate == currDate): # Check if the starting time has been reached
 # 			pass
