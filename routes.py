@@ -97,6 +97,9 @@ class Controller:
 	
 	def getAdPrice(self, adID):
 		return self.database.getAdPrice(adID)
+	
+	def setWinning(self, adID, bidID):
+		return self.database.setWinning(adID, bidID)
 
 
 	# Determines if the ad has a winning bid
@@ -113,6 +116,9 @@ class Controller:
 	
 	def fetch_bids(self):
 		return self.database.getAllBids()
+
+	def getAd(self, adID):
+		return self.getAd(adID)
 
 class User(UserMixin):
 	def __init__(self, id):
@@ -313,7 +319,8 @@ def choose_bid():
 		control.setBidStatus("DECLINED", bid[0])
 
 	# Set status of chosen bid to ACCEPTED
-	control.setBidStatus("ACCEPTED", bidID)	
+	control.setBidStatus("ACCEPTED", bidID)
+	control.setWinning(adID, bidID)
 
 	return redirect("/account")
 
@@ -402,6 +409,24 @@ def checkAds():
 
 # Checks all bids in the system to update status
 def checkBids():
+	bids = control.fetch_bids()
+
+	# Go through bids and check ad status
+	for bid in bids:
+		ad = control.getAd(bid[1])
+		if (ad == 0):
+			control.setBidStatus("AD DELETED", bid[0])
+		else:
+			if (ad[7] == "EXPIRED"):
+				control.setBidStatus("DECLINED", bid[0])
+			elif (ad[7] == "PROGRESS" or ad[7] == "COMPLETED"):
+				if (ad[13] == bid[0]):
+					control.setBidStatus("ACCEPTED", bid[0])
+				else:
+					control.setBidStatus("DECLINED", bid[0])
+			elif (ad[7] == "ACTIVE"):
+				control.setBidStatus("PENDING", bid[0])
+
 
 
 		

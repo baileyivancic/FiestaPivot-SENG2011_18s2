@@ -402,6 +402,7 @@ class Database(object):
         db.close()
         return 0
     
+    # Gets price of bid with specified bidID
     def getAdPrice(self, adID):
         db = self.get_db()
         cursor=db.cursor()
@@ -412,7 +413,7 @@ class Database(object):
         self.close(db)
         return temp[0]
     
-
+    # Returns all bids currently in database
     def getAllBids(self):
         db = self.get_db()
         cursor=db.cursor()
@@ -422,3 +423,36 @@ class Database(object):
 
         self.close(db)
         return temp
+    
+    # Gets ad with specified adID
+    def getAd(self, adID):
+        db = self.get_db()
+        cursor=db.cursor()
+
+        cursor.execute("SELECT * FROM ads WHERE ID=?", (adID, ))
+        temp = cursor.fetchone()
+
+        self.close(db)
+
+        if temp == (0, ): # Could not find ad with specified id
+            return 0
+
+        else:
+            return temp
+
+    # Sets the id of the winning bid field inside specified ad
+    def setWinning(self, adID, bidID):
+        db = self.get_db()
+        cursor=db.cursor()
+
+        cursor.execute("SELECT EXISTS(SELECT 1 FROM ads WHERE ID=?)", (adID,))
+        temp =  cursor.fetchone()
+
+        cursor.execute('''
+        UPDATE ads
+        SET winningID = ?
+        WHERE ID = ?
+        ''',(bidID,adID))
+        db.commit()
+        db.close()
+        return 0

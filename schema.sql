@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS ads(
     end_time    TEXT        NOT NULL,
     alcohol     TEXT        NOT NULL,
     noPeople    INTEGER     NOT NULL,
+    winningID   INTEGER     NOT NULL,
     CONSTRAINT fk
         FOREIGN KEY (userEmail)
         REFERENCES accounts(email)
