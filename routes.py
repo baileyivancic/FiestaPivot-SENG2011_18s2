@@ -341,15 +341,15 @@ def search():
 	# Filter out ads that have been posted by the user OR which the user has bidded on
 	index = 0
 	for ad in tempAds:
-		print("Ad is ")
-		print(ad)
-		print("Current user is ")
-		print(email)
+		print(ad[2])
 		if (ad[1] == current_user.get_id()): # User has posted ad, therefore it shoudln't be shown
-			del(tempAds[index])
+			pass
+			tempAds.pop(index)
 		elif(checkUserBids(email, ad[0]) == 1): # User has bidded on this ad before
-			del(tempAds[index])
-		index+=1
+			pass
+			#tempAds.pop(index)
+		print(ad[2])
+		index = index + 1
 
 	# Sort ads based on 4 sorts, CHANGE FROM BUBBLE TO INSERTION
 	dateAsc = bubbleDateAds(tempAds)
@@ -364,7 +364,6 @@ def search():
 	ads.append(dateDesc)
 	ads.append(priceAsc)
 	ads.append(priceDesc)
-	print(ads)
 	
 	return render_template("search.html", adSorted=ads, name=name, email=email)
 
@@ -386,7 +385,7 @@ def bidSend():
 
 	# Put data in db
 	control.postBid(adID, adName, userID, price, comment, status, oPrice, date)
-	return search()
+	return redirect("/search")
 
 # Checks all ads in the system to see if they have been completed, or if they are expired
 def checkAds():
@@ -431,7 +430,6 @@ def checkBids():
 			elif (ad[7] == "ACTIVE"):
 				control.setBidStatus("PENDING", bid[0])
 
-<<<<<<< HEAD
 # Checks if user has bidded on an ad before
 def checkUserBids(userID, adID):
 	bids = control.find_user_bids(userID)
@@ -440,7 +438,7 @@ def checkUserBids(userID, adID):
 		if(bid[1] == adID):
 			return 1
 	return 0
-=======
+
 def systemCheck():
 	checkAds() # Automatic ad expiry
 	checkBids() # Automatic bid status change
@@ -454,4 +452,4 @@ def systemCheck():
 # - Deleting ad that user has created 
 # - Deleting bid user has created 
 # - Showing all bids registered for current ad 
->>>>>>> 76ff618bf44af678e4430e3d7b85c5ac605f3d9f
+

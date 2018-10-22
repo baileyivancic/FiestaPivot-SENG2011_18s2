@@ -247,6 +247,18 @@
     </div>
 
 <!-- SCRIPTS -->
+
+    <!--To be run when the page loads-->
+    <script>
+    let sort = 0; // Will be sorting by closest event by default
+    let sortBoxes = document.getElementsByClassName("sortedBox");
+    for (let i=0; i<sortBoxes.length; i++)
+    {
+        if (i == sort) { sortBoxes[i].style.display="block"; }
+        else {sortBoxes[i].style.display="none";}
+    }
+    </script>
+
     <!--Successful bid confirmation-->
     <script>
     function bidSuccess(title) 
@@ -310,14 +322,6 @@
             {
                 // Set all to visible by default
                 adResults[i].style.display="block";
-
-                // Filter out ads posted by user
-                let adUser = adResults[i].children.adUser.attributes.value.value;
-
-                if (adUser == user)
-                {
-                    adResults[i].style.display="none";
-                }
 
                 // Filtering by alcohol
                 let adAlc = adResults[i].children.alcohol.attributes.value.value;
