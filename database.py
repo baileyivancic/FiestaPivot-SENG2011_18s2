@@ -121,31 +121,31 @@ class Database(object):
         self.close(db)
         return temp[0]
     
-    def get_adsPosted(self, email):
+    def sum_ads(self, email, status):
         db = self.get_db()
         cursor = db.cursor()
 
-        cursor.execute("SELECT adsPosted FROM accounts WHERE email=?", (email, ))
+        cursor.execute("SELECT ID FROM ads WHERE userEmail=? AND status=?", (email, status, ))
         temp = cursor.fetchone()
 
-        if temp == False:
-            return False
+        if temp == None:
+            return 0
 
         self.close(db)
-        return temp[0]
+        return len(temp)
 
-    def get_bidsPosted(self, email):
+    def sum_bids(self, email, status):
         db = self.get_db()
         cursor = db.cursor()
 
-        cursor.execute("SELECT bidsPosted FROM accounts WHERE email=?", (email, ))
+        cursor.execute("SELECT ID FROM bids WHERE userEmail=? AND status=?", (email, status, ))
         temp = cursor.fetchone()
 
-        if temp == False:
-            return False
+        if temp == None:
+            return 0
 
         self.close(db)
-        return temp[0]
+        return len(temp)
     
     def get_rating(self, email):
         db = self.get_db()
