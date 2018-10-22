@@ -100,14 +100,12 @@
                 <!--Ordering results by certain criteria-->
                 <div class="rw">
                     <p>Sort by:</p>
-                    <form action="/search" method="SORT">
-                        <select onchange="this.form.submit()" id="sortSelect" name="sortSelect" class="form-control">
-                            <option value="dateAsc">Date: Soonest first</option>
-                            <option value="dateDes">Date: Furthest first</option>
-                            <option value="priceAsc">Price: Lowest first</option>
-                            <option value="priceDes">Price: Highest first</option>
-                        </select>
-                    </form>
+                    <select id="sortSelect" name="sortSelect">
+                        <option value="0">Date: Soonest first</option>
+                        <option value="1">Date: Furthest first</option>
+                        <option value="2">Price: Lowest first</option>
+                        <option value="3">Price: Highest first</option>
+                    </select>
                 </div>
 
                 <div class="rw">
@@ -139,7 +137,12 @@
 
              <!--Put boxes containing ads in here-->
              <div class="results">
+
                 <div class="list-group" style="width: 100%;">
+                        {% if adSorted %}
+                        {% for ads in adSorted %}
+                    <div class="sortedBox">
+                    {% if ads %}
                     {% for ad in ads %}
                     {% if ad[7] == "ACTIVE" %}
                     <a onclick="document.getElementById('{{ad[0]}}').style.display='block'" href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
@@ -192,6 +195,11 @@
                     </div>
                     {% endif %}
                     {% endfor %}
+                    {% endif %}
+
+                </div>
+                    {% endfor %}
+                    {% endif %}
                 </div>
 
                 <!--Modal for bid-->
@@ -210,8 +218,8 @@
                                         <h3>Original price: </h3>
                                         <h3 id="oPrice" name="oPrice" value=""></h3>
                                         <h3>Your price:</h3>
-                                            <input id="priceInput" name="priceInput" value="" placeholder="Aim to ask for an equal or lower price than the original">
-                                        <h3 id="priceWarning" style="color: red;"></h3>
+                                            <input id="priceInput" name="priceInput" value="" type="number" min="0.00" max="1000000.00" required>
+                                        <h3 id="priceWarning" style="color: orange;"></h3>
                                         <h3>Additional messages/comments to poster:</h3>
                                             <input id="commentInput" name="commentInput" placeholder="Notes to poster" required>
                                         <input id="adID" name="adID" type="hidden">
@@ -222,9 +230,7 @@
                         </div>
                     </div>
                 </div>
-
-
-                </div>
+            </div>
             </div>
 
         <!-- Footer-->
@@ -259,18 +265,19 @@
         // Change title of new modal to contain title of ad
         document.getElementById('bidTitle').innerHTML = "Bidding on: " + postTitle;
 
-        // Display original ad price
+        // Display original ad price + set new price to old
         document.getElementById('oPrice').innerHTML = oPrice;
         document.getElementById('oPrice').value = oPrice;
+        document.getElementById('priceInput').value = oPrice;
         
         // Show new modal
         document.getElementById('bid').style.display='block';
         
         // Change label to be id of ad
-
         document.getElementById('adID').value = postID;
     }
     </script>
+
     <!--Handle search criteria-->
     <script>
         function filter()
@@ -285,6 +292,15 @@
             let alcohol = document.getElementById("alcohol").value;
             let noPeople = document.getElementById("noPeople").value;
             let user = document.getElementById("userL").attributes.value.value;
+            let sort = parseInt(document.getElementById("sortSelect").value);
+
+            // Show only the sorted results
+            let sortBoxes = document.getElementsByClassName("sortedBox");
+            for (let i=0; i<sortBoxes.length; i++)
+            {
+                if (i == sort) { sortBoxes[i].style.display="block"; }
+                else {sortBoxes[i].style.display="none";}
+            }
 
             // Get all ad objects
             let adResults = document.getElementsByClassName("flex-column");
@@ -423,26 +439,5 @@
         }
     }
     </script>
-
-    <!--To be run when the page loads-->
-    <script>
-    let user = document.getElementById("userL").attributes.value.value;
-
-    // Get all ad objects
-    let adResults = document.getElementsByClassName("flex-column");
-
-    // Loop through all ads and check for attributes
-    for (let i=0; i<adResults.length; i++)
-    {
-        // Filter out ads posted by user
-        let adUser = adResults[i].children.adUser.attributes.value.value;
-
-        if (adUser == user)
-        {
-            adResults[i].style.display="none";
-        }
-    }
-    </script>
-
 </body>
 </html>
