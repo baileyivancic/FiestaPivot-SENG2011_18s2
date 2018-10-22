@@ -336,26 +336,23 @@ def search():
 	tempAds = control.fetch_ads() # Master list of ads
 	name = control.get_name( current_user.get_id() )
 	email = current_user.get_id()
-	ads=[]
+	newAds = [] # Holds the ads that are not filtered out
+	ads=[] # Holds the list of sorted lists of ads
 
 	# Filter out ads that have been posted by the user OR which the user has bidded on
 	index = 0
 	for ad in tempAds:
-		print(ad[2])
-		if (ad[1] == current_user.get_id()): # User has posted ad, therefore it shoudln't be shown
-			pass
-			tempAds.pop(index)
-		elif(checkUserBids(email, ad[0]) == 1): # User has bidded on this ad before
-			pass
-			#tempAds.pop(index)
-		print(ad[2])
+		bidFlag = checkUserBids(email, ad[0])
+
+		if (ad[1] != current_user.get_id() and bidFlag != 1): # Filter out previously bidded and self-posted
+			newAds.append(tempAds[index])
 		index = index + 1
 
 	# Sort ads based on 4 sorts, CHANGE FROM BUBBLE TO INSERTION
-	dateAsc = bubbleDateAds(tempAds)
+	dateAsc = bubbleDateAds(newAds)
 	dateDesc = dateAsc.copy()
 	dateDesc.reverse()
-	priceAsc = bubblePriceAds(tempAds)
+	priceAsc = bubblePriceAds(newAds)
 	priceDesc = priceAsc.copy()
 	priceDesc.reverse()
 
