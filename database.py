@@ -432,12 +432,7 @@ class Database(object):
         temp = cursor.fetchone()
 
         self.close(db)
-
-        if temp == (0, ): # Could not find ad with specified id
-            return 0
-
-        else:
-            return temp
+        return temp
 
     # Sets the id of the winning bid field inside specified ad
     def setWinning(self, adID, bidID):

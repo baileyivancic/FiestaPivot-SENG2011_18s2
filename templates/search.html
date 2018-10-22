@@ -37,7 +37,7 @@
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/account">{{name[0]}}</a>
+                            <a class="nav-link" value="{{email}}" id="userL" href="/account">{{name[0]}}</a>
                         </li>
                         <li class="nav-item">
                             <a href="/post-ad">
@@ -146,7 +146,7 @@
                         <h5 id="title" value="{{ad[2]}}" class="mb-1">{{ ad[2] }}</h5>
                         <small id="date" value="{{ad[8]}}">Date: {{ ad[8] }}</small>
                         <p id="description" value="{{ad[6]}}" class="mb-1">{{ ad[6] }}</p>
-                        <small class="info">Posted by: {{ ad[1] }}</small>
+                        <small class="info" id="adUser" value="{{ad[1]}}">Posted by: {{ ad[1] }}</small>
                         <small id="price" value="{{ad[3]}}" class="info">Price: {{ ad[3] }}</small>
                         <small id="city" value="{{ad[4]}}" class="inf0">City: {{ ad[4] }}</small>
                         <small id="state" value="{{ad[5]}}" class="info">State: {{ ad[5] }}</small>
@@ -284,6 +284,7 @@
             let date = document.getElementById("date").value;
             let alcohol = document.getElementById("alcohol").value;
             let noPeople = document.getElementById("noPeople").value;
+            let user = document.getElementById("userL").attributes.value.value;
 
             // Get all ad objects
             let adResults = document.getElementsByClassName("flex-column");
@@ -293,6 +294,14 @@
             {
                 // Set all to visible by default
                 adResults[i].style.display="block";
+
+                // Filter out ads posted by user
+                let adUser = adResults[i].children.adUser.attributes.value.value;
+
+                if (adUser == user)
+                {
+                    adResults[i].style.display="none";
+                }
 
                 // Filtering by alcohol
                 let adAlc = adResults[i].children.alcohol.attributes.value.value;
@@ -327,8 +336,6 @@
                 {
                     if (adNo < 200) { adResults[i].style.display="none"; }
                 }
-
-
 
                 // Filtering by price
                 let adPrice = parseFloat(adResults[i].children.price.attributes.value.value);
@@ -413,6 +420,26 @@
         if (newPrice > oldPrice)
         {
             document.getElementById("priceWarning").innerText = "Price entered is over advertised amount";
+        }
+    }
+    </script>
+
+    <!--To be run when the page loads-->
+    <script>
+    let user = document.getElementById("userL").attributes.value.value;
+
+    // Get all ad objects
+    let adResults = document.getElementsByClassName("flex-column");
+
+    // Loop through all ads and check for attributes
+    for (let i=0; i<adResults.length; i++)
+    {
+        // Filter out ads posted by user
+        let adUser = adResults[i].children.adUser.attributes.value.value;
+
+        if (adUser == user)
+        {
+            adResults[i].style.display="none";
         }
     }
     </script>

@@ -118,7 +118,7 @@ class Controller:
 		return self.database.getAllBids()
 
 	def getAd(self, adID):
-		return self.getAd(adID)
+		return self.database.getAd(adID)
 
 class User(UserMixin):
 	def __init__(self, id):
@@ -341,6 +341,7 @@ def about():
 def search():
 	ads = control.fetch_ads()
 	name = control.get_name( current_user.get_id() )
+	email = current_user.get_id()
 	newAds = bubbleDateAds(ads)
 
 	# TODO - put different sorted lists into a big list, and pass that into html page
@@ -366,7 +367,7 @@ def search():
 	
 	print(newAds)
 	
-	return render_template("search.html", ads=newAds, name=name)
+	return render_template("search.html", ads=newAds, name=name, email=email)
 
 # Creating bid from user input after searching
 @app.route('/bid-send', methods=['GET', 'POST'])
@@ -417,7 +418,7 @@ def checkBids():
 		print("Bod is -")
 		print(bid)
 		ad = control.getAd(bid[1])
-		if (ad == 0):
+		if (ad == None):
 			control.setBidStatus("AD DELETED", bid[0])
 		else:
 			if (ad[7] == "EXPIRED"):
@@ -429,15 +430,3 @@ def checkBids():
 					control.setBidStatus("DECLINED", bid[0])
 			elif (ad[7] == "ACTIVE"):
 				control.setBidStatus("PENDING", bid[0])
-
-
-
-		
-# TODO:
-# - Change schema to say adID and bidID and all that stuff
-# - put date on ACCEPTED bids
-
-#Done 
-# - Deleting ad that user has created 
-# - Deleting bid user has created 
-# - Showing all bids registered for current ad 
