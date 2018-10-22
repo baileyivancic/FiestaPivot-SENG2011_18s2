@@ -165,7 +165,7 @@ class Database(object):
         db = self.get_db()
         cursor = db.cursor()
 
-        cursor.execute('''INSERT INTO ads (userEmail, title, price, city, state, descr, status, date, start_time, end_time, alcohol, noPeople) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',(userEmail, title, price, city, state, descr, "ACTIVE", date, start_time, end_time, alcohol, noPeople))
+        cursor.execute('''INSERT INTO ads (userEmail, title, price, city, state, descr, status, date, start_time, end_time, alcohol, noPeople, winningID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',(userEmail, title, price, city, state, descr, "ACTIVE", date, start_time, end_time, alcohol, noPeople, -1))
         
         self.close(db)
         return True
@@ -369,7 +369,7 @@ class Database(object):
         db = self.get_db()
         cursor=db.cursor()
 
-        cursor.execute("SELECT * FROM accounts WHERE email=?", (ID, ))
+        cursor.execute("SELECT * FROM accounts WHERE email=?", (email, ))
         temp = cursor.fetchone()
         bids = temp[7]
 
@@ -388,7 +388,7 @@ class Database(object):
         db = self.get_db()
         cursor=db.cursor()
 
-        cursor.execute("SELECT * FROM accounts WHERE email=?", (ID, ))
+        cursor.execute("SELECT * FROM accounts WHERE email=?", (email, ))
         temp = cursor.fetchone()
         ads = temp[6]
 
@@ -418,11 +418,10 @@ class Database(object):
         db = self.get_db()
         cursor=db.cursor()
 
-        cursor.execute("SELECT * FROM bids", (adID, ))
-        temp = cursor.fetchall()
+        bids = cursor.execute("SELECT * FROM bids").fetchall()
 
         self.close(db)
-        return temp
+        return bids
     
     # Gets ad with specified adID
     def getAd(self, adID):

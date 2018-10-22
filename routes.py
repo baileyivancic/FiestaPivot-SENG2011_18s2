@@ -182,6 +182,7 @@ def default():
 def login():
 	error = None
 	checkAds() # Automatic ad expiry
+	checkBids() # Automatic bid status change
 	if request.method == "POST":
 		email = request.form["email"].strip()
 		password = request.form["password"].strip()
@@ -411,8 +412,10 @@ def checkAds():
 def checkBids():
 	bids = control.fetch_bids()
 
-	# Go through bids and check ad status
+	# # Go through bids and check ad status
 	for bid in bids:
+		print("Bod is -")
+		print(bid)
 		ad = control.getAd(bid[1])
 		if (ad == 0):
 			control.setBidStatus("AD DELETED", bid[0])
