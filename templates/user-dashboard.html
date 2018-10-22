@@ -95,7 +95,66 @@
                                 <small class="info">Status: {{ ad[7] }}</small>
                             </div>
 
-                            <section role="main" class="cover-container" id="ad-{{ad[0]}}-modal-body-edit-form"style="display: none;">
+                            {% if bidsOrdered %}
+                            <!--Put bids for ad in here-->
+                                {% if bidsOrdered[0][6] == "PENDING" %}
+                                    <p>Choose a bid:</p> 
+                                {% endif %}   
+
+                                {% for bid in bidsOrdered %}
+                                    {% if bid[1] == ad[0] %}
+                                        <div>
+                                            <a class="choose-bids list-group-item list-group-item-action flex-column align-items-start">
+                                                <form action="/choose-bid" method="POST">
+                                                    {% if bid[6] == "PENDING" %}
+                                                        <div class="overlay">
+                                                            <button type="submit" class="text">Choose Bid</button>
+                                                        </div>
+                                                    {% elif bid[6] == "ACCEPTED" %}
+                                                        <div class="overlay-accepted">
+                                                            <button disabled type="submit" class="chosen-text">Accepted</button>
+                                                        </div>
+                                                    {% elif bid[6] == "DECLINED" %}
+                                                        <div class="overlay-declined">
+                                                            <button disabled type="submit" class="chosen-text">Declined</button>
+                                                        </div>
+                                                    {% endif %}
+
+                                                    <input style="display:none" name="id" value="{{bid[0]}}">
+                                                    <div class="content">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                            <h5 class="mb-1" id="name" >Bid for {{ bid[2] }}</h5>
+                                                        </div>
+                                                        <p class="mb-1" id="comment">Message: {{ bid[5] }}</p>
+                                                        <small id="price">Bid amount: ${{ bid[4] }}</small>
+                                                        <small id="User">Posted by user: {{ bid[3] }}</small>
+                                                    </div>
+                                                </form>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %} 
+                            <div class="modal-footer">
+                                <form action="/delete-ad" method="POST">
+                                    <input style="display: none" name="id" type="text" value="{{ad[0]}}">
+                                    <button type="submit" class="btn btn-secondary">Delete</button>
+                                </form>
+                                 <button onclick="edit('ad-{{ad[0]}}')" type="button" class="btn btn-primary">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="Modals">
+                    <div id="ad-{{ad[0]}}-edit-form" class="w3-modal">
+                        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+                            <div >
+                                <span onclick="document.getElementById('ad-{{ad[0]}}-edit-form').style.display ='none' " class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>  
+                            </div>
+
+                            <section role="main" class="cover-container">
                                 <div class="container" style="background-color: #eee; padding-bottom: 50px; padding-top: 50px; border-radius: 5px;">
                                     <h1 class="text-center text-dark">Edit Ad</h1>
                                     <div class="col-sm-12 offset-sm-3" class="info-form">
@@ -174,54 +233,6 @@
                                     </div>
                                 </div>
                             </section>
-
-                            {% if bidsOrdered %}
-                            <!--Put bids for ad in here-->
-                                {% if bidsOrdered[0][6] == "PENDING" %}
-                                    <p>Choose a bid:</p> 
-                                {% endif %}   
-
-                                {% for bid in bidsOrdered %}
-                                    {% if bid[1] == ad[0] %}
-                                        <div>
-                                            <a class="choose-bids list-group-item list-group-item-action flex-column align-items-start">
-                                                <form action="/choose-bid" method="POST">
-                                                    {% if bid[6] == "PENDING" %}
-                                                        <div class="overlay">
-                                                            <button type="submit" class="text">Choose Bid</button>
-                                                        </div>
-                                                    {% elif bid[6] == "ACCEPTED" %}
-                                                        <div class="overlay-accepted">
-                                                            <button disabled type="submit" class="chosen-text">Accepted</button>
-                                                        </div>
-                                                    {% elif bid[6] == "DECLINED" %}
-                                                        <div class="overlay-declined">
-                                                            <button disabled type="submit" class="chosen-text">Declined</button>
-                                                        </div>
-                                                    {% endif %}
-
-                                                    <input style="display:none" name="id" value="{{bid[0]}}">
-                                                    <div class="content">
-                                                        <div class="d-flex w-100 justify-content-between">
-                                                            <h5 class="mb-1" id="name" >Bid for {{ bid[2] }}</h5>
-                                                        </div>
-                                                        <p class="mb-1" id="comment">Message: {{ bid[5] }}</p>
-                                                        <small id="price">Bid amount: ${{ bid[4] }}</small>
-                                                        <small id="User">Posted by user: {{ bid[3] }}</small>
-                                                    </div>
-                                                </form>
-                                            </a>
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endif %} 
-                            <div class="modal-footer">
-                                <form action="/delete-ad" method="POST">
-                                    <input style="display: none" name="id" type="text" value="{{ad[0]}}">
-                                    <button type="submit" class="btn btn-secondary">Delete</button>
-                                </form>
-                                 <button onclick="edit('ad-{{ad[0]}}-modal-body')" type="button" class="btn btn-primary">Edit</button>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -236,7 +247,7 @@
                 <p class="lead">My Bids</p>
                 {% if bids %}
                 {% for bid in bids %}
-                <a data-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
+                <a onclick="document.getElementById('bid-{{bid[0]}}').style.display = 'block' " data-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
                     <h5 class="mb-1" id="name" >{{ bid[2] }}</h5>
                     <p class="mb-1" id="comment">Message: {{ bid[5] }}</p>
                     <small id="price">Bid amount: ${{ bid[4] }}</small>
@@ -267,10 +278,40 @@
                                     <input style="display: none" name="id" type="text" value="{{bid[0]}}">
                                     <button type="submit" class="btn btn-secondary">Delete</button>
                                 </form>
-                                 <button onclick="'{% set edit = True %}'" type="button" class="btn btn-primary">Edit</button>
+                                 <button onclick="edit('bid-{{bid[0]}}')" type="button" class="btn btn-primary">Edit</button>
                             </div>
                         </div>
                       </div>
+                    </div>
+
+                    <!--Modal for bid-->
+                    <div class="Modals">
+                        <div id="bid-{{bid[0]}}-edit-form" class="w3-modal">
+                            <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+                                
+                                <div class="w3-center"><br>
+                                    <span onclick="document.getElementById('bid-{{bid[0]}}-edit-form').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+                                    <label id="bidTitle"></label>
+                                </div>
+                                
+                                <form action="/bid-send" method="post" class="w3-container w3-center w3-border-top w3-padding-16 w3-light-grey">
+                                    <div class="w3-container">
+                                        <div class="w3-section">
+                                            <h3>Original price: </h3>
+                                            <h3 id="oPrice" name="oPrice" value=""></h3>
+                                            <h3>Your price:</h3>
+                                                <input id="priceInput" name="priceInput" value="" placeholder="Aim to ask for an equal or lower price than the original">
+                                            <h3 id="priceWarning" style="color: red;"></h3>
+                                            <h3>Additional messages/comments to poster:</h3>
+                                                <input id="commentInput" name="commentInput" placeholder="Notes to poster" required>
+                                            <input id="adID" name="adID" type="hidden">
+                                        </div>
+                                    </div>
+                                    <button type="submit" value="Place Bid" type="button" class="w3-button w3-red">Place bid</button>
+                                </form>
+
+                            </div>
+                        </div>
                     </div>
                 {% endfor %}
                 {% else %}
@@ -304,10 +345,9 @@
 
         function edit(id) {
             document.getElementById(id).style.display="none";
+
             var form = document.getElementById(id + "-edit-form");
-            console.log(form.id + "=" + form.style.display);
             form.style.display='block';
-            console.log(form.id + "= " + form.style.display);
         }
 
         function close_ad(adID) {
