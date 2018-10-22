@@ -333,34 +333,40 @@ def about():
 @app.route('/search', methods=["GET", "POST"])
 @login_required
 def search():
-	ads = control.fetch_ads()
+	tempAds = control.fetch_ads() # Master list of ads
 	name = control.get_name( current_user.get_id() )
-	newAds = bubbleDateAds(ads)
+	email = current_user.get_id()
+	ads=[]
 
-	# TODO - put different sorted lists into a big list, and pass that into html page
+	# Filter out ads that have been posted by the user OR which the user has bidded on
+	index = 0
+	for ad in tempAds:
+		print("Ad is ")
+		print(ad)
+		print("Current user is ")
+		print(email)
+		if (ad[1] == current_user.get_id()): # User has posted ad, therefore it shoudln't be shown
+			del(tempAds[index])
+		elif(checkUserBids(email, ad[0]) == 1): # User has bidded on this ad before
+			del(tempAds[index])
+		index+=1
 
-	# Changing sorting of ads based on user choice
-	if request.method == "SORT":
-		sort = request.form['sortSelect']
-		if sort == "dateAsc":
-			newAds = bubbleDateAds(ads)
-			print("Date asc ")
+	# Sort ads based on 4 sorts, CHANGE FROM BUBBLE TO INSERTION
+	dateAsc = bubbleDateAds(tempAds)
+	dateDesc = dateAsc.copy()
+	dateDesc.reverse()
+	priceAsc = bubblePriceAds(tempAds)
+	priceDesc = priceAsc.copy()
+	priceDesc.reverse()
 
-		elif sort == "dateDes":
-			newAds = list(reversed(bubbleDateAds(ads)))
-			print("Date des ")
-		
-		elif sort == "priceAsc":
-			newAds = bubblePriceAds(ads)
-			print("Price asc ")
-		
-		elif sort == "priceDes":
-			newAds = list(reversed(bubblePriceAds(ads)))
-			print("Price des")
+	# Push sorted lists into ads container
+	ads.append(dateAsc)
+	ads.append(dateDesc)
+	ads.append(priceAsc)
+	ads.append(priceDesc)
+	print(ads)
 	
-	print(newAds)
-	
-	return render_template("search.html", ads=newAds, name=name)
+	return render_template("search.html", adSorted=ads, name=name, email=email)
 
 # Creating bid from user input after searching
 @app.route('/bid-send', methods=['GET', 'POST'])
@@ -399,6 +405,7 @@ def checkAds():
 				control.setAdStatus("COMPLETED", adID)
 				# find winning bid and set that to completed
 
+		#TODO
 		# if (adDate == currDate): # Check if the starting time has been reached
 		# 	pass
 
@@ -406,7 +413,7 @@ def checkAds():
 def checkBids():
 	bids = control.fetch_bids()
 
-	# # Go through bids and check ad status
+	# Go through bids and check ad status
 	for bid in bids:
 		print("Bod is -")
 		print(bid)
@@ -424,6 +431,16 @@ def checkBids():
 			elif (ad[7] == "ACTIVE"):
 				control.setBidStatus("PENDING", bid[0])
 
+<<<<<<< HEAD
+# Checks if user has bidded on an ad before
+def checkUserBids(userID, adID):
+	bids = control.find_user_bids(userID)
+
+	for bid in bids:
+		if(bid[1] == adID):
+			return 1
+	return 0
+=======
 def systemCheck():
 	checkAds() # Automatic ad expiry
 	checkBids() # Automatic bid status change
@@ -437,3 +454,4 @@ def systemCheck():
 # - Deleting ad that user has created 
 # - Deleting bid user has created 
 # - Showing all bids registered for current ad 
+>>>>>>> 76ff618bf44af678e4430e3d7b85c5ac605f3d9f
