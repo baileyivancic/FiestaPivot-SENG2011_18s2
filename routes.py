@@ -118,7 +118,7 @@ class Controller:
 		return self.database.getAllBids()
 
 	def getAd(self, adID):
-		return self.getAd(adID)
+		return self.database.getAd(adID)
 
 class User(UserMixin):
 	def __init__(self, id):
@@ -417,7 +417,7 @@ def checkBids():
 		print("Bod is -")
 		print(bid)
 		ad = control.getAd(bid[1])
-		if (ad == 0):
+		if (ad == None):
 			control.setBidStatus("AD DELETED", bid[0])
 		else:
 			if (ad[7] == "EXPIRED"):
