@@ -72,12 +72,6 @@ class Controller:
 	def get_phone(self, email):
 		return self.database.get_phone(email)
 	
-	def get_adsPosted(self, email):
-		return self.database.get_adsPosted(email)
-	
-	def get_bidsPosted(self, email):
-		return self.database.get_bidsPosted(email)
-	
 	def get_rating(self, email):
 		return self.database.get_rating(email)
 
@@ -90,8 +84,8 @@ class Controller:
 		user.append(self.get_state(email))
 		user.append(self.get_about(email))
 		user.append(self.get_phone(email))
-		user.append(self.get_adsPosted(email))
-		user.append(self.get_bidsPosted(email))
+		user.append(self.database.sum_ads(email, status="COMPLETED"))
+		user.append(self.database.sum_bids(email, status="COMPLETED"))
 		user.append(self.get_rating(email))
 		return user
 	
@@ -181,8 +175,7 @@ def default():
 @app.route('/login',  methods=["GET", "POST"])
 def login():
 	error = None
-	checkAds() # Automatic ad expiry
-	checkBids() # Automatic bid status change
+	
 	if request.method == "POST":
 		email = request.form["email"].strip()
 		password = request.form["password"].strip()
@@ -271,6 +264,7 @@ def account():
 	bids = control.find_user_bids( current_user.get_id() )
 	name = control.database.get_name( current_user.get_id() )
 	
+
 	# Get bids associated with each ad
 	bidsOrdered=[]
 	for ad in ads:
@@ -430,14 +424,16 @@ def checkBids():
 			elif (ad[7] == "ACTIVE"):
 				control.setBidStatus("PENDING", bid[0])
 
-
+def systemCheck():
+	checkAds() # Automatic ad expiry
+	checkBids() # Automatic bid status change
 
 		
 # TODO:
-# - Change schema to say adID and bidID and all that stuff
 # - put date on ACCEPTED bids
 
 #Done 
+# - Change schema to say adID and bidID and all that stuff
 # - Deleting ad that user has created 
 # - Deleting bid user has created 
 # - Showing all bids registered for current ad 

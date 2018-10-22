@@ -62,7 +62,7 @@
                 <p class="lead">My Ads</p>
                 {% if ads %}
                 {% for ad in ads %}
-                <a href="#ad-{{ad[0]}}" data-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
+                <a onclick="document.getElementById('ad-{{ad[0]}}').style.display='block'" data-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{ ad[2] }}</h5>
                         <small>Event date: {{ ad[8] }}</small>
@@ -76,76 +76,151 @@
 
                 <!--Modals for each ad-->
                 <!--AD MODALS-->
-                <div class="modal fade" id="ad-{{ad[0]}}" tabindex="-1" role="dialog" aria-labelledby="exampleTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
+                <div class="w3-modal" id="ad-{{ad[0]}}" tabindex="-1" role="dialog" aria-labelledby="exampleTitle" aria-hidden="true">
+                    <div class="w3-modal-content w3-card-4 w3-animate-zoom" role="document">
+                        <div class="w3-container">
+                            <div >
+                                <span onclick="close_ad('ad-{{ad[0]}}')" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>  
+                            </div>
+                            <div  id="ad-{{ad[0]}}-modal-body">
+                                <!-- TODO -->
                                 <div class="d-flex w-100 justify-content-between">
                                     <h5 class="modal-title">{{ ad[2] }}</h5>
                                     <small>Event date: {{ ad[8] }}</small>
-                                </div>  
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                                </div>
+                                <p class="mb-1">{{ ad[6] }}</p>
+                                <small class="info">Price: ${{ ad[3] }}</small>
+                                <small class="info">Alcohol provisions: {{ ad[11] }}</small>
+                                <small class="info">Number of people: {{ ad[12] }}</small>
+                                <small class="info">Status: {{ ad[7] }}</small>
                             </div>
-                            <div class="modal-body">
-                                {% if edit == False %}
-                                <!-- TODO -->
-                                    <p class="mb-1">{{ ad[6] }}</p>
-                                    <small class="info">Price: ${{ ad[3] }}</small>
-                                    <small class="info">Alcohol provisions: {{ ad[11] }}</small>
-                                    <small class="info">Number of people: {{ ad[12] }}</small>
-                                    <small class="info">Status: {{ ad[7] }}</small>
-                                {% else %}
-                                    {% include "forum-ad.html" %}
-                                {% endif %}
-                            </div>
+
+                            <section role="main" class="cover-container" id="ad-{{ad[0]}}-modal-body-edit-form"style="display: none;">
+                                <div class="container" style="background-color: #eee; padding-bottom: 50px; padding-top: 50px; border-radius: 5px;">
+                                    <h1 class="text-center text-dark">Edit Ad</h1>
+                                    <div class="col-sm-12 offset-sm-3" class="info-form">
+                                        <form action="" method="POST">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <p for="inputPassword4" class="text-dark">Name of event</p>
+                                                    <input type="text" name="title" value="{{ad[2]}}" class="form-control" placeholder="E.g. BBQ with the bois" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <p for="inputCity" class="text-dark">City</p>
+                                                    <input type="text" name="city" value="{{ad[4]}}" class="form-control" placeholder="E.g. Sydney" value="{{city}}" required>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <p for="inputState" class="text-dark">State</p>
+                                                    <select id="stateSelect" name="state" id="inputState" class="form-control" required>
+                                                        <option selected value="{{ad[5]}}" >{{ad[5]}}</option>
+                                                        <option value="nsw">NSW</option>
+                                                        <option value="qld">QLD</option>
+                                                        <option value="sa">SA</option>
+                                                        <option value="tas">TAS</option>
+                                                        <option value="vic">VIC</option>
+                                                        <option value="wa">WA</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-2">
+                                                    <p for="alcoholSelect" class="text-dark">Alcohol?</p>
+                                                    <select  name="alcohol" id="inputAlcohol" class="form-control" required>
+                                                        <option value="No" {%if ad[11] == "No" %} selected {%endif%}>No</option>
+                                                        <option value="Yes" {%if ad[11] == "Yes" %} selected {%endif%}>Yes</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <p for="inputCity" class="text-dark">Number of People</p>
+                                                    <span class="noPeople">
+                                                        <input name="noPeople" value="{{ad[12]}}" class="form-control" type="number" placeholder="E.g. 30" min="0" max="100000" step="1" required/>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <p for="inputCity" class="text-dark">Price</p>
+                                                    <span class="price">
+                                                        <input name="price" value="{{ad[3]}}" class="form-control" type="number" placeholder="E.g. 150" min="0.00" max="10000.00" required/>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <p for="inputCity" class="text-dark">Description</p>
+                                                    <textarea rows="4" cols="50" name="descr" class="form-control" placeholder="Other specifications such as address, dietary requirements, provided utilities, etc" required>{{ad[6]}}</textarea> 
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-2">
+                                                    <p for="inputCity" class="text-dark">Date of event</p>
+                                                    <input class="form-control" value="{{ad[8]}}" type="date" name="date" min="now" required>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <p for="inputState" class="text-dark">Start time of event</p>
+                                                    <input class="form-control" value="{{ad[9]}}" type="time" name="start-time" required>
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <p for="inputState" class="text-dark">End time of event</p>
+                                                    <input class="form-control" value="{{ad[10]}}" type="time" name="end-time" required>
+                                                </div>
+                                            </div>
+                                            <a href="#"><button type="submit" class="btn btn-lg btn-primary">Post</button></a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </section>
+
                             {% if bidsOrdered %}
                             <!--Put bids for ad in here-->
-                            {% if bidsOrdered[0][6] == "PENDING" %}
-                                <p>Choose a bid:</p> 
-                            {% endif %}   
+                                {% if bidsOrdered[0][6] == "PENDING" %}
+                                    <p>Choose a bid:</p> 
+                                {% endif %}   
 
-                            {% for bid in bidsOrdered %}
-                                {% if bid[1] == ad[0] %}
-                                    <div>
-                                        <a class="choose-bids list-group-item list-group-item-action flex-column align-items-start">
-                                            <form action="/choose-bid" method="POST">
-                                                {% if bid[6] == "PENDING" %}
-                                                    <div class="overlay">
-                                                        <button type="submit" class="text">Choose Bid</button>
-                                                    </div>
-                                                {% elif bid[6] == "ACCEPTED" %}
-                                                    <div class="overlay-accepted">
-                                                        <button disabled type="submit" class="chosen-text">Accepted</button>
-                                                    </div>
-                                                {% elif bid[6] == "DECLINED" %}
-                                                    <div class="overlay-declined">
-                                                        <button disabled type="submit" class="chosen-text">Declined</button>
-                                                    </div>
-                                                {% endif %}
+                                {% for bid in bidsOrdered %}
+                                    {% if bid[1] == ad[0] %}
+                                        <div>
+                                            <a class="choose-bids list-group-item list-group-item-action flex-column align-items-start">
+                                                <form action="/choose-bid" method="POST">
+                                                    {% if bid[6] == "PENDING" %}
+                                                        <div class="overlay">
+                                                            <button type="submit" class="text">Choose Bid</button>
+                                                        </div>
+                                                    {% elif bid[6] == "ACCEPTED" %}
+                                                        <div class="overlay-accepted">
+                                                            <button disabled type="submit" class="chosen-text">Accepted</button>
+                                                        </div>
+                                                    {% elif bid[6] == "DECLINED" %}
+                                                        <div class="overlay-declined">
+                                                            <button disabled type="submit" class="chosen-text">Declined</button>
+                                                        </div>
+                                                    {% endif %}
 
-                                                <input style="display:none" name="id" value="{{bid[0]}}">
-                                                <div class="content">
-                                                    <div class="d-flex w-100 justify-content-between">
-                                                        <h5 class="mb-1" id="name" >Bid for {{ bid[2] }}</h5>
+                                                    <input style="display:none" name="id" value="{{bid[0]}}">
+                                                    <div class="content">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                            <h5 class="mb-1" id="name" >Bid for {{ bid[2] }}</h5>
+                                                        </div>
+                                                        <p class="mb-1" id="comment">Message: {{ bid[5] }}</p>
+                                                        <small id="price">Bid amount: ${{ bid[4] }}</small>
+                                                        <small id="User">Posted by user: {{ bid[3] }}</small>
                                                     </div>
-                                                    <p class="mb-1" id="comment">Message: {{ bid[5] }}</p>
-                                                    <small id="price">Bid amount: ${{ bid[4] }}</small>
-                                                    <small id="User">Posted by user: {{ bid[3] }}</small>
-                                                </div>
-                                            </form>
-                                        </a>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
+                                                </form>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
                             {% endif %} 
                             <div class="modal-footer">
                                 <form action="/delete-ad" method="POST">
                                     <input style="display: none" name="id" type="text" value="{{ad[0]}}">
                                     <button type="submit" class="btn btn-secondary">Delete</button>
                                 </form>
-                                 <button type="button" class="btn btn-primary">Edit</button>
+                                 <button onclick="edit('ad-{{ad[0]}}-modal-body')" type="button" class="btn btn-primary">Edit</button>
                             </div>
                         </div>
                     </div>
@@ -161,7 +236,7 @@
                 <p class="lead">My Bids</p>
                 {% if bids %}
                 {% for bid in bids %}
-                <a href="#bid-{{bid[0]}}" data-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
+                <a data-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
                     <h5 class="mb-1" id="name" >{{ bid[2] }}</h5>
                     <p class="mb-1" id="comment">Message: {{ bid[5] }}</p>
                     <small id="price">Bid amount: ${{ bid[4] }}</small>
@@ -172,9 +247,9 @@
 
                 <!--Modals for each bid-->
                 <!--bid MODALS-->
-                <div class="modal fade" id="bid-{{bid[0]}}" tabindex="-1" role="dialog" aria-labelledby="exampleTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
+                <div class="w3-modal" id="bid-{{bid[0]}}" tabindex="-1" role="dialog" aria-labelledby="exampleTitle" aria-hidden="true">
+                    <div class="w3-modal-content w3-card-4 w3-animate-zoom" role="document">
+                        <div class="w3-center">
                           <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLongTitle">{{bid[2]}}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -227,8 +302,22 @@
             document.getElementById(id).style.display='block'
         }
 
-        document.getElementById().onclick = () => {
+        function edit(id) {
+            document.getElementById(id).style.display="none";
+            var form = document.getElementById(id + "-edit-form");
+            console.log(form.id + "=" + form.style.display);
+            form.style.display='block';
+            console.log(form.id + "= " + form.style.display);
+        }
 
+        function close_ad(adID) {
+            document.getElementById(adID).style.display='none';
+
+            var body = document.getElementById(adID + "-modal-body");
+            body.style.display = "block";
+
+            var form = document.getElementById(adID + "-modal-body-edit-form");
+            form.style.display='none';
         }
     </script>
     </body>
