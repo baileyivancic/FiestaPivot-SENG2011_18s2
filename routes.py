@@ -350,17 +350,25 @@ def search():
 
 	# Sort ads based on 4 sorts, CHANGE FROM BUBBLE TO INSERTION
 	dateAsc = bubbleDateAds(newAds)
-	dateDesc = dateAsc.copy()
-	dateDesc.reverse()
+	if dateAsc: 
+		dateDesc = dateAsc.copy()
+		dateDesc.reverse()
+	else:
+		dateDesc = []
+		
 	priceAsc = bubblePriceAds(newAds)
-	priceDesc = priceAsc.copy()
-	priceDesc.reverse()
+	if priceAsc:
+		priceDesc = priceAsc.copy()
+		priceDesc.reverse()
+	else:
+		priceDesc = []
+		
 
 	# Push sorted lists into ads container
 	ads.append(dateAsc)
-	ads.append(dateDesc)
 	ads.append(priceAsc)
 	ads.append(priceDesc)
+	ads.append(dateDesc)
 	
 	return render_template("search.html", adSorted=ads, name=name, email=email)
 
