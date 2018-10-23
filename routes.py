@@ -431,7 +431,6 @@ def checkBids():
 			elif (ad[7] == "ACTIVE"):
 				control.setBidStatus("PENDING", bid[0])
 
-<<<<<<< HEAD
 # Checks if user has bidded on an ad before
 def checkUserBids(userID, adID):
 	bids = control.find_user_bids(userID)
@@ -440,7 +439,7 @@ def checkUserBids(userID, adID):
 		if(bid[1] == adID):
 			return 1
 	return 0
-=======
+
 def systemCheck():
 	checkAds() # Automatic ad expiry
 	checkBids() # Automatic bid status change
@@ -454,4 +453,3 @@ def systemCheck():
 # - Deleting ad that user has created 
 # - Deleting bid user has created 
 # - Showing all bids registered for current ad 
->>>>>>> 76ff618bf44af678e4430e3d7b85c5ac605f3d9f
