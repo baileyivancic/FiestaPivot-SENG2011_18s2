@@ -514,3 +514,23 @@ class Database(object):
         db.commit()
         db.close()
         return 0
+
+    # Sets user rating
+    def setReviews(self, email, newRating):
+        db = self.get_db()
+        cursor=db.cursor()
+
+        cursor.execute("SELECT EXISTS(SELECT rating FROM accounts WHERE email=?)", (email,))
+        temp =  cursor.fetchone()[0]
+
+        reviews = self.getReviews(email) + 1
+        newRating = (temp + newRating) / reviews
+
+        cursor.execute('''
+        UPDATE accounts
+        SET rating = ?
+        WHERE email = ?
+        ''',(newRating,email))
+        db.commit()
+        db.close()
+        return 0
