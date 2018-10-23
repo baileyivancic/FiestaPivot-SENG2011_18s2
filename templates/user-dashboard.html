@@ -174,7 +174,8 @@
                                         <div class="container" style="background-color: #eee; padding-bottom: 50px; padding-top: 50px; border-radius: 5px;">
                                             <h1 class="text-center text-dark">Edit Ad</h1>
                                             <div class="col-sm-12 offset-sm-3" class="info-form">
-                                                <form action="" method="POST">
+                                                <form action="/edit-ad" method="POST">
+                                                    <input style="display: none" name="adID" value="{{ad[0]}}" required>
                                                     <div class="form-row">
                                                         <div class="form-group col-md-6">
                                                             <p for="inputPassword4" class="text-dark">Name of event</p>
@@ -237,14 +238,14 @@
                                                         </div>
                                                         <div class="form-group col-md-2">
                                                             <p for="inputState" class="text-dark">Start time of event</p>
-                                                            <input class="form-control" value="{{ad[9]}}" type="time" name="start-time" required>
+                                                            <input class="form-control" value="{{ad[9]}}" type="time" name="start_time" required>
                                                         </div>
                                                         <div class="form-group col-md-2">
                                                             <p for="inputState" class="text-dark">End time of event</p>
-                                                            <input class="form-control" value="{{ad[10]}}" type="time" name="end-time" required>
+                                                            <input class="form-control" value="{{ad[10]}}" type="time" name="end_time" required>
                                                         </div>
                                                     </div>
-                                                    <a href="#"><button type="submit" class="btn btn-lg btn-primary">Post</button></a>
+                                                    <a href="#"><button type="submit" class="btn btn-lg btn-primary">Confirm Changes</button></a>
                                                 </form>
                                             </div>
                                         </div>
@@ -283,12 +284,12 @@
                         <div class="w3-modal" id="bid-{{bid[0]}}" tabindex="-1" role="dialog" aria-labelledby="exampleTitle" aria-hidden="true">
                             <div class="w3-modal-content w3-card-4 w3-animate-zoom" role="document">
                                 <div class="w3-center">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">{{bid[2]}}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">{{bid[2]}}</h5>
+                                        <span onclick="document.getElementById('bid-{{bid[0]}}').style.display='none' " class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
                                     </div>
+
                                     <div class="modal-body">
                                         <p id="price">Bid amount: ${{ bid[4] }}</p>
                                         <p class="mb-1" id="comment">Message: {{ bid[5] }}</p>
@@ -313,23 +314,22 @@
                                         
                                         <div class="w3-center"><br>
                                             <span onclick="document.getElementById('bid-{{bid[0]}}-edit-form').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
-                                            <label id="bidTitle"></label>
                                         </div>
                                         
-                                        <form action="/bid-send" method="post" class="w3-container w3-center w3-border-top w3-padding-16 w3-light-grey">
+                                        <form action="/edit-bid" method="POST" class="w3-container w3-center w3-border-top w3-padding-16 w3-light-grey">
                                             <div class="w3-container">
                                                 <div class="w3-section">
-                                                    <h3>Original price: </h3>
-                                                    <h3 id="oPrice" name="oPrice" value=""></h3>
+                                                    <h3>Original price: ${{ bid[8] }}</h3>
                                                     <h3>Your price:</h3>
-                                                        <input id="priceInput" name="priceInput" value="" placeholder="Aim to ask for an equal or lower price than the original">
+                                                        <input id="priceInput" name="price" value="{{ bid[4] }}" placeholder="Aim to ask for an equal or lower price than the original">
                                                     <h3 id="priceWarning" style="color: red;"></h3>
                                                     <h3>Additional messages/comments to poster:</h3>
-                                                        <input id="commentInput" name="commentInput" placeholder="Notes to poster" required>
-                                                    <input id="adID" name="adID" type="hidden">
+                                                        <input id="commentInput" name="comment" value="{{ bid[5] }}" placeholder="Notes to poster" required>
+                                                    <input id="ID" name="ID" value="{{ bid[0] }}" type="hidden">
+                                                    <input type="hidden" name="oPrice" value="{{bid[8]}}" >
                                                 </div>
                                             </div>
-                                            <button type="submit" value="Place Bid" type="button" class="w3-button w3-red">Place bid</button>
+                                            <button type="submit" value="Place Bid" type="button" class="w3-button w3-red">Confirm Changes</button>
                                         </form>
 
                                     </div>
