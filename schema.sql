@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS accounts(
     adsPosted   INTEGER     NOT NULL,
     bidsPosted  INTEGER     NOT NULL,
     about       TEXT        NOT NULL,
-    phoneNo     TEXT        NOT NULL
+    phoneNo     TEXT        NOT NULL,
+    reviews     INTEGER     NOT NULL
 );  
 
 /* Add in extra criteria that we want to incude in the ad element 
