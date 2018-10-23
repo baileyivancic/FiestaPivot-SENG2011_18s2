@@ -454,21 +454,23 @@ def checkBids():
 
 	# Go through bids and check ad status
 	for bid in bids:
-		print("Bod is -")
-		print(bid)
 		ad = control.getAd(bid[1])
 		if (ad == None):
 			control.setBidStatus("AD DELETED", bid[0])
+
 		else:
 			if (ad[7] == "EXPIRED"):
 				control.setBidStatus("DECLINED", bid[0])
+
 			elif (ad[7] == "PROGRESS"):
 				if (ad[13] == bid[0]):
 					control.setBidStatus("ACCEPTED", bid[0])
 				else:
 					control.setBidStatus("DECLINED", bid[0])
-			elif (ad[7] == "COMPLETED"):
-				control.setBidStatus("COMPLETED", bid[0])
+
+			elif (ad[7] == "COMPLETED - PENDING REVIEW"):
+				control.setBidStatus("COMPLETED - PENDING REVIEW", bid[0])
+
 			elif (ad[7] == "ACTIVE"):
 				control.setBidStatus("PENDING", bid[0])
 

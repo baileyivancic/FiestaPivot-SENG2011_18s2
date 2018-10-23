@@ -75,7 +75,6 @@
                 <!--ADS TAB-->
                 <div class="tab-pane fade show active" id="ads" role="tabpanel" aria-labelledby="ads-tab">
                     <div id="active">
-                        <p class="lead">My Ads</p>
                         {% if ads %}
                         {% for ad in ads %}
                         <a onclick="document.getElementById('ad-{{ad[0]}}').style.display='block'" data-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
@@ -191,12 +190,12 @@
                                                             <p for="inputState" class="text-dark">State</p>
                                                             <select id="stateSelect" name="state" id="inputState" class="form-control" required>
                                                                 <option selected value="{{ad[5]}}" >{{ad[5]}}</option>
-                                                                <option value="nsw">NSW</option>
-                                                                <option value="qld">QLD</option>
-                                                                <option value="sa">SA</option>
-                                                                <option value="tas">TAS</option>
-                                                                <option value="vic">VIC</option>
-                                                                <option value="wa">WA</option>
+                                                                <option value="NSW">NSW</option>
+                                                                <option value="QLD">QLD</option>
+                                                                <option value="SA">SA</option>
+                                                                <option value="TAS">TAS</option>
+                                                                <option value="VIC">VIC</option>
+                                                                <option value="WA">WA</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -267,7 +266,6 @@
                 <div class="tab-pane fade" id="bids" role="tabpanel" aria-labelledby="bids-tab">
                     
                     <div id="active">
-                        <p class="lead">My Bids</p>
                         {% if bids %}
                         {% for bid in bids %}
                         <a onclick="document.getElementById('bid-{{bid[0]}}').style.display = 'block' " data-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
