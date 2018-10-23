@@ -201,8 +201,6 @@ def register():
 		about = request.form["about"].strip()
 		phone = request.form["phoneNo"].strip()
 
-		print("Phone is " + phone)
-
 		if (about == ""):
 			about = "I just love food!"
 
@@ -217,7 +215,7 @@ def register():
 			flash("Successfully created account!")
 			return account()
 		elif valid == 0:
-			error = "Please try again, there is already a user with this email addresss"
+			error = "Please try again, there is already a user with this email address"
 			return render_template("register.html", error=error)
 		elif valid == 3:
 			error = "Passwords do not match, please try again"
@@ -249,7 +247,8 @@ def post():
 		alcohol = request.form['alcohol'].strip()
 		noPeople = request.form['noPeople'].strip()
 
-		print(title)
+		print("State is ")
+		print(state)
 
 		if control.postAd(email, title, price, city, state, descr, date, start_time, end_time, alcohol, noPeople):
 			return redirect("/account")
