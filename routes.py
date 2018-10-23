@@ -361,7 +361,7 @@ def search():
 		priceDesc = priceAsc.copy()
 		priceDesc.reverse()
 	else:
-		priceDesc = []
+		priceCheckDesc = []
 		
 
 	# Push sorted lists into ads container
@@ -444,9 +444,11 @@ def checkUserBids(userID, adID):
 			return 1
 	return 0
 
+@app.route('/systemCheck', methods=['GET', 'POST'])
 def systemCheck():
 	checkAds() # Automatic ad expiry
 	checkBids() # Automatic bid status change
+	return redirect("/account")
 
 		
 # TODO:

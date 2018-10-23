@@ -364,7 +364,7 @@ class Database(object):
         db.close()
         return 0  
     
-    # Incrememnt number of bids the user has completed
+    # Increment number of bids the user has completed
     def incrementBids(self, email):
         db = self.get_db()
         cursor=db.cursor()
