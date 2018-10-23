@@ -277,20 +277,6 @@ def edit_bid():
 	control.database.update_bid(values)
 	return redirect("/account")
 
-@app.route('/edit-info', methods=["POST"])
-@login_required
-def edit_info():
-
-	values = request.form
-	print("EDIT")
-	print(values)
-
-	if not control.database.update_info(values):
-		#TODO error message saying email isnt valid
-		return redirect("/account")
-
-	return redirect("/account")
-
 @app.route('/account',  methods=["GET", "POST"])
 @login_required
 def account():
@@ -396,8 +382,7 @@ def search():
 		priceDesc = priceAsc.copy()
 		priceDesc.reverse()
 	else:
-		priceCheckDesc = []
-		
+		priceDesc = []
 
 	# Push sorted lists into ads container
 	ads.append(dateAsc)
@@ -441,7 +426,7 @@ def checkAds():
 			if (control.findWinning(adID) == 0): # Ad does not have a winning bid associated with it
 				control.setAdStatus("EXPIRED", adID)
 			else:
-				control.setAdStatus("COMPLETED - PENDING REVIEW", adID)
+				control.setAdStatus("COMPLETED - PENDING REVIEW	", adID)
 				# find winning bid and set that to completed
 
 		#TODO
@@ -488,13 +473,3 @@ def systemCheck():
 	checkAds() # Automatic ad expiry
 	checkBids() # Automatic bid status change
 	return redirect("/account")
-
-		
-# TODO:
-# - put date on ACCEPTED bids
-
-#Done 
-# - Change schema to say adID and bidID and all that stuff
-# - Deleting ad that user has created 
-# - Deleting bid user has created 
-# - Showing all bids registered for current ad 

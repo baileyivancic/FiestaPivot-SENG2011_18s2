@@ -77,6 +77,8 @@
                     <div id="active">
                         {% if ads %}
                         {% for ad in ads %}
+
+                        
                         <a onclick="document.getElementById('ad-{{ad[0]}}').style.display='block'" data-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">{{ ad[2] }}</h5>
@@ -87,6 +89,11 @@
                             <small class="info">Alcohol provisions: {{ ad[11] }}</small>
                             <small class="info">Number of people: {{ ad[12] }}</small>
                             <small class="info">Status: {{ ad[7] }}</small>
+
+                            {% if ad[7] == "COMPLETED - PENDING REVIEW" %}
+
+                        <h1>Biggest heading</h1>
+                        {%endif%}
                         </a>
 
                         <!--Modals for each ad-->
@@ -255,7 +262,7 @@
                         {% endfor %}
                         {% else %}
                         <p>Click on "Post an Ad" tab to create your first ad!</p>
-                        {%endif %}
+                        {% endif %}
 
                     </div>
                 </div>
