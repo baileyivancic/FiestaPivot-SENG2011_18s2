@@ -14,8 +14,6 @@ class Controller:
 		self.database = Database()
 
 	def register_user(self, email, user, password, city, state, rating, adsPosted, bidsPosted, about, phone):
-		print("In register phone is ")
-		print(phone)
 		return self.database.register_user(email, user, password, city, state, rating, adsPosted, bidsPosted, about, phone)
 
 	def isValidUser(self, username, password):
@@ -459,7 +457,7 @@ def checkBids():
 			elif (ad[7] == "ACTIVE"):
 				control.setBidStatus("PENDING", bid[0])
 
-# Checks if user has bidded on an ad before
+# Checks if user has bid on an ad before
 def checkUserBids(userID, adID):
 	bids = control.find_user_bids(userID)
 
@@ -473,3 +471,6 @@ def systemCheck():
 	checkAds() # Automatic ad expiry
 	checkBids() # Automatic bid status change
 	return redirect("/account")
+
+def addRatingAd(email, newRating):
+	pass
