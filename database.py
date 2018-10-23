@@ -170,6 +170,32 @@ class Database(object):
         self.close(db)
         return True
 
+    def update_ad(self, values):
+        db = self.get_db()
+        cursor = db.cursor()
+
+        cursor.execute('''
+                        UPDATE ads
+                        SET title = ?, price = ?, city = ?, state = ?, descr = ?, date = ?, start_time = ?, end_time = ?, alcohol = ?, noPeople = ? 
+                        WHERE ID = ?
+                        ''', (values["title"], values["price"], values["city"], values["state"], values["descr"], values["date"], values["start_time"], values["end_time"], values["alcohol"], values["noPeople"], values["adID"]))
+
+        self.close(db)
+        return True
+
+    def update_bid(self, values):
+        db = self.get_db()
+        cursor = db.cursor()
+
+        cursor.execute('''
+                        UPDATE bids
+                        SET  price = ?, comment = ?, oPrice = ?
+                        WHERE ID = ?
+                        ''', ( values["price"], values["comment"], values["oPrice"], values["ID"]))
+
+        self.close(db)
+        return True
+
     def delete_ad(self, ad_id):
         db = self.get_db()
         cursor = db.cursor()

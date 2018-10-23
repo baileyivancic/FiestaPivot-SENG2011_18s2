@@ -255,6 +255,28 @@ def post():
 	return render_template("post.html", state=state, city=city, name=name)
 	
 
+@app.route('/edit-ad', methods=["POST"])
+@login_required
+def edit_ad():
+
+	values = request.form
+	print("EDIT")
+	print(values)
+
+	control.database.update_ad(values)
+	return redirect("/account")
+
+@app.route('/edit-bid', methods=["POST"])
+@login_required
+def edit_bid():
+
+	values = request.form
+	print("EDIT")
+	print(values)
+
+	control.database.update_bid(values)
+	return redirect("/account")
+
 @app.route('/account',  methods=["GET", "POST"])
 @login_required
 def account():
