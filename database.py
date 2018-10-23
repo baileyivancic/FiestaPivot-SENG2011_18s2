@@ -25,9 +25,6 @@ class Database(object):
         db = self.get_db()
         cursor = db.cursor()
 
-        print("In db phone is ")
-        print(phone)
-
         cursor.execute("SELECT EXISTS(SELECT 1 FROM accounts WHERE email=?)", (email,))
         temp =  cursor.fetchone()
         if temp != (0, ):
@@ -36,7 +33,7 @@ class Database(object):
             db.close()
             return 0
         else:
-            cursor.execute('''INSERT INTO accounts (email, username, password, city, state, rating, adsPosted, bidsPosted, about, phoneNo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',(email, user, password, city, state, rating, adsPosted, bidsPosted, about, str(phone)))
+            cursor.execute('''INSERT INTO accounts (email, username, password, city, state, rating, adsPosted, bidsPosted, about, phoneNo, reviews) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',(email, user, password, city, state, rating, adsPosted, bidsPosted, about, str(phone), 0))
             db.commit()
             db.close()
             return 1
@@ -486,6 +483,34 @@ class Database(object):
         SET winningID = ?
         WHERE ID = ?
         ''',(bidID,adID))
+        db.commit()
+        db.close()
+        return 0
+    
+    # Gets number of reviews posted by user
+    def getReviews(self, email):
+        db = self.get_db()
+        cursor=db.cursor()
+
+        cursor.execute("SELECT reviews FROM accounts WHERE email=?", (email, ))
+        temp = cursor.fetchone()
+
+        self.close(db)
+        return temp[0]
+    
+    # Sets number of reviews posted by user
+    def setReviews(self, email, newReviews):
+        db = self.get_db()
+        cursor=db.cursor()
+
+        cursor.execute("SELECT EXISTS(SELECT 1 FROM accounts WHERE email=?)", (email,))
+        temp =  cursor.fetchone()
+
+        cursor.execute('''
+        UPDATE accounts
+        SET reviews = ?
+        WHERE email = ?
+        ''',(newReviews,email))
         db.commit()
         db.close()
         return 0
