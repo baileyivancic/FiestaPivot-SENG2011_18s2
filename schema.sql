@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS accounts(
 * - ACTIVE when date has not been reached and a winning bid has not been chosen (DEFAULT WHEN CREATED)
 * - PROGRESS when date has not been reached and a winnign bid has been chosen
 * - COMPLETED when date has been reached and a winning bid has been chosen
+* - COMPLETED - PENDING REVIEW when date has been reached, winning bid has been chosed and review has not been submitted
 * - EXPIRED when date has been reached and no winning bid chosen
 */
 CREATE TABLE IF NOT EXISTS ads(
@@ -47,6 +48,7 @@ CREATE TABLE IF NOT EXISTS ads(
 * - ACCEPTED if the ad is the winning bid for the ad
 * - DECLINED if the ad is CLOSED or PROGRESS or COMPLETED and the bid is not the winning bid of the ad
 * - COMPLETED when date has arrived and bid is the winning bid
+* - COMPLETED - PENDING REVOEW when date has arrived, it is winning bid and review has not been left
 # - AD DELETED if original ad has been deleted
 */
 CREATE TABLE IF NOT EXISTS bids(

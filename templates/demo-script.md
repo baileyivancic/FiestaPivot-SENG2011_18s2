@@ -39,3 +39,11 @@
     - State: VIC
     - About me: Loves the hunt
     - Phone number: 0499567248
+
+> Step 3 - Try to break login
+
+> Step 4 - Create ads
+
+> Step 5 - Bid on ads
+
+> Step 6 - 
