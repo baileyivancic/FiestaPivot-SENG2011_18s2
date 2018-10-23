@@ -427,11 +427,13 @@ def checkBids():
 		else:
 			if (ad[7] == "EXPIRED"):
 				control.setBidStatus("DECLINED", bid[0])
-			elif (ad[7] == "PROGRESS" or ad[7] == "COMPLETED"):
+			elif (ad[7] == "PROGRESS"):
 				if (ad[13] == bid[0]):
 					control.setBidStatus("ACCEPTED", bid[0])
 				else:
 					control.setBidStatus("DECLINED", bid[0])
+			elif (ad[7] == "COMPLETED"):
+				control.setBidStatus("COMPLETED", bid[0])
 			elif (ad[7] == "ACTIVE"):
 				control.setBidStatus("PENDING", bid[0])
 
