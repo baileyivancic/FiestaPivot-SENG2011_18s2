@@ -201,8 +201,6 @@ def register():
 		about = request.form["about"].strip()
 		phone = request.form["phoneNo"].strip()
 
-		print("Phone is " + phone)
-
 		if (about == ""):
 			about = "I just love food!"
 
@@ -217,7 +215,7 @@ def register():
 			flash("Successfully created account!")
 			return account()
 		elif valid == 0:
-			error = "Please try again, there is already a user with this email addresss"
+			error = "Please try again, there is already a user with this email address"
 			return render_template("register.html", error=error)
 		elif valid == 3:
 			error = "Passwords do not match, please try again"
@@ -249,7 +247,8 @@ def post():
 		alcohol = request.form['alcohol'].strip()
 		noPeople = request.form['noPeople'].strip()
 
-		print(title)
+		print("State is ")
+		print(state)
 
 		if control.postAd(email, title, price, city, state, descr, date, start_time, end_time, alcohol, noPeople):
 			return redirect("/account")
@@ -336,35 +335,39 @@ def search():
 	tempAds = control.fetch_ads() # Master list of ads
 	name = control.get_name( current_user.get_id() )
 	email = current_user.get_id()
-	ads=[]
+	newAds = [] # Holds the ads that are not filtered out
+	ads=[] # Holds the list of sorted lists of ads
 
 	# Filter out ads that have been posted by the user OR which the user has bidded on
 	index = 0
 	for ad in tempAds:
-		print("Ad is ")
-		print(ad)
-		print("Current user is ")
-		print(email)
-		if (ad[1] == current_user.get_id()): # User has posted ad, therefore it shoudln't be shown
-			del(tempAds[index])
-		elif(checkUserBids(email, ad[0]) == 1): # User has bidded on this ad before
-			del(tempAds[index])
-		index+=1
+		bidFlag = checkUserBids(email, ad[0])
+
+		if (ad[1] != current_user.get_id() and bidFlag != 1): # Filter out previously bidded and self-posted
+			newAds.append(tempAds[index])
+		index = index + 1
 
 	# Sort ads based on 4 sorts, CHANGE FROM BUBBLE TO INSERTION
-	dateAsc = bubbleDateAds(tempAds)
-	dateDesc = dateAsc.copy()
-	dateDesc.reverse()
-	priceAsc = bubblePriceAds(tempAds)
-	priceDesc = priceAsc.copy()
-	priceDesc.reverse()
+	dateAsc = bubbleDateAds(newAds)
+	if dateAsc: 
+		dateDesc = dateAsc.copy()
+		dateDesc.reverse()
+	else:
+		dateDesc = []
+		
+	priceAsc = bubblePriceAds(newAds)
+	if priceAsc:
+		priceDesc = priceAsc.copy()
+		priceDesc.reverse()
+	else:
+		priceCheckDesc = []
+		
 
 	# Push sorted lists into ads container
 	ads.append(dateAsc)
-	ads.append(dateDesc)
 	ads.append(priceAsc)
 	ads.append(priceDesc)
-	print(ads)
+	ads.append(dateDesc)
 	
 	return render_template("search.html", adSorted=ads, name=name, email=email)
 
@@ -386,7 +389,7 @@ def bidSend():
 
 	# Put data in db
 	control.postBid(adID, adName, userID, price, comment, status, oPrice, date)
-	return search()
+	return redirect("/search")
 
 # Checks all ads in the system to see if they have been completed, or if they are expired
 def checkAds():
@@ -423,11 +426,13 @@ def checkBids():
 		else:
 			if (ad[7] == "EXPIRED"):
 				control.setBidStatus("DECLINED", bid[0])
-			elif (ad[7] == "PROGRESS" or ad[7] == "COMPLETED"):
+			elif (ad[7] == "PROGRESS"):
 				if (ad[13] == bid[0]):
 					control.setBidStatus("ACCEPTED", bid[0])
 				else:
 					control.setBidStatus("DECLINED", bid[0])
+			elif (ad[7] == "COMPLETED"):
+				control.setBidStatus("COMPLETED", bid[0])
 			elif (ad[7] == "ACTIVE"):
 				control.setBidStatus("PENDING", bid[0])
 
@@ -440,9 +445,11 @@ def checkUserBids(userID, adID):
 			return 1
 	return 0
 
+@app.route('/systemCheck', methods=['GET', 'POST'])
 def systemCheck():
 	checkAds() # Automatic ad expiry
 	checkBids() # Automatic bid status change
+	return redirect("/account")
 
 		
 # TODO:
