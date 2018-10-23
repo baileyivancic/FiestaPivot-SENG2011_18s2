@@ -345,8 +345,9 @@
                 <!-- MY INFO TAB-->
                 <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
 
-                    <div id="active">
-                        <p>My email: {{info[0]}}</p>
+                    <div class="w3-container" id="info">
+                        <p class="lead">My Info</p>
+                        <p>My Email: {{info[0]}}</p>
                         <p>City: {{info[1]}}</p>
                         <p>State: {{info[2]}}</p>
                         <p>About me: {{info[3]}}</p>      
@@ -356,6 +357,71 @@
                         <p>My FiestaScore: {{info[7]}}</p>   
 
                         <button>Change Password</button>
+                        <button onclick="edit('info')" type="button" class="btn btn-primary">Edit</button>
+                    </div>
+                </div>
+
+                <div class="Modals">
+                    <div id="info-edit-form" class="w3-modal">
+                        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px;">
+
+                            <div >
+                                <span onclick="document.getElementById('info-edit-form').style.display ='none';document.getElementById('info').style.display='block'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>  
+                            </div>
+
+                            <section role="main" class="cover-container" id="info-edit-form" style="background: url(static/Images/darkDessert.png) center no-repeat;background-size: cover;">
+                                <div id="cover-caption">
+                                    <div class="text-center text-light" id="Slogan">
+                                        <h1 class="display-3">Edit your details</h1>
+                                    </div>
+                                    <div class="col-sm-6 offset-sm-3 info-form">
+                                        <form action="edit-info" method="POST">						
+                                            <div class="form-group">
+                                                <label class="sr-only">Name</label>
+                                                <input type="text" name="username" class="form-control" value="{{name[0]}}" placeholder="John Smith" required>
+                                            </div>										
+                                            <div class="form-group" >
+                                                <label class="sr-only">Email</label>
+                                                <input type="email" name="email" class="form-control" value="{{info[0]}}" placeholder="Email" required>
+                                            </div>										
+                                            <div class="form-row">
+                                                <div class="form-group col-sm-7">
+                                                    <label class="sr-only">City</label>
+                                                    <input type="text" name="city" class="form-control" value="{{info[1]}}" placeholder="State: (eg. Sydney)" required>
+                                                </div>
+                                                <div class="form-group col-md-5">
+                                                    <label class="sr-only">State</label>
+                                                    <select name="state" id="inputState" class="form-control">
+                                                        <option selected>{{info[2]}}</option>
+                                                        <option>NSW</option>
+                                                        <option>QLD</option>
+                                                        <option>SA</option>
+                                                        <option>TAS</option>
+                                                        <option>VIC</option>
+                                                        <option>WA</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label class="sr-only">About me</label>
+                                                    <input type="text" name="about" class="form-control" value="{{info[3]}}" placeholder="About me: (eg. Specialising in baking, tarts..)">
+                                                </div>
+                                            </div>
+                        
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label class="sr-only">Phone number</label>
+                                                    <input type="number" name="phoneNo" class="form-control" value="{{info[4]}}" placeholder="Phone number: (eg. 0412 345 678)"required>
+                                                </div>
+                                            </div>
+                                            
+                                            <button type="submit" class="btn btn-primary">Confirm Changes</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 </div>
                 <!--END OF INFO TAB-->

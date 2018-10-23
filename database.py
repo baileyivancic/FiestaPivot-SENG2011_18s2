@@ -196,6 +196,19 @@ class Database(object):
         self.close(db)
         return True
 
+    def update_info(self, values):
+        db = self.get_db()
+        cursor = db.cursor()
+
+        cursor.execute('''
+                        UPDATE accounts
+                        SET  email = ?, username = ?, city = ?, state = ?, about = ?, phoneNo = ?
+                        WHERE email = ?
+                        ''', ( values["email"], values["username"], values["city"], values["state"], values["about"], values["phoneNo"],values["email"]))
+
+        self.close(db)
+        return True
+
     def delete_ad(self, ad_id):
         db = self.get_db()
         cursor = db.cursor()
