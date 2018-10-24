@@ -79,7 +79,12 @@
                         {% for ad in ads %}
 
                         
-                        <a onclick="document.getElementById('ad-{{ad[0]}}').style.display='block'" data-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <a onclick="document.getElementById('ad-{{ad[0]}}').style.display='block'" data-toggle="modal" class="list-group-item ad list-group-item-action flex-column align-items-start">
+                            
+                            {% if ad[7] == "COMPLETED - PENDING REVIEW" %}
+                                <span class="badge">Review Ad</span>
+                            {% endif %}
+                            
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">{{ ad[2] }}</h5>
                                 <small>Event date: {{ ad[8] }}</small>
@@ -89,11 +94,6 @@
                             <small class="info">Alcohol provisions: {{ ad[11] }}</small>
                             <small class="info">Number of people: {{ ad[12] }}</small>
                             <small class="info">Status: {{ ad[7] }}</small>
-
-                            {% if ad[7] == "COMPLETED - PENDING REVIEW" %}
-
-                        <h1>Biggest heading</h1>
-                        {%endif%}
                         </a>
 
                         <!--Modals for each ad-->
