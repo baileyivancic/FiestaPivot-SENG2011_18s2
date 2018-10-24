@@ -69,28 +69,52 @@ def isPrefix(token, string):
         r = (token == string[:len(token)])
     return r
 
-# def quicksort(a=[], left, right):
-#     if left < (right-1):
-#         p = partition(a, left, right)
-#         quicksort(a, left, p)
-#         quicksort(a, p+1, right)
+def quicksortPrice(a, left, right):
+    if left < (right-1):
+        p = partitionPrice(a, left, right)
+        quicksortPrice(a, left, p)
+        quicksortPrice(a, p+1, right)
 
-# def partition(b=[], left, right):
-#     p = left
-#     k = left+1
+def quicksortDate(a, left, right):
+    if left < (right-1):
+        p = partitionDate(a, left, right)
+        quicksortDate(a, left, p)
+        quicksortDate(a, p+1, right)
 
-#     while k < right:
-#         if a[k] < a[p]:
-#             j = k+1
-#             tmp = a[k]
-#             a[k] = a[j]
+def partitionPrice(b, left, right):
+    p = left
+    k = left+1
+
+    while k < right:
+        if a[k][3] < a[p][3]:
+            j = k+1
+            tmp = a[k]
+            a[k] = a[j]
             
-#             while j < p:
-#                 a[j+1] = a[j]
-#                 j+=1
+            while j < p:
+                a[j+1] = a[j]
+                j+=1
 
-#             a[p+1] = a[p]
-#             p+=1 
-#             a[p-1] = tmp
+            a[p+1] = a[p]
+            p+=1 
+            a[p-1] = tmp
+        k+=1
 
-#         k+=1
+def partitionDate(b, left, right):
+    p = left
+    k = left+1
+
+    while k < right:
+        if a[k][8] < a[p][8]:
+            j = k+1
+            tmp = a[k]
+            a[k] = a[j]
+            
+            while j < p:
+                a[j+1] = a[j]
+                j+=1
+
+            a[p+1] = a[p]
+            p+=1 
+            a[p-1] = tmp
+        k+=1

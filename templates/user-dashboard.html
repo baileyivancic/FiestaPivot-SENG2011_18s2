@@ -97,7 +97,8 @@
                             <small class="info">Status: {{ ad[7] }}</small>
                         </a>
 
-                        <!--Modals for each ad-->
+                        
+                        <!--Modals for each bid-->
                         <!--AD MODALS-->
                         <div class="w3-modal" id="ad-{{ad[0]}}" tabindex="-1" role="dialog" aria-labelledby="exampleTitle" aria-hidden="true">
                             <div class="w3-modal-content w3-card-4 w3-animate-zoom" role="document">
@@ -119,25 +120,22 @@
                                         <small class="info">Status: {{ ad[7] }}</small>
                                     </div>
 
+
+                                    {% if ad[7] != "COMPLETED - PENDING REVIEW" %}
+
                                     {% if bidsOrdered %}
                                     <!--Put bids for ad in here-->
                                         {% if bidsOrdered[0][6] == "PENDING" %}
                                             <p>Choose a bid:</p> 
                                         {% endif %}   
 
-                                        <hr>
-                                        <form action="/rateAd" method="POST">
-                                            <p>We hope that you had a great time hosting your event with FiestaPivot. Please review your experience with this bidder:</p>
-                                            <p>FiestaScore (Out of 10):</p>
-                                            <input class="form-control" id="ratingAd" name="ratingAd" type="number" placeholder="FiestaPivot score" min="0" max="10" step="1" required>
-                                            <button type="submit">Submit Review</button>
-                                            <input style="display: none" name="adID" type="text" value="{{ad[0]}}">
-                                        </form>
-
-                                        {% else %}
                                         {% for bid in bidsOrdered %}
                                             {% if bid[1] == ad[0] %}
                                                 <div>
+                                                    
+
+
+
                                                     <a class="choose-bids list-group-item list-group-item-action flex-column align-items-start">
                                                         <form action="/choose-bid" method="POST">
                                                             {% if bid[6] == "PENDING" %}
@@ -152,6 +150,7 @@
                                                                 <div class="overlay-declined">
                                                                     <button disabled type="submit" class="chosen-text">Declined</button>
                                                                 </div>
+
                                                             {% endif %}
 
                                                             <input style="display:none" name="id" value="{{bid[0]}}">
@@ -165,11 +164,30 @@
                                                             </div>
                                                         </form>
                                                     </a>
+
+
+
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
 
                                     {% endif %} 
+
+                                    {% else %}
+
+                                    <div class="modal-footer" id="ratingBid">
+                                        <div>
+                                            <form action="/rateAd" method="POST">
+                                                <h4>We hope that you had a great time hosting your event with FiestaPivot. Please review your experience with this bidder:</h4>
+                                                <p>FiestaScore (Out of 10):</p>
+                                                <input class="form-control" id="ratingAd" name="ratingAd" type="number" placeholder="FiestaPivot score" min="0" max="10" step="1" required>
+                                                <button type="submit">Submit Review</button>
+                                                <input style="display: none" name="adID" type="text" value="{{ad[0]}}">
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    {% endif %}
 
                                     
                                     <div class="modal-footer">
@@ -186,6 +204,7 @@
                                 </div>
                             </div>
                         </div>
+                        
 
                         <div class="Modals">
                             <div id="ad-{{ad[0]}}-edit-form" class="w3-modal">
@@ -342,7 +361,7 @@
                                     <div class="modal-footer" id="ratingBid">
                                         <div>
                                             <form action="/rateBid" method="POST">
-                                                <h4>We hope that you had a great time hosting your event with FiestaPivot. Please review your experience with this bidder:</h4>
+                                                <h4>We hope that you had a great time hosting your event with FiestaPivot. Please review your experience with this advertiser:</h4>
                                                 <p>FiestaScore (Out of 10):</p>
                                                 <input class="form-control" id="ratingBid" name="ratingBid" type="number" placeholder="FiestaPivot score" min="0" max="10" step="1" required>
                                                 <button type="submit">Submit Review</button>
