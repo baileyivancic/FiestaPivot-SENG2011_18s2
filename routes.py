@@ -424,7 +424,7 @@ def checkAds():
 			if (control.findWinning(adID) == 0): # Ad does not have a winning bid associated with it
 				control.setAdStatus("EXPIRED", adID)
 			else:
-				control.setAdStatus("COMPLETED - PENDING REVIEW	", adID)
+				control.setAdStatus("COMPLETED - PENDING REVIEW", adID)
 				# find winning bid and set that to completed
 
 		#TODO
