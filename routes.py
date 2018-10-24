@@ -380,7 +380,7 @@ def search():
 
 	# Sort ads based on 4 sorts, CHANGE FROM BUBBLE TO INSERTION
 	dateAsc = newAds.copy()
-	quicksortDate(dateAsc, 0, len(dateAsc)-1)
+	quicksortDate(dateAsc, 0, len(dateAsc))
 	if dateAsc: 
 		dateDesc = dateAsc.copy()
 		dateDesc.reverse()
@@ -388,7 +388,7 @@ def search():
 		dateDesc = []
 
 	priceAsc = newAds.copy()
-	quicksortPrice(priceAsc, 0, len(priceAsc)-1)
+	quicksortPrice(priceAsc, 0, len(priceAsc))
 	if priceAsc:
 		priceDesc = priceAsc.copy()
 		priceDesc.reverse()
