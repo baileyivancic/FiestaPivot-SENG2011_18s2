@@ -287,6 +287,21 @@ def edit_bid():
 	control.database.update_bid(values)
 	return redirect("/account")
 
+@app.route('/edit-info', methods=["POST"])
+@login_required
+def edit_info():
+
+	values = request.form
+	print("EDIT")
+	print(values)
+
+	if not control.database.update_info(values):
+		#TODO error message saying email isnt valid
+		return redirect("/account")
+
+	return redirect("/account")
+
+
 @app.route('/account',  methods=["GET", "POST"])
 @login_required
 def account():
