@@ -83,7 +83,7 @@ def quicksortDate(a, left, right):
 
 def partitionPrice(a, left, right):
     p = left
-    k = left
+    k = left+1
 
     while k < right:
         if a[k][3] < a[p][3]:
@@ -104,7 +104,7 @@ def partitionPrice(a, left, right):
 
 def partitionDate(a, left, right):
     p = left
-    k = left
+    k = left+1
 
     while k < right:
         if a[k][8] < a[p][8]:
