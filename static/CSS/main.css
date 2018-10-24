@@ -170,3 +170,71 @@ body{
   z-index: 2;
   box-shadow: inset 0 0 0 1px #fafafa, 0 0 3px rgba(0, 0, 0, 0.3);
 }
+
+/*GRID CSS*/
+.grid-headline{
+  text-align: center;
+   font-size:2em;
+   font-family: 'Open Sans';
+   margin:2em;
+ }
+ /*RULES FOR THE .grid-header/HEADER TAG*/
+ .grid-header {
+   /*"GRID-AREA" PROPERTY IS A PROPERTY WHO GIVES THE .grid-header A NAME FOR A CERTAIN AREA - WHICH IS DEFINED FURTHER DOWN IN THE CSS WITH GRID-TEMPLATE-AREAS PROPERTY*/
+   grid-area: header;
+      background: red;
+   color: white;
+ }
+ /*RULES FOR THE .grid-nav/NAV TAG*/
+ .grid-nav {
+    /*SAME SCENARIO AS MENTIONED ABOVE*/
+   grid-area: nav;
+   margin-left: 0.5rem;
+      background: green;
+   color: white;
+ }
+ /*RULES FOR THE .grid-main/MAIN TAG*/
+ .grid-main {
+      /*SAME SCENARIO AS MENTIONED ABOVE*/
+   grid-area: content;
+      background: orange;
+   color: white;
+ }
+ 
+ /*RULES FOR THE .grid-aside/ASIDE TAG*/
+ .grid-aside {
+   grid-area: side;
+   margin-right: 0.5rem;
+      background: navy;
+   color: white;
+ }
+ 
+ /*RULES FOR THE .grid-footer/FOOTER TAG*/
+ .grid-footer {
+   grid-area: footer;
+      background: red;
+   color: white;
+ }
+ 
+ /*RULES FOR THE .grid-container/CONTAINER TAG*/
+ .grid-container{
+   /*DEFINES THE GRID ATTRIBUTE TO THE PROPERTY "DISPLAY:"*/
+   display: grid;
+   /*DEFINES THE BEFORE MENTIONED GRID-AREAS ON THE CHILD ELEMENTS WITHIN .grid-container*/
+   grid-template-areas:
+     /*THE HEADER IS SPREAD OUT TO FILL 3/3 OF THE PAGES WIDTH - BASICALLY ITS AN ORDER SYSTEM LIKE THE FLEXBOX PROPERTY "ORDER:"*/
+     "header header header"
+     "nav content side"
+     "footer footer footer";
+ /*DEFINES HOW BIG THE GRID COLUMNS MUST BE - AFFECTS THE NAV AND ASIDE - THE NAV AS THE FIRST ATTRIBUTE/200PX - AND THEN THE FRACTIONAL UNIT WHICH IS PLACEMENT ONCE AGAIN*/
+   grid-template-columns: 200px 1fr 200px;
+   /*SAME SCENARIO JUST WITH THE ROWS - HEADER AND FOOTER VALUES - AND AGAIN SOME "PADDING" WITH THE 1 FRACTIONAL UNIT - WHICH TAKES UP THE AVAILBLE SPACE - IN THIS CASE 1 UNIT OF IT*/
+   grid-template-rows: auto 1fr auto;
+   /*THE GRID GAP BETWEEN ALL OF ITS CHILDREN - FOOTER ETC. - IN HUMAN THE WHITESPACE/PADDING*/
+   grid-gap: 10px;
+   height: 100vh;
+ }
+ 
+ .grid-row {
+   display: grid;
+ }

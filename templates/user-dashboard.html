@@ -196,7 +196,7 @@
                                                 <input style="display: none" name="id" type="text" value="{{ad[0]}}">
                                                 <button type="submit" class="btn btn-secondary w3-hover-red">Delete</button>
                                             </form>
-                                            <button onclick="edit('ad-{{ad[0]}}')" type="button" class="btn btn-primary">Edit</button>
+                                            <button onclick="edit('ad-{{ad[0]}}', 'ad-{{ad[0]}}-edit-form')" type="button" class="btn btn-primary">Edit</button>
                                         {% endif %}
                                     </div>
                                     
@@ -352,7 +352,7 @@
                                             <input style="display: none" name="id" type="text" value="{{bid[0]}}">
                                             <button type="submit" class="btn btn-secondary w3-hover-red">Delete</button>
                                         </form>
-                                         <button onclick="edit('bid-{{bid[0]}}')" type="button" class="btn btn-primary">Edit</button>
+                                         <button onclick="edit('bid-{{bid[0]}}', 'bid-{{bid[0]}}-edit-form')" type="button" class="btn btn-primary">Edit</button>
                                     </div>
 
                                     {% else %}
@@ -426,8 +426,44 @@
                         <p>Bids completed: {{info[6]}}</p>   
                         <p>My FiestaScore: {{info[7]}}</p>   
 
-                        <button type="button" class="btn btn-outline-primary">Change Password</button>
-                        <button onclick="edit('info')" type="button" class="btn btn-primary">Edit</button>
+                        <button onclick="edit('info', 'info-change-password')" type="button" class="btn btn-lg btn-outline-primary" >Change Password</button>
+                        <button onclick="edit('info', 'info-edit-form')" type="button" class="btn btn-primary">Edit</button>
+                    </div>
+                </div>
+
+                <div class="Modals">
+                    <div id="info-change-password" class="w3-modal">
+                        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px;">
+
+                            <div >
+                                <span onclick="document.getElementById('info-change-password').style.display ='none';document.getElementById('info').style.display='block'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>  
+                            </div>
+
+                            <section role="main" class="cover-container" id="cover" style="background: url(static/Images/darkDessert.png) center no-repeat;background-size: cover;">
+                                <div id="cover-caption">
+                                        <div class="text-center text-light" id="Slogan">
+                                            <h1 class="display-3">Change your password</h1>
+                                        </div>
+                                        <div class="col-sm-6 offset-sm-3 info-form">
+                                            <form action="/change-password" onsubmit="return check_password()" method="POST">						
+                                               				
+                                                <div class="form-group">
+                                                    <label class="sr-only">Password</label>
+                                                    <input type="password" name="change-password1" class="form-control" id="change-password1" placeholder="Password (3-15 characters)" pattern=".{3,15}" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="sr-only">Confirm Password</label>
+                                                    <input type="password" name="passwordConfirm" class="form-control" id="change-password2" placeholder="Confirm password" pattern=".{3,15}" required>
+                                                </div>						
+                                                <input name="userID" type="hidden" value="{{info[0]}}" required>
+                                                <button type="submit" class="btn btn-primary">Change Password</button>
+                                            </form>
+                                        </div>
+                                    
+                                </div>
+                            </section>
+                        </div>
+>>>>>>> master
                     </div>
                 </div>
 
@@ -506,10 +542,10 @@
             document.getElementById(id).style.display='block'
         }
 
-        function edit(id) {
-            document.getElementById(id).style.display="none";
+        function edit(id1, id2) {
+            document.getElementById(id1).style.display="none";
 
-            var form = document.getElementById(id + "-edit-form");
+            var form = document.getElementById(id2);
             form.style.display='block';
         }
 
@@ -521,6 +557,18 @@
 
             var form = document.getElementById(adID + "-modal-body-edit-form");
             form.style.display='none';
+        }
+
+        function check_password() {
+            let password = document.getElementById("change-password1").value;
+            let confirm = document.getElementById("change-password2").value;
+
+            if (parseInt(password) != parseInt(confirm) ) {
+                alert("Passwords do not match, please try again \n" + password + " != " + confirm);
+                return false;
+            }
+
+            return true;
         }
     </script>
 

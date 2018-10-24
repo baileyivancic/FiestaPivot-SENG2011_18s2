@@ -219,6 +219,7 @@ def register():
 			valid = 4
 		else:
 			valid = control.register_user(email, user, password, city, state, 0, 0, 0, about, phone)
+
 		if valid == 1:
 			login_user(User(email), remember= False)
 			#flash("Successfully created account!")
@@ -286,6 +287,21 @@ def edit_bid():
 	control.database.update_bid(values)
 	return redirect("/account")
 
+@app.route('/edit-info', methods=["POST"])
+@login_required
+def edit_info():
+
+	values = request.form
+	print("EDIT")
+	print(values)
+
+	if not control.database.update_info(values):
+		#TODO error message saying email isnt valid
+		return redirect("/account")
+
+	return redirect("/account")
+
+
 @app.route('/account',  methods=["GET", "POST"])
 @login_required
 def account():
@@ -326,6 +342,17 @@ def delete_bid():
 	bid_id = request.form["id"]
 		
 	control.delete_bid(bid_id)
+	return redirect("/account")
+
+@app.route('/change-password', methods=["POST"])
+@login_required
+def change_password():
+	password = request.form["change-password1"]
+	ID = request.form["userID"]
+
+	control.database.change_password(ID, password)
+
+	print("CHANGE PASSWORD")
 	return redirect("/account")
 
 @app.route('/choose-bid',  methods=["POST"])
@@ -379,27 +406,27 @@ def search():
 		index = index + 1
 
 	# Sort ads based on 4 sorts, CHANGE FROM BUBBLE TO INSERTION
-	dateAsc = newAds.copy()
-	quicksortDate(dateAsc, 0, len(dateAsc)-1)
+	dateAsc = copy.deepcopy(newAds)
+	quicksortDate(dateAsc, 0, len(dateAsc))
 	if dateAsc: 
-		dateDesc = dateAsc.copy()
+		dateDesc = copy.deepcopy(dateAsc)
 		dateDesc.reverse()
 	else:
 		dateDesc = []
 
-	priceAsc = newAds.copy()
-	quicksortPrice(priceAsc, 0, len(priceAsc)-1)
+	priceAsc = copy.deepcopy(newAds)
+	quicksortPrice(priceAsc, 0, len(priceAsc))
 	if priceAsc:
-		priceDesc = priceAsc.copy()
+		priceDesc = copy.deepcopy(priceAsc)
 		priceDesc.reverse()
 	else:
 		priceDesc = []
 
 	# Push sorted lists into ads container
 	ads.append(dateAsc)
+	ads.append(dateDesc)
 	ads.append(priceAsc)
 	ads.append(priceDesc)
-	ads.append(dateDesc)
 	
 	return render_template("search.html", adSorted=ads, name=name, email=email)
 

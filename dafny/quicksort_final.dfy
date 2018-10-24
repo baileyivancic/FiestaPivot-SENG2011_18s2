@@ -5,7 +5,6 @@
 
 predicate sorted(a:array<int>, left:int, right:int)
 	requires 0 <= left <= right <= a.Length
-	requires a != null
 	reads a
 {
 	forall j,k | left <= j < k < right :: (a[j] <= a[k])
@@ -13,7 +12,6 @@ predicate sorted(a:array<int>, left:int, right:int)
   
 method quicksort(a: array<int>, left: int, right: int)
 	decreases right - left
-	requires a != null
 	requires a.Length > 0
 	requires 0 <= left <= right <= a.Length
 	requires (forall i | left <= i < right :: a[i] < a[right]) <== (0 <= left <= right < a.Length)
@@ -22,6 +20,7 @@ method quicksort(a: array<int>, left: int, right: int)
 	ensures (forall i | left <= i < right :: a[i] < a[right]) <== (0 <= left <= right < a.Length)
 	ensures (forall i | left <= i < right :: a[left - 1] <= a[i]) <== (0 < left <= right <= a.Length)
 	ensures sorted(a, left, right);
+	ensures multiset(a[..]) == multiset(old(a[..]))
 	modifies a
 {
 	if(left < right-1)
@@ -33,7 +32,6 @@ method quicksort(a: array<int>, left: int, right: int)
 }
 
 method partition(a: array<int>, left: int, right: int) returns (p: int)
-	requires a != null
 	requires a.Length > 0
 	requires 0 <= left < right <= a.Length
 	requires (forall i | left <= i < right :: (a[i] < a[right])) <== (0 <= left <= right < a.Length)
@@ -44,6 +42,7 @@ method partition(a: array<int>, left: int, right: int) returns (p: int)
 	ensures forall i | (0 <= i < left || right <= i < a.Length) :: (old(a[i]) == a[i])
 	ensures (forall i | left <= i < right :: (a[i] < a[right])) <== (0 <= left <= right < a.Length)
 	ensures (forall i | left <= i < right :: (a[left-1] <= a[i])) <== (0 < left <= right <= a.Length)
+	ensures multiset(a[..]) == multiset(old(a[..]))
 	modifies a
 {
 
@@ -51,12 +50,14 @@ method partition(a: array<int>, left: int, right: int) returns (p: int)
 	var k := left+1;
 
 	while(k < right)
+	decreases right - k
 	invariant left <= p < k <= right
 	invariant forall i | left <= i < p :: a[i] < a[p]
 	invariant forall i | p < i < k :: a[p] <= a[i]
 	invariant forall i | (0 <= i < left || right <= i < a.Length) :: (old(a[i]) == a[i])
 	invariant (forall i | left <= i < right :: a[i] < a[right]) <== (0 <= left <= right < a.Length)
 	invariant (forall i :: left <= i < right ==> a[left-1] <= a[i]) <== (0 < left <= right <= a.Length)
+	invariant multiset(a[..]) == multiset(old(a[..]))
 	{
 		if(a[k] < a[p])
 		{
@@ -65,12 +66,14 @@ method partition(a: array<int>, left: int, right: int) returns (p: int)
 			a[k] := a[j];
 
 			while(j > p)
+			decreases j - p
 			invariant a[p] > tmp
 			invariant forall i | left <= i < p :: (a[i] < a[p])
 			invariant forall i | p < i < k + 1 :: (a[p] <= a[i])
 			invariant forall i | (0 <= i < left || right <= i < a.Length) :: (old(a[i]) == a[i])
 			invariant (forall i :: left <= i < right ==> a[i] < a[right]) <== (0 <= left <= right < a.Length)
 			invariant (forall i :: left <= i < right ==> a[left-1] <= a[i]) <== (0 < left <= right <= a.Length)
+			invariant multiset(a[..]) == multiset(old(a[..]))
 			{
 				a[j+1] := a[j];
 				j := j-1;

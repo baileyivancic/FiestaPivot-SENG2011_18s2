@@ -206,6 +206,19 @@ class Database(object):
         self.close(db)
         return True
 
+    def change_password(self, ID, password):
+        db = self.get_db()
+        cursor = db.cursor()
+
+        cursor.execute('''
+                        UPDATE accounts
+                        SET password = ?
+                        WHERE email = ?
+                        ''', (password, ID))
+
+        self.close(db)
+        return True
+
     def delete_ad(self, ad_id):
         db = self.get_db()
         cursor = db.cursor()
