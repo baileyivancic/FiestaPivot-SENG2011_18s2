@@ -311,7 +311,7 @@
                             <div class="w3-modal-content w3-card-4 w3-animate-zoom" role="document">
                                 <div class="w3-center">
 
-                                        {% if bid[6] != "COMPLETED - PENDING REVIEW" %}
+                                    {% if bid[6] != "COMPLETED - PENDING REVIEW" %}
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLongTitle">{{bid[2]}}</h5>
                                         <span onclick="document.getElementById('bid-{{bid[0]}}').style.display='none' " class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
@@ -334,6 +334,8 @@
                                     </div>
 
                                     {% else %}
+                                            <span onclick="document.getElementById('bid-{{bid[0]}}').style.display='none' " class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+
                                     <div class="modal-footer" id="ratingBid">
                                         <div>
                                             <form action="/rateBid" method="POST">

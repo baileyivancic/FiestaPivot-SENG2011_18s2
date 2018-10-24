@@ -520,7 +520,7 @@ def addRatingBid():
 	# Get info from ad
 	bid = control.getBid(bidID)
 	adID = bid[1]
-	control.getAd(adID)
+	ad = control.getAd(adID)
 	email = ad[1]
 
 	reviews = control.get_reviews(email) + 1
@@ -536,4 +536,4 @@ def addRatingBid():
 	# Set ad status to completed, since review is done
 	control.setBidStatus("COMPLETED", bidID)
 
-	return redirect("/account")
+	return redirect("/account") 
