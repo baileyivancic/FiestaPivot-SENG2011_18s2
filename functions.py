@@ -81,7 +81,7 @@ def quicksortDate(a, left, right):
         quicksortDate(a, left, p)
         quicksortDate(a, p+1, right)
 
-def partitionPrice(b, left, right):
+def partitionPrice(a, left, right):
     p = left
     k = left+1
 
@@ -99,8 +99,10 @@ def partitionPrice(b, left, right):
             p+=1 
             a[p-1] = tmp
         k+=1
+    
+    return p
 
-def partitionDate(b, left, right):
+def partitionDate(a, left, right):
     p = left
     k = left+1
 
@@ -118,3 +120,5 @@ def partitionDate(b, left, right):
             p+=1 
             a[p-1] = tmp
         k+=1
+        
+    return p
