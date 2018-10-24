@@ -79,7 +79,12 @@
                         {% for ad in ads %}
 
                         
-                        <a onclick="document.getElementById('ad-{{ad[0]}}').style.display='block'" data-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <a onclick="document.getElementById('ad-{{ad[0]}}').style.display='block'" data-toggle="modal" class="list-group-item ad list-group-item-action flex-column align-items-start">
+                            
+                            {% if ad[7] == "COMPLETED - PENDING REVIEW" %}
+                                <span class="badge">Review Ad</span>
+                            {% endif %}
+                            
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">{{ ad[2] }}</h5>
                                 <small>Event date: {{ ad[8] }}</small>
@@ -89,11 +94,6 @@
                             <small class="info">Alcohol provisions: {{ ad[11] }}</small>
                             <small class="info">Number of people: {{ ad[12] }}</small>
                             <small class="info">Status: {{ ad[7] }}</small>
-
-                            {% if ad[7] == "COMPLETED - PENDING REVIEW" %}
-
-                        <h1>Biggest heading</h1>
-                        {%endif%}
                         </a>
 
                         <!--Modals for each ad-->
@@ -101,11 +101,10 @@
                         <div class="w3-modal" id="ad-{{ad[0]}}" tabindex="-1" role="dialog" aria-labelledby="exampleTitle" aria-hidden="true">
                             <div class="w3-modal-content w3-card-4 w3-animate-zoom" role="document">
                                 <div class="w3-container">
-                                    <div >
+                                    <div>
                                         <span onclick="close_ad('ad-{{ad[0]}}')" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>  
                                     </div>
                                     <div  id="ad-{{ad[0]}}-modal-body">
-                                        <!-- TODO -->
                                         <div class="d-flex w-100 justify-content-between">
                                             <h5 class="modal-title">{{ ad[2] }}</h5>
                                             <small>Event date: {{ ad[8] }}</small>
@@ -123,6 +122,16 @@
                                             <p>Choose a bid:</p> 
                                         {% endif %}   
 
+                                        <hr>
+                                        <form action="/rateAd" method="POST">
+                                            <p>We hope that you had a great time hosting your event with FiestaPivot. Please review your experience with this bidder:</p>
+                                            <p>FiestaScore (Out of 10):</p>
+                                            <input class="form-control" id="ratingAd" name="ratingAd" type="number" placeholder="FiestaPivot score" min="0" max="10" step="1" required>
+                                            <button type="submit">Submit Review</button>
+                                            <input style="display: none" name="adID" type="text" value="{{ad[0]}}">
+                                        </form>
+
+                                        {% else %}
                                         {% for bid in bidsOrdered %}
                                             {% if bid[1] == ad[0] %}
                                                 <div>
@@ -156,15 +165,21 @@
                                                 </div>
                                             {% endif %}
                                         {% endfor %}
+
                                     {% endif %} 
 
+                                    
                                     <div class="modal-footer">
-                                        <form action="/delete-ad" method="POST">
-                                            <input style="display: none" name="id" type="text" value="{{ad[0]}}">
-                                            <button type="submit" class="btn btn-secondary">Delete</button>
-                                        </form>
-                                         <button onclick="edit('ad-{{ad[0]}}')" type="button" class="btn btn-primary">Edit</button>
+                                        {% if ad[7] != "COMPLETED - PENDING REVIEW" %}
+                                            <form action="/delete-ad" method="POST">
+                                                <input style="display: none" name="id" type="text" value="{{ad[0]}}">
+                                                <button type="submit" class="btn btn-secondary">Delete</button>
+                                            </form>
+                                            <button onclick="edit('ad-{{ad[0]}}')" type="button" class="btn btn-primary">Edit</button>
+                                        {% endif %}
                                     </div>
+                                    
+
                                 </div>
                             </div>
                         </div>
@@ -277,12 +292,17 @@
                         {% if bids %}
                         {% for bid in bids %}
                         <a onclick="document.getElementById('bid-{{bid[0]}}').style.display = 'block' " data-toggle="modal" class="list-group-item list-group-item-action flex-column align-items-start">
-                            <h5 class="mb-1" id="name" >{{ bid[2] }}</h5>
-                            <p class="mb-1" id="comment">Message: {{ bid[5] }}</p>
-                            <small id="price">Bid amount: ${{ bid[4] }}</small>
-                            <small id="status">Original Budget: ${{ bid[8] }}</small>
-                            <small id="status">Status: {{ bid[6] }}</small>
-                            <small id="status">Date posted: {{ bid[7] }}</small>
+
+                            {% if bid[6] == "COMPLETED - PENDING REVIEW" %}
+                                <span class="badge">Review Ad</span>
+                            {% endif %}
+
+                            <h5 class="mb-1" id="name" class="info">{{ bid[2] }}</h5>
+                            <p class="mb-1" id="comment" class="info">Message: {{ bid[5] }}</p>
+                            <small id="price" class="info">Bid amount: ${{ bid[4] }}</small>
+                            <small id="status" class="info">Original Budget: ${{ bid[8] }}</small>
+                            <small id="status" class="info">Status: {{ bid[6] }}</small>
+                            <small id="status" class="info">Date posted: {{ bid[7] }}</small>
                         </a>
 
                         <!--Modals for each bid-->
@@ -291,6 +311,7 @@
                             <div class="w3-modal-content w3-card-4 w3-animate-zoom" role="document">
                                 <div class="w3-center">
 
+                                        {% if bid[6] != "COMPLETED - PENDING REVIEW" %}
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLongTitle">{{bid[2]}}</h5>
                                         <span onclick="document.getElementById('bid-{{bid[0]}}').style.display='none' " class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
@@ -302,6 +323,8 @@
                                         <small id="status">Original Budget: ${{ bid[8] }}</small>
                                         <small id="status">Status: {{ bid[6] }}</small>
                                     </div>
+                                    
+
                                     <div class="modal-footer">
                                         <form action="/delete-bid" method="POST">
                                             <input style="display: none" name="id" type="text" value="{{bid[0]}}">
@@ -309,6 +332,21 @@
                                         </form>
                                          <button onclick="edit('bid-{{bid[0]}}')" type="button" class="btn btn-primary">Edit</button>
                                     </div>
+
+                                    {% else %}
+                                    <div class="modal-footer" id="ratingBid">
+                                        <div>
+                                            <form action="/rateBid" method="POST">
+                                                <h4>We hope that you had a great time hosting your event with FiestaPivot. Please review your experience with this bidder:</h4>
+                                                <p>FiestaScore (Out of 10):</p>
+                                                <input class="form-control" id="ratingBid" name="ratingBid" type="number" placeholder="FiestaPivot score" min="0" max="10" step="1" required>
+                                                <button type="submit">Submit Review</button>
+                                                <input style="display: none" name="bidID" type="text" value="{{bid[0]}}">
+                                            </form>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
                                 </div>
                               </div>
                             </div>
@@ -398,7 +436,8 @@
                                                     <input type="text" name="city" class="form-control" value="{{info[1]}}" placeholder="State: (eg. Sydney)" required>
                                                 </div>
                                                 <div class="form-group col-md-5">
-                                                    <label class="sr-only">State</label>
+                                                    <label class="sr-only">State</label
+                                                        >
                                                     <select name="state" id="inputState" class="form-control">
                                                         <option selected>{{info[2]}}</option>
                                                         <option>NSW</option>

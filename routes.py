@@ -55,6 +55,9 @@ class Controller:
 	def getBids(self, adID):
 		return self.database.getBids(adID)
 	
+	def getBid(self, bidID):
+		return self.database.getBid(bidID)
+	
 	def getAdBid(self, bidID):
 		return self.database.getAdIDFromBid(bidID)
 
@@ -72,6 +75,9 @@ class Controller:
 	
 	def get_rating(self, email):
 		return self.database.get_rating(email)
+	
+	def get_reviews(self, email):
+		return self.database.getReviews(email)
 
 	def getInfo(self, ID):
 		user = []
@@ -92,7 +98,12 @@ class Controller:
 	
 	def setWinning(self, adID, bidID):
 		return self.database.setWinning(adID, bidID)
-
+	
+	def setReviews(self, email, newReviews):
+		return self.database.setReviews(email, newReviews)
+	
+	def setRating(self, email, newRating):
+		return self.database.setRating(email, newRating)
 
 	# Determines if the ad has a winning bid
 	# Returns 1 for yes, 0 for no
@@ -440,6 +451,9 @@ def checkBids():
 		ad = control.getAd(bid[1])
 		if (ad == None):
 			control.setBidStatus("AD DELETED", bid[0])
+		
+		elif (bid[6] == "COMPLETED"):
+			pass
 
 		else:
 			if (ad[7] == "EXPIRED"):
@@ -472,5 +486,54 @@ def systemCheck():
 	checkBids() # Automatic bid status change
 	return redirect("/account")
 
-def addRatingAd(email, newRating):
-	pass
+@app.route("/rateAd", methods=["GET", "POST"])
+def addRatingAd():
+	newRating = int(request.form['ratingAd'].strip())
+	adID = int(request.form['adID'].strip())
+
+	# Get bidder id from bid
+	ad = control.getAd(adID)
+	bidID = ad[13]
+	bid = control.getBid(bidID)
+	email = bid[3]
+
+	reviews = control.get_reviews(email) + 1
+	oldRating = control.get_rating(email)
+
+	# Calculate new values
+	newRating = (oldRating + newRating) / reviews
+
+	# Update database with new value
+	control.setRating(email, newRating)
+	control.setReviews(email, reviews)
+
+	# Set ad status to completed, since review is done
+	control.setAdStatus("COMPLETED", adID)
+
+	return redirect("/account")
+
+@app.route("/rateBid", methods=["GET", "POST"])
+def addRatingBid():
+	bidID = int(request.form['bidID'].strip())
+	newRating = int(request.form['ratingBid'].strip())
+
+	# Get info from ad
+	bid = control.getBid(bidID)
+	adID = bid[1]
+	control.getAd(adID)
+	email = ad[1]
+
+	reviews = control.get_reviews(email) + 1
+	oldRating = control.get_rating(email)
+
+	# Calculate new values
+	newRating = (oldRating + newRating) / reviews
+
+	# Update database with new value
+	control.setRating(email, newRating)
+	control.setReviews(email, reviews)
+
+	# Set ad status to completed, since review is done
+	control.setBidStatus("COMPLETED", bidID)
+
+	return redirect("/account")
