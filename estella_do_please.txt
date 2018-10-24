@@ -1,7 +1,6 @@
 Hello Estella (and Jacob). These are the things Nabil and I need you to do for the fornt end :)
 
 - Styling LHS of search page (all the search fields and inputs)
-- My Dashboard (headings, font inside boxes)
 - Modal that pops up showing the ad information (titles, colour, text font and size etc.)
 - Modal that pops up when bidding on ad
 - Ad details above bids in the bids for ad Modal
