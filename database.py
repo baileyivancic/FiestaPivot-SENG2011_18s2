@@ -513,18 +513,15 @@ class Database(object):
         ''',(newReviews,email))
         db.commit()
         db.close()
-        return 0
+        return 0   
 
     # Sets user rating
-    def setReviews(self, email, newRating):
+    def setRating(self, email, newRating):
         db = self.get_db()
         cursor=db.cursor()
 
         cursor.execute("SELECT EXISTS(SELECT rating FROM accounts WHERE email=?)", (email,))
         temp =  cursor.fetchone()[0]
-
-        reviews = self.getReviews(email) + 1
-        newRating = (temp + newRating) / reviews
 
         cursor.execute('''
         UPDATE accounts
@@ -534,3 +531,14 @@ class Database(object):
         db.commit()
         db.close()
         return 0
+    
+    # Get bid from bidID
+    def getBid(self, bidID):
+        db = self.get_db()
+        cursor=db.cursor()
+
+        cursor.execute("SELECT * FROM bids WHERE ID=?", (bidID, ))
+        temp = cursor.fetchone()
+
+        self.close(db)
+        return temp
