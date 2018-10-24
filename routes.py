@@ -7,7 +7,7 @@ import copy
 import datetime
 from database import Database
 from server import app, login_manager
-from functions import bubbleDateAds, bubblePriceAds
+from functions import bubbleDateAds, bubblePriceAds, quicksortDate, quicksortPrice, partitionDate, partitionPrice
 
 class Controller:
 	def __init__(self):
