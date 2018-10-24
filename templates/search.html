@@ -139,13 +139,13 @@
              <div class="results">
 
                 <div class="list-group" style="width: 100%;">
-                        {% if adSorted %}
-                        {% for ads in adSorted %}
+                    {% if adSorted %}
+                    {% for ads in adSorted %}
                     <div class="sortedBox">
                     {% if ads %}
                     {% for ad in ads %}
                     {% if ad[7] == "ACTIVE" %}
-                    <a onclick="document.getElementById('{{ad[0]}}').style.display='block'" href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
+                    <a onclick="document.getElementById('{{loop.index0}}-{{ad[0]}}').style.display='block'" href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="width: 100%;">
                         <h5 id="title" value="{{ad[2]}}" class="mb-1">{{ ad[2] }}</h5>
                         <small id="date" value="{{ad[8]}}">Date: {{ ad[8] }}</small>
                         <p id="description" value="{{ad[6]}}" class="mb-1">{{ ad[6] }}</p>
@@ -159,11 +159,11 @@
 
                     <!--AD MODALS-->
                     <div class="Modals">
-                        <div id="{{ad[0]}}" class="w3-modal">
+                        <div id="{{loop.index0}}-{{ad[0]}}" class="w3-modal">
                             <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
             
                             <div class="w3-center"><br>
-                                <span onclick="document.getElementById('{{ad[0]}}').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+                                <span onclick="document.getElementById('{{loop.index0}}-{{ad[0]}}').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
                                 <p id="adTitle">{{ad[2]}}</p>
                             </div>
             
