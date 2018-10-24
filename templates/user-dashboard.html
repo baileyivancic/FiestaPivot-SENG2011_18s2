@@ -18,7 +18,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
-    <body style="background-color: #eee;">
+    <body style="background-color: #eee; height: 100%;">
         
         <!--Navbar (Bootstrap taken from https://www.codeply.com/go/qhaBrcWp3v) -->
         <nav class="navbar navbar-expand-md navbar-dark bg-primary">
@@ -54,7 +54,8 @@
         </nav>
 
         <!--Body-->
-          <div class="container" style="height: 100%; padding: 50px;">
+    <main role="main">
+        <div class="container" style="min-height: 100%; padding: 50px;">
             <h1 class="display-5">Welcome Back {{name[0]}}</h1>
             <hr class="my-4">
 
@@ -104,11 +105,13 @@
                                     <div>
                                         <span onclick="close_ad('ad-{{ad[0]}}')" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>  
                                     </div>
-                                    <div  id="ad-{{ad[0]}}-modal-body">
+                                    <div class="modal-header">
                                         <div class="d-flex w-100 justify-content-between">
                                             <h5 class="modal-title">{{ ad[2] }}</h5>
                                             <small>Event date: {{ ad[8] }}</small>
                                         </div>
+                                    </div>
+                                    <div id="ad-{{ad[0]}}-modal-body">
                                         <p class="mb-1">{{ ad[6] }}</p>
                                         <small class="info">Price: ${{ ad[3] }}</small>
                                         <small class="info">Alcohol provisions: {{ ad[11] }}</small>
@@ -173,7 +176,7 @@
                                         {% if ad[7] != "COMPLETED - PENDING REVIEW" %}
                                             <form action="/delete-ad" method="POST">
                                                 <input style="display: none" name="id" type="text" value="{{ad[0]}}">
-                                                <button type="submit" class="btn btn-secondary">Delete</button>
+                                                <button type="submit" class="btn btn-secondary w3-hover-red">Delete</button>
                                             </form>
                                             <button onclick="edit('ad-{{ad[0]}}')" type="button" class="btn btn-primary">Edit</button>
                                         {% endif %}
@@ -328,7 +331,7 @@
                                     <div class="modal-footer">
                                         <form action="/delete-bid" method="POST">
                                             <input style="display: none" name="id" type="text" value="{{bid[0]}}">
-                                            <button type="submit" class="btn btn-secondary">Delete</button>
+                                            <button type="submit" class="btn btn-secondary w3-hover-red">Delete</button>
                                         </form>
                                          <button onclick="edit('bid-{{bid[0]}}')" type="button" class="btn btn-primary">Edit</button>
                                     </div>
@@ -395,16 +398,16 @@
 
                     <div class="w3-container" id="info">
                         <p class="lead">My Info</p>
-                        <p>My Email: {{info[0]}}</p>
+                        <p>Email: {{info[0]}}</p>
                         <p>City: {{info[1]}}</p>
                         <p>State: {{info[2]}}</p>
                         <p>About me: {{info[3]}}</p>      
-                        <p>My Phone number: {{info[4]}}</p>   
+                        <p>Phone number: {{info[4]}}</p>   
                         <p>Events held: {{info[5]}}</p>
                         <p>Bids completed: {{info[6]}}</p>   
                         <p>My FiestaScore: {{info[7]}}</p>   
 
-                        <button>Change Password</button>
+                        <button type="button" class="btn btn-outline-primary">Change Password</button>
                         <button onclick="edit('info')" type="button" class="btn btn-primary">Edit</button>
                     </div>
                 </div>
@@ -475,8 +478,10 @@
                 </div>
                 <!--END OF INFO TAB-->
             </div>
-          </div>
+        </div>
 
+       
+    </main>
     <script>
         function show_modal(id) {
             document.getElementById(id).style.display='block'
@@ -499,15 +504,16 @@
             form.style.display='none';
         }
     </script>
+
+    <!-- Footer -->
+        <footer class="footer font-small navbar-dark bg-dark pt-4">
+            <div class="container text-center">
+                <span class="text-light">
+                FiestaPivot is an innovative new take on the outsourcing business model - bringing all its benefits to the realm of food preparation. Find people to cater for your party, black tie function, or picnic, or offer your services to help new clients, and become the most in-demand business in town.
+                </span>
+            </div>
+            <div class="text-center py-3"><p class="text-light">© 2018 Copyright Team Artemis</div>
+        </footer>
     </body>
 
-     <!-- Footer -->
-    <footer class="page-footer font-small navbar-dark bg-dark pt-4">
-        <div class="container text-center">
-            <p class="text-light">
-            FiestaPivot is an innovative new take on the outsourcing business model - bringing all its benefits to the realm of food preparation. Find people to cater for your party, black tie function, or picnic, or offer your services to help new clients, and become the most in-demand business in town.
-            </p>
-        </div>
-        <div class="text-center py-3"><p class="text-light">© 2018 Copyright Team Artemis</div>
-    </footer>
 </html> 
