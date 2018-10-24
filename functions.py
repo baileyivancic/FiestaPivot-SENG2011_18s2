@@ -70,13 +70,13 @@ def isPrefix(token, string):
     return r
 
 def quicksortPrice(a, left, right):
-    if left < (right-1):
+    if right - left > 1:
         p = partitionPrice(a, left, right)
         quicksortPrice(a, left, p)
         quicksortPrice(a, p+1, right)
 
 def quicksortDate(a, left, right):
-    if left < (right-1):
+    if left < right - 1:
         p = partitionDate(a, left, right)
         quicksortDate(a, left, p)
         quicksortDate(a, p+1, right)
@@ -87,17 +87,17 @@ def partitionPrice(a, left, right):
  
     while k < right:
         if a[k][3] < a[p][3]:
-            j = k - 1
             tmp = a[k]
-            a[k] = a[j]
+            a[k] = a[k-1]
+            j = k - 1
  
-            while j < p:
+            while j > p:
                 a[j+1] = a[j]
                 j = j - 1
        
             a[p+1] = a[p]
+            a[p] = tmp
             p = p + 1
-            a[p-1] = tmp
         k = k + 1
     return p
 

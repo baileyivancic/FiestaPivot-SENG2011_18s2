@@ -219,6 +219,7 @@ def register():
 			valid = 4
 		else:
 			valid = control.register_user(email, user, password, city, state, 0, 0, 0, about, phone)
+
 		if valid == 1:
 			login_user(User(email), remember= False)
 			flash("Successfully created account!")
@@ -326,6 +327,17 @@ def delete_bid():
 	bid_id = request.form["id"]
 		
 	control.delete_bid(bid_id)
+	return redirect("/account")
+
+@app.route('/change-password', methods=["POST"])
+@login_required
+def change_password():
+	password = request.form["change-password1"]
+	ID = request.form["userID"]
+
+	control.database.change_password(ID, password)
+
+	print("CHANGE PASSWORD")
 	return redirect("/account")
 
 @app.route('/choose-bid',  methods=["POST"])
