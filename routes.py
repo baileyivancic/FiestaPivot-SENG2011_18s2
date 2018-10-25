@@ -106,16 +106,13 @@ class Controller:
 		return self.database.setRating(email, newRating)
 
 	# Determines if the ad has a winning bid
-	# Returns 1 for yes, 0 for no
+	# Returns True for yes, False for no
 	def findWinning(self, adID):
-		bids = self.getBids(adID)
-		flag = 0
-		for bid in bids:
-			if (bid[6] == "ACCEPTED"):
-				flag = 1
-				break
-		
-		return flag
+		ad = self.getAd(adID)
+		if (ad[13] != -1):
+			return True
+		else:
+			return False
 	
 	def fetch_bids(self):
 		return self.database.getAllBids()
@@ -459,12 +456,16 @@ def checkAds():
 		adID = ad[0]
 		adTime = ad[9]
 		
+		print("IM IN HERE")
+		print(control.findWinning(adID))
+
 		# Check if the bid has expired
 		if (adDate < currDate): # Date has been passed
-			if (control.findWinning(adID) == 0): # Ad does not have a winning bid associated with it
+			if (control.findWinning(adID) == False): # Ad does not have a winning bid
 				control.setAdStatus("EXPIRED", adID)
 			else:
-				control.setAdStatus("COMPLETED - PENDING REVIEW", adID)
+				if (ad[7] != "COMPLETED"):
+					control.setAdStatus("COMPLETED - PENDING REVIEW", adID)
 				# find winning bid and set that to completed
 
 		#TODO
