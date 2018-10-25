@@ -16,7 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
-<body style="background: url(static/Images/cateringDark.jpg);">
+<body style="background: url(static/Images/cateringDark.jpg) center;">
     <div id="container" >
         <!-- Header -->
         <div id="header">
@@ -52,10 +52,10 @@
                     </ul>
                 </div>
             </nav>
-
+        </div>
         <!-- Body -->
         <div id="body">
-             <div class="sidebar col-lg-3">
+            <div class="sidebar col-lg-3" style="background-color: #fff; padding: 10px;">
                 <h3 class="rw">Search for ads</h3>
                 <h5 class="rw">Please enter in criteria:</h5>
 
@@ -63,11 +63,11 @@
                 <div class="rw">
                     <p for="inputPassword4" class="text-dark">Keywords</p>
                     <input id = "keywords" value="{{keywords}}" type="text" name="title" class="form-control" id="inputPassword4" placeholder="Type in keywords">
-                </div>
+                </div><br>
                 <div class="rw">
                     <p for="inputCity" class="text-dark">City</p>
                     <input id="city" type="text" name="city" class="form-control" placeholder="E.g. Sydney">
-                </div>
+                </div><br>
                 <div class="rw">
                     <p for="inputState" class="text-dark">State</p>
                     <select name="state" id="state" class="form-control">
@@ -79,23 +79,23 @@
                         <option>VIC</option>
                         <option>WA</option>
                     </select>
-                </div>
+                </div> <br>
                 <div class="rw" style="height: auto">
                         <p for="inputCity" class="text-dark">Min. Price</p>
                         <span class="price">
                             <input id="minPrice" name="price" class="form-control" type="number" min="0.00" max="10000.00"/>
                         </span>
-                </div>
+                </div> <br>
                 <div class="rw" style="height: auto">
                         <p for="inputCity" class="text-dark">Max. Price</p>
                         <span class="price">
                             <input id="maxPrice" name="price" class="form-control" type="number" min="0.00" max="10000.00"/>
                         </span>
-                </div>
+                </div> <br>
                 <div class="rw">
                         <p for="inputCity" class="text-dark">From date:</p>
                         <input id="date" class="form-control" type="date" name="date" min="now">
-                </div>
+                </div> <br>
 
                 <!--Ordering results by certain criteria-->
                 <div class="rw">
@@ -106,7 +106,7 @@
                         <option value="2">Price: Lowest first</option>
                         <option value="3">Price: Highest first</option>
                     </select>
-                </div>
+                </div> <br>
 
                 <div class="rw">
                     <p>Size:</p>
@@ -119,7 +119,7 @@
                             <option value="5">101-200</option>
                             <option value="6">200+</option>
                         </select>
-                </div>
+                </div> <br>
 
                 <div class="rw">
                     <p>Alcohol provisions:</p>
@@ -128,11 +128,11 @@
                             <option value="No">No</option>
                             <option value="Yes">Yes</option>
                         </select>
-                </div>
+                </div> <br>
                
 
-                <button onclick="filter()">Refresh</button>
-             </div>
+                <button onclick="filter()" class="btn btn-lg btn-primary">Refresh</button>
+            </div>
              
 
              <!--Put boxes containing ads in here-->
@@ -162,32 +162,32 @@
                         <div id="{{loop.index0}}-{{ad[0]}}" class="w3-modal">
                             <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
             
-                            <div class="w3-center"><br>
+                            <div class="modal-header">
                                 <span onclick="document.getElementById('{{loop.index0}}-{{ad[0]}}').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
-                                <p id="adTitle">{{ad[2]}}</p>
+                                <h5 id="adTitle" class="modal-title">{{ad[2]}}</h5>
                             </div>
             
                             <div class="w3-container">
                                 <div class="w3-section">
-                                    <h3>Posted by:</h3>
+                                    <h6>Posted by:</h6>
                                         <label><b>{{ad[1]}}</b></label>
-                                    <h3>Location:</h3>
-                                        <label><b>{{ad[4]}}, {{ad[5]}}</b></label>
-                                    <h3>Price:</h3>
-                                        <label><b>{{ad[3]}}</b></label>
-                                    <h3>Date:</h3>
+                                    <h6>Date:</h6>
                                         <label><b>{{ad[8]}}</b></label>
-                                    <h3>Alcohol provisions:</h3>
+                                    <h6>Location:</h6>
+                                        <label><b>{{ad[4]}}, {{ad[5]}}</b></label>
+                                    <h6>Price:</h6>
+                                        <label><b>{{ad[3]}}</b></label>
+                                    <h6>Alcohol provisions:</h6>
                                         <label><b>{{ad[11]}}</b></label>
-                                    <h3>Number of people:</h3>
+                                    <h6>Number of people:</h6>
                                         <label><b>{{ad[12]}}</b></label>
-                                    <h3>Job description:</h3>
+                                    <h6>Job description:</h6>
                                         <label><b>{{ad[6]}}</b></label>
                                 </div>
                             </div>
             
                             <div class="w3-container w3-center w3-border-top w3-padding-16 w3-light-grey">
-                                <button onclick="bidModal('{{ad[2]}}', '{{ad[0]}}', '{{ad[3]}}')" type="button" class="w3-button w3-red">Place bid</button>
+                                <button onclick="bidModal('{{ad[2]}}', '{{ad[0]}}', '{{ad[3]}}')" type="button" class="btn btn-lg btn-primary">Place bid</button>
                             </div>
             
                             </div>
@@ -231,7 +231,7 @@
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
 
         <!-- Footer-->
         <div id="footer">
@@ -242,7 +242,7 @@
                     </p>
                 </div>
                 <div class="text-center py-3"><p class="text-light">© 2018 Copyright Team Artemis</div>
-        </footer>
+            </footer>
         </div>
     </div>
 
