@@ -254,13 +254,25 @@ def post():
 		alcohol = request.form['alcohol'].strip()
 		noPeople = request.form['noPeople'].strip()
 
-		print("State is ")
-		print(state)
+		print("Times:")
+		print(validTimes(start_time, end_time))
+
+		if not validTimes(start_time, end_time):
+			return render_template("post.html", state=state, city=city, name=name, error="Invalid start time and end time")
 
 		if control.postAd(email, title, price, city, state, descr, date, start_time, end_time, alcohol, noPeople):
 			return redirect("/account")
-	return render_template("post.html", state=state, city=city, name=name)
+	return render_template("post.html", state=state, city=city, name=name, error=None)
 	
+
+def validTimes(start_time, end_time):
+	print(start_time)
+	print(end_time)
+	if start_time > end_time:
+		return False
+	else:
+		return True 
+
 
 @app.route('/edit-ad', methods=["POST"])
 @login_required
