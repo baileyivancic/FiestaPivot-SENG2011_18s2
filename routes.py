@@ -238,6 +238,7 @@ def post():
 	state = control.get_state(current_user.get_id())
 	city = control.get_city(current_user.get_id())
 	name = control.get_name(current_user.get_id())
+	error=None
 
 	# Submit putton pressed
 	if request.method == "POST":
@@ -258,11 +259,12 @@ def post():
 		print(validTimes(start_time, end_time))
 
 		if not validTimes(start_time, end_time):
-			return render_template("post.html", state=state, city=city, name=name, error="Invalid start time and end time")
+			error="Invalid start time and end time"
+			return render_template("post.html", state=state, city=city, name=name, error=error)
 
 		if control.postAd(email, title, price, city, state, descr, date, start_time, end_time, alcohol, noPeople):
 			return redirect("/account")
-	return render_template("post.html", state=state, city=city, name=name, error=None)
+	return render_template("post.html", state=state, city=city, name=name, error=error)
 	
 
 def validTimes(start_time, end_time):
