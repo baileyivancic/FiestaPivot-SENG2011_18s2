@@ -427,7 +427,7 @@
                         <p>My FiestaScore: {{info[7]}}</p>   
 
                         <button onclick="edit('info', 'info-change-password')" type="button" class="btn btn-lg btn-outline-primary" >Change Password</button>
-                        <button onclick="edit('info', 'info-edit-form')" type="button" class="btn btn-primary">Edit</button>
+                        <button onclick="edit('info', 'info-edit-form')" type="button" class="btn btn-lg btn-primary">Edit</button>
                     </div>
                 </div>
 
@@ -440,30 +440,27 @@
                             </div>
 
                             <section role="main" class="cover-container" id="cover" style="background: url(static/Images/darkDessert.png) center no-repeat;background-size: cover;">
-                                <div id="cover-caption">
-                                        <div class="text-center text-light" id="Slogan">
-                                            <h1 class="display-3">Change your password</h1>
-                                        </div>
-                                        <div class="col-sm-6 offset-sm-3 info-form">
-                                            <form action="/change-password" onsubmit="return check_password()" method="POST">						
-                                               				
-                                                <div class="form-group">
-                                                    <label class="sr-only">Password</label>
-                                                    <input type="password" name="change-password1" class="form-control" id="change-password1" placeholder="Password (3-15 characters)" pattern=".{3,15}" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="sr-only">Confirm Password</label>
-                                                    <input type="password" name="passwordConfirm" class="form-control" id="change-password2" placeholder="Confirm password" pattern=".{3,15}" required>
-                                                </div>						
-                                                <input name="userID" type="hidden" value="{{info[0]}}" required>
-                                                <button type="submit" class="btn btn-primary">Change Password</button>
-                                            </form>
-                                        </div>
-                                    
+                                <div id="cover-caption" style="margin-bottom: 10px">
+                                    <div class="text-center text-light">
+                                        <h3 class="display-3">Change your password</h3>
+                                    </div>
+                                    <div class="col-sm-6 offset-sm-3 info-form">
+                                        <form action="/change-password" onsubmit="return check_password()" method="POST">				
+                                            <div class="form-group">
+                                                <label class="sr-only">Password</label>
+                                                <input type="password" name="change-password1" class="form-control" id="change-password1" placeholder="Password (3-15 characters)" pattern=".{3,15}" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="sr-only">Confirm Password</label>
+                                                <input type="password" name="passwordConfirm" class="form-control" id="change-password2" placeholder="Confirm password" pattern=".{3,15}" required>
+                                            </div>						
+                                            <input name="userID" type="hidden" value="{{info[0]}}" required>
+                                            <button type="submit" class="btn btn-primary">Change Password</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </section>
                         </div>
->>>>>>> master
                     </div>
                 </div>
 
@@ -477,8 +474,8 @@
 
                             <section role="main" class="cover-container" id="info-edit-form" style="background: url(static/Images/darkDessert.png) center no-repeat;background-size: cover;">
                                 <div id="cover-caption">
-                                    <div class="text-center text-light" id="Slogan">
-                                        <h1 class="display-3">Edit your details</h1>
+                                    <div class="text-center text-light">
+                                        <h3 class="display-3">Edit your details</h3>
                                     </div>
                                     <div class="col-sm-6 offset-sm-3 info-form">
                                         <form action="edit-info" method="POST">						
