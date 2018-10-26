@@ -1,74 +1,101 @@
-method partition( a: array<int>, left: int, right: int) returns (greater: int)
-modifies a
-ensures left==old(left) && right==old(right)
-requires 0<=left<right<a.Length
-ensures multiset(a[..]) == multiset(old(a[..]))
-ensures left<=greater<=right
-ensures forall i :: left<=i<greater ==> a[i]<=a[greater]
-ensures forall i :: greater<i<=right ==> a[i]>a[greater]
-ensures forall i :: ( 0<=i<left && right<i<a.Length ) ==> a[i] == old(a)[i]
-{
-	var j := left;
-	greater := left-1;
-	var pivot := a[right];
-	assert pivot == a[right];
+// References:
+// Microsoft's Verification Corner: The Dutch National Flag Algorithm (https://www.youtube.com/watch?v=dQC5m-GZYbk)
+// Carroll Morgan's http://www.cse.unsw.edu.au/~se2011/2014Material/Week03/Sorting.pdf
+// https://soe.rutgers.edu/sites/default/files/imce/pdfs/gset-2014/Formal%20Verification%20with%20Dafny.pdf
 
-	while ( j<right ) 
-	decreases right-j
-	invariant left<=j<=right
-	invariant left-1<=greater<j
-	invariant forall i :: left<=i<=greater ==> a[i]<=a[right]
-	invariant forall i :: greater<i<j ==> a[i]>a[right]
-	invariant multiset(a[..]) == multiset(old(a[..]))
+predicate sorted(a:array<int>, left:int, right:int)
+	requires 0 <= left <= right <= a.Length
+	reads a
+{
+	forall j,k | left <= j < k < right :: (a[j] <= a[k])
+}
+  
+method quicksort(a: array<int>, left: int, right: int)
+	decreases right - left
+	requires a.Length > 0
+	requires 0 <= left <= right <= a.Length
+	requires (forall i | left <= i < right :: a[i] < a[right]) <== (0 <= left <= right < a.Length)
+	requires (forall i | left <= i < right :: a[left - 1] <= a[i]) <== (0 < left <= right <= a.Length)
+	ensures forall i | (0 <= i < left || right <= i < a.Length) :: (old(a[i]) == a[i])
+	ensures (forall i | left <= i < right :: a[i] < a[right]) <== (0 <= left <= right < a.Length)
+	ensures (forall i | left <= i < right :: a[left - 1] <= a[i]) <== (0 < left <= right <= a.Length)
+	ensures sorted(a, left, right);
+	// ensures multiset(a[..]) == multiset(old(a[..]))
+	modifies a
+{
+	if(left < right-1)
 	{
-		if ( a[j] <= a[right] ) {
-			greater := greater+1;
-			swap_elements(a, greater, j);
+		var p := partition(a, left, right);
+		quicksort(a, left, p);
+		quicksort(a, p+1, right);
+	}
+}
+
+method partition(a: array<int>, left: int, right: int) returns (p: int)
+	requires a.Length > 0
+	requires 0 <= left < right <= a.Length
+	requires (forall i | left <= i < right :: (a[i] < a[right])) <== (0 <= left <= right < a.Length)
+	requires (forall i | left <= i < right :: (a[left-1] <= a[i])) <== (0 < left <= right <= a.Length)
+	ensures 0 <= left <= p < right <= a.Length
+	ensures forall i | (left <= i < p) :: (a[i] < a[p])
+	ensures forall i | (p < i < right) :: (a[p] <= a[i])
+	ensures forall i | (0 <= i < left || right <= i < a.Length) :: (old(a[i]) == a[i])
+	ensures (forall i | left <= i < right :: (a[i] < a[right])) <== (0 <= left <= right < a.Length)
+	ensures (forall i | left <= i < right :: (a[left-1] <= a[i])) <== (0 < left <= right <= a.Length)
+	// ensures multiset(a[..]) == multiset(old(a[..]))
+	modifies a
+{
+
+	p := left;
+	var k := left+1;
+
+	while(k < right)
+	decreases right - k
+	invariant left <= p < k <= right
+	invariant forall i | left <= i < p :: a[i] < a[p]
+	invariant forall i | p < i < k :: a[p] <= a[i]
+	invariant forall i | (0 <= i < left || right <= i < a.Length) :: (old(a[i]) == a[i])
+	invariant (forall i | left <= i < right :: a[i] < a[right]) <== (0 <= left <= right < a.Length)
+	invariant (forall i :: left <= i < right ==> a[left-1] <= a[i]) <== (0 < left <= right <= a.Length)
+	// invariant multiset(a[..]) == multiset(old(a[..]))
+	{
+		if(a[k] < a[p])
+		{
+			var j := k-1;
+			var tmp := a[k];
+			a[k] := a[j];
+
+			while(j > p)
+			decreases j - p
+			invariant a[p] > tmp
+			invariant forall i | left <= i < p :: (a[i] < a[p])
+			invariant forall i | p < i < k + 1 :: (a[p] <= a[i])
+			invariant forall i | (0 <= i < left || right <= i < a.Length) :: (old(a[i]) == a[i])
+			invariant (forall i :: left <= i < right ==> a[i] < a[right]) <== (0 <= left <= right < a.Length)
+			invariant (forall i :: left <= i < right ==> a[left-1] <= a[i]) <== (0 < left <= right <= a.Length)
+			// invariant multiset(a[..]) == multiset(old(a[..]))
+			{
+				a[j+1] := a[j];
+				j := j-1;
+			}
+			
+			a[p+1] := a[p];
+			p := p+1;
+			a[p-1] := tmp;
 		}
-
-		j := j+1;
-	}
-
-	assert right == j;
-	assert a[j]<=a[right];
-
-	if ( a[j] <= a[right] ) {
-		greater := greater+1;
-		swap_elements(a, greater, j);
-	}
-
-	return greater;
-}
-
-method quicksort(a :array<int>, left: int, right:int)
-decreases right-left
-decreases right
-modifies a 
-requires 0<=left && right<a.Length
-ensures left==old(left) && right==old(right)
-ensures forall i :: ( 0<=i<left && right<i<a.Length ) ==> a[i]==old(a)[i]
-ensures forall i,j :: left<=i<j<=right ==> a[i]<=a[j]
-ensures multiset(a[..]) == multiset(old(a[..]))
-{
-	if ( left < right ) {
-		assert left<right;
-		var pivot := partition(a, left, right);
-		assert forall i :: left<=i<pivot ==> a[i]<=a[pivot];
-		quicksort(a, left, pivot-1);
-		quicksort(a, pivot+1, right);
+		k := k+1;
 	}
 }
 
-method swap_elements(a: array<int>, index1: int, index2: int) 
-modifies a
-requires 0<=index1<a.Length && 0<=index2<a.Length
-ensures a[index1] == old(a)[index2] && a[index2] == old(a)[index1]
-ensures multiset(a[..]) == multiset(old(a[..]))
-ensures forall i :: ( 0<=i<a.Length && i!=index1 && i!=index2) ==> a[i] == old(a)[i]
+method test()
 {
-	var temp := 0;
+	var a:array<int>:= new int[][5,4,3,2,1];
+	assert a[0] == 5;
+	assert a[1] == 4; 
+	assert a[2] == 3; 
+	assert a[3] == 2; 
+	assert a[4] == 1; 
 
-	temp := a[index2];
-	a[index2] := a[index1];
-	a[index1] := temp;
+	quicksort(a,0,a.Length);
+	assert sorted(a,0,a.Length);
 }
