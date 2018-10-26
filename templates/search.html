@@ -17,47 +17,46 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body style="background: url(static/Images/cateringDark.jpg) center;">
-    <div id="container" >
-        <!-- Header -->
-        <div id="header">
-            <!--Navbar (Bootstrap taken from https://www.codeply.com/go/qhaBrcWp3v) -->
-            <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-                <a class="navbar-brand abs" href="/">FiestaPivot</a>
-                <button class="navbar-toggler" type="button" data-to0987ggle="collapse" data-target="#collapsingNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse" id="collapsingNavbar">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/about">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/search">Search</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" value="{{email}}" id="userL" href="/account">{{name[0]}}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/post-ad">
-                                <button type="button" class="btn btn-outline-light">Post an Ad</button>
-                            </a>
-                        </li>
-                        <li style="margin-left: 10px;" class="nav-item">
-                            <a href="/logout">
-                                <button type="button" class="btn btn-outline-light">Sign Out</button>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+    
+    <!--Navbar (Bootstrap taken from https://www.codeply.com/go/qhaBrcWp3v) -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+        <a class="navbar-brand abs" href="/">FiestaPivot</a>
+        <button class="navbar-toggler" type="button" data-to0987ggle="collapse" data-target="#collapsingNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="collapsingNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/search">Search</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" value="{{email}}" id="userL" href="/account">{{name[0]}}</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/post-ad">
+                        <button type="button" class="btn btn-outline-light">Post an Ad</button>
+                    </a>
+                </li>
+                <li style="margin-left: 10px;" class="nav-item">
+                    <a href="/logout">
+                        <button type="button" class="btn btn-outline-light">Sign Out</button>
+                    </a>
+                </li>
+            </ul>
         </div>
+    </nav>
+
+    <div id="container" >
         <!-- Body -->
         <div id="body">
-            <div class="sidebar col-lg-3" style="background-color: #fff; padding: 10px;">
-                <h3 class="rw">Search for ads</h3>
-                <h5 class="rw">Please enter in criteria:</h5>
+            <div class="sidebar col-lg-3" style="background-color: #eee; padding-top: 30px;">
+                <h3 class="rw">Search for ads</h3><br>
+                <h5 class="rw">Please enter in criteria:</h5><p></p>
 
                 <!--Input fields for search criteria-->
                 <div class="rw">
@@ -168,25 +167,25 @@
             
                             <div class="w3-container">
                                 <div class="w3-section">
-                                    <h6>Posted by:</h6>
-                                        <label><b>{{ad[1]}}</b></label>
-                                    <h6>Date:</h6>
-                                        <label><b>{{ad[8]}}</b></label>
-                                    <h6>Location:</h6>
-                                        <label><b>{{ad[4]}}, {{ad[5]}}</b></label>
-                                    <h6>Price:</h6>
-                                        <label><b>{{ad[3]}}</b></label>
-                                    <h6>Alcohol provisions:</h6>
-                                        <label><b>{{ad[11]}}</b></label>
-                                    <h6>Number of people:</h6>
-                                        <label><b>{{ad[12]}}</b></label>
-                                    <h6>Job description:</h6>
-                                        <label><b>{{ad[6]}}</b></label>
+                                    <h5>Posted by:</h5>
+                                        <label>{{ad[1]}}</label>
+                                    <h5>Date:</h5>
+                                        <label>{{ad[8]}}</label>
+                                    <h5>Location:</h5>
+                                        <label>{{ad[4]}}, {{ad[5]}}</label>
+                                    <h5>Price:</h5>
+                                        <label>{{ad[3]}}</label>
+                                    <h5>Alcohol provisions:</h5>
+                                        <label>{{ad[11]}}</label>
+                                    <h5>Number of people:</h5>
+                                        <label>{{ad[12]}}</label>
+                                    <h5>Job description:</h5>
+                                        <label>{{ad[6]}}</label>
                                 </div>
                             </div>
             
-                            <div class="w3-container w3-center w3-border-top w3-padding-16 w3-light-grey">
-                                <button onclick="bidModal('{{ad[2]}}', '{{loop.index0}}-{{ad[0]}}', '{{ad[0]}}','{{ad[3]}}')" type="button" class="w3-button w3-red">Place bid</button>
+                            <div class="modal-footer">
+                                <button onclick="bidModal('{{ad[2]}}', '{{loop.index0}}-{{ad[0]}}', '{{ad[0]}}','{{ad[3]}}')" type="button" class="btn btn-lg btn-primary w3-hover-red">Place bid</button>
                             </div>
             
                             </div>
@@ -206,25 +205,27 @@
                     <div id="bid" class="w3-modal">
                         <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
                             
-                            <div class="w3-center"><br>
+                            <div class="modal-header">
                                 <span onclick="document.getElementById('bid').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
                                 <label id="bidTitle"></label>
                             </div>
                             
-                            <form action="/bid-send" method="post" class="w3-container w3-center w3-border-top w3-padding-16 w3-light-grey">
+                            <form action="/bid-send" method="post" class="w3-container">
                                 <div class="w3-container">
                                     <div class="w3-section">
-                                        <h3>Original price: </h3>
-                                        <h3 id="oPrice" name="oPrice" value=""></h3>
-                                        <h3>Your price:</h3>
+                                        <h4>Original price: </h4>
+                                        <p id="oPrice" name="oPrice" value=""></p>
+                                        <h4>Your price:</h4>
                                             <input id="priceInput" name="priceInput" value="" type="number" min="0.00" max="1000000.00" required>
-                                        <h3 id="priceWarning" style="color: orange;"></h3>
-                                        <h3>Additional messages/comments to poster:</h3>
+                                        <p id="priceWarning" style="color: orange;"></p>
+                                        <h4>Additional messages/comments to poster:</h4>
                                             <input id="commentInput" name="commentInput" placeholder="Notes to poster" required>
                                         <input id="adID" name="adID" type="hidden">
                                     </div>
                                 </div>
-                                <button type="submit" value="Place Bid" type="button" class="w3-button w3-red">Place bid</button>
+                                 <div class="modal-footer">
+                                    <button type="submit" value="Place Bid" type="button" class="btn btn-lg btn-primary w3-hover-red">Place bid</button>
+                                </div>
                             </form>
                         </div>
                     </div>
