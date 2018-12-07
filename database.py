@@ -222,8 +222,7 @@ class Database(object):
     def delete_ad(self, ad_id):
         db = self.get_db()
         cursor = db.cursor()
-
-        cursor.execute("DELETE FROM ads WHERE ID=?", ad_id)
+        cursor.execute("DELETE FROM ads WHERE ID=?", (ad_id,))
 
         self.close(db)
         return
@@ -232,7 +231,7 @@ class Database(object):
         db = self.get_db()
         cursor = db.cursor()
 
-        cursor.execute("DELETE FROM bids WHERE ID=?", bid_id)
+        cursor.execute("DELETE FROM bids WHERE ID=?", (bid_id,))
 
         self.close(db)
         return
