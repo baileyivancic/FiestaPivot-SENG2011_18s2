@@ -32,6 +32,13 @@ FiestaPivot includes the following features:
 
 We are really proud of the application we have put forward, and think that is satisfies the initial brief very well, while also satisfying our own brief of trying to make the experience for both advertiser and bidder as seamless as possible.
 
+## Images
+![alt text](readmeImages/image1.png)
+![alt text](http://url/to/img.png)
+![alt text](http://url/to/img.png)
+![alt text](http://url/to/img.png)
+
+
 ### Tech stack:
 The application is built on a HTML-CSS-Bootstrap-Jinja2 front-end, using Python with Flask for the back-end requests. SQL has been used for the database.
 
