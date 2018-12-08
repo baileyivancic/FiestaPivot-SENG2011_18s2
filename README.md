@@ -34,11 +34,11 @@ We are really proud of the application we have put forward, and think that is sa
 
 ## Images
 ![alt text](readmeImages/image1.png)
-![alt text](readmeImages/image2/png)
-![alt text](readmeImages/image3/png)
-![alt text](readmeImages/image4/png)
-![alt text](readmeImages/image5/png)
-![alt text](readmeImages/image6/png)
+![alt text](readmeImages/image2.png)
+![alt text](readmeImages/image3.png)
+![alt text](readmeImages/image4.png)
+![alt text](readmeImages/image5.png)
+![alt text](readmeImages/image6.png)
 
 
 ### Tech stack:
